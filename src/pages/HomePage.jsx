@@ -22,9 +22,16 @@ const HomePage = () => {
         const cmsData = await fetchAPI(`/content/${collection}`);
         if (cmsData) {
           setData(cmsData);
+        } else {
+          // Fallback to local file if CMS fails
+          const { homeContent } = await import('../data/content/homepage');
+          setData(homeContent);
         }
       } catch (error) {
-        console.error("Failed to load homepage data from CMS:", error);
+        console.error("Failed to load homepage data:", error);
+        // Fallback on error
+        const { homeContent } = await import('../data/content/homepage');
+        setData(homeContent);
       } finally {
         setLoading(false);
       }
