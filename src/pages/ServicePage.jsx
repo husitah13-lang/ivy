@@ -31,28 +31,34 @@ const ServicePage = () => {
 
     const loadData = async () => {
       try {
+        // 1. Try fetching from Cloud CMS first
+        const collection = i18n.language === 'ar' ? `${id}.ar` : id;
+        const cmsData = await fetchAPI(`/content/${collection}`);
+        
+        if (cmsData) {
+          setData(cmsData);
+          setLoading(false);
+          return;
+        }
+
+        // 2. Fallback to static files if not in CMS
         let importFunc;
         if (i18n.language === 'ar') {
           importFunc = dataModulesAr[`../data/${id}.ar.js`];
           if (!importFunc) {
-             console.warn(`Arabic module for ${id} not found, falling back to English`);
              importFunc = dataModulesEn[`../data/${id}.js`];
           }
         } else {
           importFunc = dataModulesEn[`../data/${id}.js`];
         }
 
-        if (!importFunc) {
-           throw new Error(`Module ../data/${id}.js not found in import.meta.glob`);
+        if (importFunc) {
+          const module = await importFunc();
+          setData({ ...module.default });
+        } else {
+          throw new Error("Service data not found");
         }
-
-        const module = await importFunc();
-        let pageData = { ...module.default };
-
-        // Custom CMS integration for services can be added here if needed
-        // For now, we rely on static data files
         
-        setData(pageData);
         setLoading(false);
       } catch (err) {
         console.error("Failed to load service data:", err);

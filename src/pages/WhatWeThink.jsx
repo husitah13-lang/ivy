@@ -15,7 +15,7 @@ const WhatWeThink = () => {
       setLoading(true);
       try {
         const collection = i18n.language === 'ar' ? 'insights.ar' : 'insights';
-        const cmsData = await fetchAPI(`/api/${collection}`);
+        const cmsData = await fetchAPI(`/${collection}`);
         if (cmsData) {
           setData(cmsData);
         } else {

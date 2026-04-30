@@ -43,7 +43,7 @@ const HomePage = () => {
   return (
     <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
       <Hero data={data.hero_custom} />
-      <CardSection id="services" cards={data.tilegrid.slice(0, 4)} />
+      <CardSection id="services" cards={data.tilegrid} />
       <QuoteSection data={data.carousel} />
       <CarouselSection items={data.client_carousel} />
       <RecognitionBanner title={t('hero.ai_agentic_leap')} />
