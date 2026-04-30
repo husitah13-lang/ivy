@@ -58,7 +58,18 @@ app.get('/api/collections', async (req, res) => {
     await connectToDatabase();
     // Filter out redundant collections
     const collections = await Content.find(
-      { name: { $nin: ['index', 'index.ar'] } }, 
+      { 
+        name: { 
+          $nin: [
+            'index', 'index.ar', 
+            'advanced-seo', 'ppc-advertising', 'social-media-advertising', 
+            'social-media-marketing', 'martech', 'seo-services', 
+            'insights', 'software-development', 'saas-platforms', 
+            'talent-training', 'articleContent', 'business-intelligence',
+            'articleContent.ar'
+          ] 
+        } 
+      }, 
       'name'
     ).sort({ name: 1 });
     res.json(collections.map(c => c.name));
