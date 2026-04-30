@@ -19,7 +19,7 @@ const HomePage = () => {
       setLoading(true);
       try {
         const collection = i18n.language === 'ar' ? 'homepage.ar' : 'homepage';
-        const cmsData = await fetchAPI(`/${collection}`);
+        const cmsData = await fetchAPI(`/content/${collection}`);
         if (cmsData) {
           setData(cmsData);
         }
