@@ -56,7 +56,11 @@ app.post('/api/login', (req, res) => {
 app.get('/api/collections', async (req, res) => {
   try {
     await connectToDatabase();
-    const collections = await Content.find({}, 'name').sort({ name: 1 });
+    // Filter out redundant collections
+    const collections = await Content.find(
+      { name: { $nin: ['index', 'index.ar'] } }, 
+      'name'
+    ).sort({ name: 1 });
     res.json(collections.map(c => c.name));
   } catch (err) {
     res.status(500).json({ error: err.message });
