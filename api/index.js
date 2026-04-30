@@ -22,20 +22,20 @@ async function connectToDatabase() {
   if (cachedDb && mongoose.connection.readyState === 1) return cachedDb;
   
   if (!process.env.MONGO_URI) {
-    throw new Error('MONGO_URI environment variable is missing');
+    console.error('CRITICAL: MONGO_URI is missing');
+    return null; // Don't crash top-level
   }
 
   try {
-    mongoose.set('strictQuery', true);
     const db = await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 5000,
-      socketTimeoutMS: 45000,
+      serverSelectionTimeoutMS: 8000, // Wait up to 8 seconds
+      connectTimeoutMS: 10000,
     });
     cachedDb = db;
     return db;
   } catch (err) {
-    console.error('DB Connection Fail:', err);
-    throw err;
+    console.error('DB Connection Fail:', err.message);
+    return null;
   }
 }
 
@@ -62,12 +62,15 @@ app.use(express.json({ limit: '50mb' }));
 
 // Ensure DB is connected for every request
 app.use(async (req, res, next) => {
-  if (req.path === '/api' || req.path === '/api/login') return next();
+  if (req.path === '/api' || req.path === '/api/login' || req.path === '/api/health') return next();
   try {
-    await connectToDatabase();
+    const db = await connectToDatabase();
+    if (!db) {
+      return res.status(503).json({ error: 'Database connection is temporarily unavailable. Please check your MONGO_URI.' });
+    }
     next();
   } catch (err) {
-    res.status(500).json({ error: 'Database connection failed', details: err.message });
+    res.status(500).json({ error: 'Database error', details: err.message });
   }
 });
 
