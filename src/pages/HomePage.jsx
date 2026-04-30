@@ -24,13 +24,13 @@ const HomePage = () => {
           setData(cmsData);
         } else {
           // Fallback to local file if CMS fails
-          const { homeContent } = await import('../data/content/homepage');
+          const { homeContent } = await import('../data/content/homepage.js');
           setData(homeContent);
         }
       } catch (error) {
         console.error("Failed to load homepage data:", error);
         // Fallback on error
-        const { homeContent } = await import('../data/content/homepage');
+        const { homeContent } = await import('../data/content/homepage.js');
         setData(homeContent);
       } finally {
         setLoading(false);
