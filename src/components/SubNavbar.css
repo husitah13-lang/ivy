@@ -1,0 +1,71 @@
+.sub-navbar {
+  width: 100%;
+  background-color: #003b5c; /* Deep cyan/blue matching branding */
+  position: sticky;
+  top: 100px; /* Sits right below the main navbar */
+  z-index: 90;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: top 0.3s ease;
+}
+
+.sub-navbar.sub-navbar-top {
+  top: 0;
+}
+
+.sub-navbar-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 5%;
+}
+
+.sub-navbar-title {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+.sub-navbar-right {
+  display: flex;
+  gap: 30px;
+}
+
+.sub-navbar-right a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.sub-navbar-right a:hover {
+  opacity: 0.7;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .sub-navbar-container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px 5%;
+  }
+  
+  .sub-navbar-right {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    gap: 20px;
+  }
+  
+  .sub-navbar-right::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  .sub-navbar-right::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 4px;
+  }
+}

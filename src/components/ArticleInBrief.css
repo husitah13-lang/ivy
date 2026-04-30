@@ -1,0 +1,53 @@
+.article-in-brief {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 60px 5% 40px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.article-in-brief-container {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.article-in-brief-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 40px;
+  letter-spacing: -0.02em;
+}
+
+.article-in-brief-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.article-in-brief-list li {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 30px;
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #f0f0f0;
+}
+
+.article-in-brief-list li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 8px; /* align with the middle of the first line of text */
+  width: 6px;
+  height: 6px;
+  background-color: #00aeef; /* Cyan square bullet */
+}
+
+@media (max-width: 768px) {
+  .article-in-brief-title {
+    font-size: 2rem;
+  }
+  .article-in-brief-list li {
+    font-size: 1.05rem;
+  }
+}

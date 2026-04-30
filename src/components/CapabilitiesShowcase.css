@@ -1,0 +1,120 @@
+.capabilities-showcase {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 100px 5%;
+}
+
+.capabilities-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.capabilities-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.capabilities-headline {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 80px;
+  letter-spacing: -0.01em;
+}
+
+.capabilities-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 100px;
+}
+
+.capabilities-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.capability-item {
+  position: relative;
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 600;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  padding-inline-start: 25px;
+}
+
+.capability-item:hover,
+.capability-item.active {
+  color: #ffffff;
+}
+
+[dir="ltr"] .capability-item:hover,
+[dir="ltr"] .capability-item.active {
+  transform: translateX(10px);
+}
+
+[dir="rtl"] .capability-item:hover,
+[dir="rtl"] .capability-item.active {
+  transform: translateX(-10px);
+}
+
+.capability-indicator {
+  position: absolute;
+  inset-inline-start: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  background-color: #00aeef;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.capability-item.active .capability-indicator {
+  opacity: 1;
+}
+
+.capability-detail-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-height: 500px;
+}
+
+.capability-detail-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.capability-detail-description {
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: #ccc;
+  margin-bottom: 40px;
+  transition: opacity 0.4s ease;
+}
+
+.capability-graphic {
+  width: 100%;
+  margin-top: auto;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.capability-graphic img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .capabilities-layout {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+}

@@ -1,0 +1,267 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "loading_article": "Loading article...",
+    "article_not_found": "Article not found",
+    "service_not_found": "Service not found",
+    "return_home": "Return Home",
+    "testimonials": "Customer Testimonials"
+  },
+  "insights": {
+    "sort_by": "Sort by",
+    "no_results": "No results found for the selected filters.",
+    "clear_filters": "Clear all filters"
+  },
+  "nav": {
+    "services": "Services",
+    "expertise": "Expertise",
+    "careers": "Careers",
+    "news": "What we think",
+    "contact": "Contact",
+    "language": "Arabic"
+  },
+  "hero": {
+    "title_line_1": "ENGINEERING",
+    "title_line_2": "DIGITAL",
+    "title_line_3": "SYSTEMS",
+    "title_line_4": "FOR GROWTH",
+    "growth_accent": "GROWTH",
+    "ai_agentic_leap": "AI Agentic Leap",
+    "slide_0": {
+      "subtitle": "Shaping tomorrow, today",
+      "description": "In a world of constant change, reinvention is a continuous strategy. That’s why we work with organizations to rewrite the rules of growth, innovation and resilience.",
+      "cta": "See what we do"
+    },
+    "slide_1": {
+      "subtitle": "Digitally Transforming Sales & Distribution",
+      "description": "Targets Live provides a centralized hub for exceptional control and real-time insight. We empower organizations to track on-field activities, optimize dispatches, and move from intuition-based decisions to evidence-based planning.",
+      "cta": "Explore our work"
+    }
+  },
+  "home": {
+    "quote": {
+      "text": "“Companies will have a greater technology landscape, but we need to completely change the narrative to inspire people to paint the future. It is human in the lead, not human in the loop.”",
+      "author": "Julie Sweet"
+    },
+    "recognition": {
+      "title": "Global recognition and awards"
+    },
+    "news": {
+      "title": "LATEST NEWS & INSIGHTS",
+      "readMore": "Read more",
+      "items": [
+        {
+          "category": "Partnership",
+          "date": "Latest",
+          "headline": "Accenture and Google Cloud Expand Partnership to Scale Agentic Transformation for Global Enterprises"
+        },
+        {
+          "category": "AI & Security",
+          "date": "March 25, 2026",
+          "headline": "Accenture and Anthropic Team to Help Organizations Secure, Scale AI-Driven Cybersecurity Operations"
+        },
+        {
+          "category": "Acquisition",
+          "date": "March 20, 2026",
+          "headline": "Accenture Acquires Udacity to Build a Learning Platform for the AI Era"
+        },
+        {
+          "category": "Investment",
+          "date": "March 15, 2026",
+          "headline": "Accenture Invests in Sanctuary AI to Bring Humanoid Robots to Workplaces"
+        },
+        {
+          "category": "Cloud",
+          "date": "March 10, 2026",
+          "headline": "Accenture Recognized as a Leader in Cloud Services by Major Analysts"
+        },
+        {
+          "category": "Research",
+          "date": "March 05, 2026",
+          "headline": "New Research: How Generative AI is Reshaping the Global Workforce"
+        }
+      ]
+    },
+    "careers": {
+      "label": "CAREERS",
+      "title": "Build a career that's as exciting as the world we're shaping",
+      "subtitle": "Grow personally and professionally in a global company that helps you unlock your full potential.",
+      "cta": "Join us"
+    },
+    "awards": [
+      {
+        "shortTitle": "A Leader in Reinvention",
+        "description": "Recognized globally for continuously reinventing core operations and setting new industry standards.",
+        "linkText": "See related awards >"
+      },
+      {
+        "shortTitle": "A Great Place To Work®",
+        "description": "Certified as a great workplace, built on trust, innovation, and empowering people to succeed everywhere.",
+        "linkText": "See related awards >"
+      },
+      {
+        "shortTitle": "A Trusted Industry Leader",
+        "description": "Accenture is a Leader in the 2025 Gartner Magic Quadrant for Public Cloud IT Transformation Services.",
+        "linkText": "See related awards >"
+      }
+    ]
+  },
+  "contact": {
+    "hero": {
+      "title": "Global Presence",
+      "subtitle": "Connecting with our clients and communities across the globe to drive meaningful change."
+    },
+    "locations": [
+      { "country": "UK" },
+      { "country": "UAE" },
+      { "country": "PAKISTAN" },
+      { "country": "AUSTRALIA" }
+    ]
+  },
+  "carousel": {
+    "readMore": "Read more",
+    "items": [
+      {
+        "title": "WWF Germany hunts ghost nets using the power of AI",
+        "description": "Each year, 50,000 tons of fishing nets vanish into the ocean, silently killing marine life. GhostNetZero uses AI to analyze sonar data and pinpoint these hidden threats with 94% accuracy."
+      },
+      {
+        "title": "Transforming healthcare with predictive analytics",
+        "description": "Predictive models are helping doctors anticipate patient needs, allocate resources more effectively, and ultimately save lives by identifying high-risk cases before emergencies occur."
+      },
+      {
+        "title": "Building sustainable supply chains for the future",
+        "description": "Using advanced tracking and AI, companies are reducing their carbon footprint by optimizing delivery routes and predicting demand to minimize waste across the globe."
+      },
+      {
+        "title": "Empowering the next generation of digital creators",
+        "description": "New cloud-based tools are democratizing access to high-end rendering and development environments, allowing creators from anywhere to build immersive digital experiences."
+      },
+      {
+        "title": "Redefining the modern workspace with spatial computing",
+        "description": "The transition from physical desks to virtual collaboration spaces is accelerating. Discover how spatial computing is making remote work feel more natural and connected than ever."
+      }
+    ]
+  },
+  "footer": {
+    "brand": "Let there be change",
+    "links": {
+      "preference": "Preference Center",
+      "careers": "Careers",
+      "about": "About Us",
+      "contact": "Contact Us",
+      "locations": "Locations",
+      "sitemap": "Sitemap",
+      "privacy": "Privacy Statement",
+      "terms": "Terms & Conditions",
+      "cookie": "Cookie Policy/Settings",
+      "accessibility": "Accessibility Statement",
+      "donotsell": "Do Not Sell/Share My Personal Information"
+    },
+    "copyright": "© 2026 Ivy Interactive. All Rights Reserved."
+  },
+  "services_main": {
+    "nav": {
+      "title": "Capabilities",
+      "anchors": {
+        "overview": "Overview",
+        "capabilities": "Capabilities",
+        "partners": "Partners",
+        "industries": "Industries",
+        "recognition": "Recognition"
+      }
+    },
+    "hero": {
+      "title": "Reinvent what your business could be",
+      "subtitle": "Our wide range of capabilities, ecosystem partnerships and unmatched industry expertise can help your business become the next best version of itself."
+    },
+    "capabilities_intro": {
+      "eyebrow": "CAPABILITIES",
+      "title": "The capabilities to help you reinvent"
+    },
+    "capabilities": [
+      {
+        "title": "Web & E-commerce",
+        "detailTitle": "Crafting digital storefronts for global leaders",
+        "description": "Robust multi-platform e-commerce solutions designed for global brand leaders, with an intense focus on delivery and brand reputation. We create websites that capture attention and tell a brand's story with impact."
+      },
+      {
+        "title": "Digital Marketing",
+        "detailTitle": "Driving growth through strategic engagement",
+        "description": "Targeted Facebook and Instagram advertising campaigns designed to drive meaningful results. Strategic content planning and real-time engagement across all platforms to drive audience growth."
+      },
+      {
+        "title": "Creative & Design",
+        "detailTitle": "Narratives that drive user engagement",
+        "description": "Engaging narratives across all digital platforms, from copywriting to visual content. Professional solutions for branding and marketing materials that capture brand essence effectively."
+      },
+      {
+        "title": "ERP & Business Solutions",
+        "detailTitle": "Streamlining enterprise operations",
+        "description": "Comprehensive systems for human resource management, inventory control, and point-of-sale. Solutions designed to manage workforce and sales channels with precision."
+      },
+      {
+        "title": "Software Engineering",
+        "detailTitle": "Building the core of your digital future",
+        "description": "Full-stack development, API integration, and scalable infrastructure. We build secure, compliant digital solutions that serve as the backbone for enterprises and startups alike."
+      },
+      {
+        "title": "Data and Artificial Intelligence",
+        "detailTitle": "Use AI with purpose",
+        "description": "AI is more accessible than ever, and it's rapidly transforming enterprises and the ways we live and work. The way you apply its potential will determine the impact and position your business to compete and achieve new levels of performance."
+      },
+      {
+        "title": "On-Demand Services",
+        "detailTitle": "Modern logistics and homecare solutions",
+        "description": "Telemedicine, pharmacy delivery, and professional maintenance services. We build the platforms that connect service providers with users in the healthcare, autocare, and logistics sectors."
+      }
+    ],
+    "industries": [
+      {
+        "title": "FMCG / Consumer Goods",
+        "detailTitle": "Optimize trade and trends",
+        "description": "Empowering brands like Herbion to use real-time data for trade marketing, sales management, and customer trend analysis. We turn consumer behavior into actionable growth strategies."
+      },
+      {
+        "title": "Steel / Manufacturing",
+        "detailTitle": "Precision in operations",
+        "description": "Helping industrial giants like Nomee Steel streamline their sales operations management. Our digital tools bring transparency and efficiency to heavy industry manufacturing cycles."
+      },
+      {
+        "title": "Retail & Distribution",
+        "detailTitle": "Seamless commerce cycles",
+        "description": "Advanced POS systems, supply chain integration, and distribution management tools. We build the infrastructure that powers modern retail businesses from warehouse to checkout."
+      },
+      {
+        "title": "Field-Sales Driven Business",
+        "detailTitle": "Automate your field force",
+        "description": "Tailored Field Force Automation and Brand Management tools designed for companies with on-ground sales teams. Empower your team with real-time reporting and mobile-first tools."
+      },
+      {
+        "title": "Digital & E-commerce",
+        "detailTitle": "Building global storefronts",
+        "description": "From strategy to execution, we help digital-first businesses scale globally with robust architectures and data-driven marketing funnels."
+      }
+    ],
+    "recognition": {
+      "title": "We are industry of one",
+      "items": [
+        {
+          "shortTitle": "#1 Regionally for Digital CX",
+          "description": "Recognized as the leading agency for Digital Customer Experience design, driving brand loyalty through innovation.",
+          "linkText": "See related awards >"
+        },
+        {
+          "shortTitle": "Innovation Agency of the Year",
+          "description": "Awarded for our commitment to rewriting the rules of growth and resilience for global enterprises.",
+          "linkText": "See related awards >"
+        },
+        {
+          "shortTitle": "$500M+ Revenue Generated",
+          "description": "Our digital ecosystems and e-commerce platforms have powered over half a billion dollars in measurable client growth.",
+          "linkText": "See related awards >"
+        }
+      ]
+    }
+  }
+}

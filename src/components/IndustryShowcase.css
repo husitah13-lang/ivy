@@ -1,0 +1,108 @@
+.industry-showcase {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 100px 5%;
+  border-top: 1px solid #1a1a1a;
+}
+
+.industry-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.industry-eyebrow {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.industry-headline {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: 80px;
+  letter-spacing: -0.01em;
+}
+
+.industry-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 100px;
+}
+
+.industry-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.industry-item {
+  position: relative;
+  font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+  font-weight: 600;
+  color: #444;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  padding-left: 25px;
+}
+
+.industry-item:hover,
+.industry-item.active {
+  color: #ffffff;
+}
+
+.industry-indicator {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 6px;
+  background-color: #00aeef;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.industry-item.active .industry-indicator {
+  opacity: 1;
+}
+
+.industry-detail-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.industry-detail-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.industry-detail-description {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #cccccc;
+  margin-bottom: 40px;
+}
+
+.industry-graphic {
+  width: 100%;
+  margin-top: auto;
+  opacity: 0.9;
+}
+
+.industry-graphic img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@media (max-width: 900px) {
+  .industry-layout {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+}

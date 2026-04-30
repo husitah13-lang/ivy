@@ -1,0 +1,78 @@
+.service-capability-list {
+  padding: 100px 5% 120px 5%;
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.capability-list-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.capability-list-header {
+  margin-bottom: 60px;
+  max-width: 900px;
+}
+
+.capability-eyebrow {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+  display: block;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.capability-list-headline {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1;
+  font-weight: 700;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.capability-items-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.capability-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  transition: opacity 0.3s ease;
+}
+
+.capability-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #00aeef;
+  flex-shrink: 0;
+}
+
+.capability-name {
+  font-size: clamp(1.8rem, 3.5vw, 3rem);
+  font-weight: 600;
+  color: #808080; /* Muted as per screenshot for inactive items? */
+  transition: color 0.3s ease;
+}
+
+/* Let's make the first one 'active' by default or all of them white but slightly dimmed */
+.capability-item:first-child .capability-name {
+  color: #ffffff;
+}
+
+/* Add a hover effect */
+.capability-item:hover .capability-name {
+  color: #ffffff;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .service-capability-list {
+    padding: 60px 5%;
+  }
+}

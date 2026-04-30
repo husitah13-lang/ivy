@@ -1,0 +1,122 @@
+.article-faq-section {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 60px 5%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.article-faq-container {
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.article-faq-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 60px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  max-width: 800px;
+}
+
+.article-faq-list {
+  border-bottom: 1px solid #00aeef; /* Cyan line */
+}
+
+.article-faq-item {
+  border-top: 1px solid #00aeef;
+  transition: all 0.3s ease;
+}
+
+.article-faq-header {
+  display: flex;
+  align-items: flex-start;
+  padding: 30px 0;
+  cursor: pointer;
+  position: relative;
+}
+
+.article-faq-number {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-right: 40px;
+  min-width: 30px;
+  color: #ffffff;
+  margin-top: -2px; /* Slight optical adjustment */
+}
+
+.article-faq-question {
+  font-size: 1.6rem;
+  font-weight: 600;
+  margin: 0;
+  flex-grow: 1;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  padding-right: 40px;
+}
+
+.article-faq-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+.icon-plus {
+  width: 20px;
+  height: 1px;
+  background-color: #ffffff;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.icon-plus::before {
+  content: '';
+  width: 1px;
+  height: 20px;
+  background-color: #ffffff;
+  position: absolute;
+  left: 9.5px;
+  top: -9.5px;
+  transition: transform 0.3s ease;
+}
+
+.article-faq-item.active .icon-plus {
+  transform: rotate(45deg);
+}
+
+.article-faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.article-faq-item.active .article-faq-content {
+  max-height: 500px;
+}
+
+.article-faq-answer {
+  padding: 0 0 40px 70px;
+  color: #d0d0d0;
+  font-size: 1.15rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .article-faq-question {
+    font-size: 1.25rem;
+  }
+  .article-faq-number {
+    font-size: 1.25rem;
+    margin-right: 20px;
+  }
+  .article-faq-answer {
+    padding-left: 50px;
+  }
+}

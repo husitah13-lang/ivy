@@ -1,0 +1,49 @@
+.service-careers-section {
+  background-color: #111111;
+  padding: 80px 5%;
+  display: flex;
+  justify-content: flex-start;
+  color: #ffffff;
+}
+
+.service-careers-container {
+  max-width: 800px;
+  width: 100%;
+}
+
+.service-careers-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.service-careers-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: #f0f0f0;
+}
+
+.service-careers-cta {
+  display: inline-block;
+  background-color: #50c8d8; /* Cyan color matching screenshot */
+  color: #ffffff;
+  padding: 15px 30px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  border: none;
+  cursor: pointer;
+}
+
+.service-careers-cta:hover {
+  background-color: #3baebf;
+}
+
+@media (max-width: 768px) {
+  .service-careers-title {
+    font-size: 2rem;
+  }
+}

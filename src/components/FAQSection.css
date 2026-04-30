@@ -1,0 +1,114 @@
+.faq-section {
+    background-color: #000;
+    padding: 60px 0;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+.faq-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.faq-item {
+    border-top: 1px solid #00aeef; /* Cyan border matching screenshot */
+    transition: all 0.3s ease;
+}
+
+.faq-item:last-child {
+    border-bottom: 1px solid #00aeef;
+}
+
+.faq-header {
+    display: flex;
+    align-items: center;
+    padding: 30px 0;
+    cursor: pointer;
+    position: relative;
+}
+
+.faq-number {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-right: 50px;
+    min-width: 40px;
+    color: #fff;
+}
+
+.faq-question {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin: 0;
+    flex-grow: 1;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+.faq-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-plus {
+    width: 20px;
+    height: 2px;
+    background-color: #fff;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.icon-plus::before {
+    content: '';
+    width: 2px;
+    height: 20px;
+    background-color: #fff;
+    position: absolute;
+    left: 9px;
+    top: -9px;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .icon-plus {
+    transform: rotate(45deg); /* Turns plus into an X */
+}
+
+.faq-item.active .icon-plus::before {
+    /* Optional: keep as X or hide one bar */
+}
+
+.faq-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.faq-item.active .faq-content {
+    max-height: 300px; /* Adjust as needed */
+}
+
+.faq-answer {
+    padding: 0 0 40px 90px; /* Increased offset to align with larger numbers */
+    color: #a1a1aa;
+    font-size: 1.3rem;
+    line-height: 1.6;
+    max-width: 900px;
+}
+
+@media (max-width: 768px) {
+    .faq-question {
+        font-size: 1.2rem;
+    }
+    
+    .faq-number {
+        margin-right: 20px;
+    }
+    
+    .faq-answer {
+        padding-left: 50px;
+    }
+}

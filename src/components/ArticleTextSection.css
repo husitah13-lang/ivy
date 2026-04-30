@@ -1,0 +1,31 @@
+.article-text-section {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 40px 5% 60px;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.article-text-container {
+  max-width: 1000px;
+  width: 100%;
+}
+
+.article-text-title {
+  font-size: clamp(2rem, 3.5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.article-text-paragraph {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  color: #f0f0f0;
+}
+
+.article-text-paragraph:last-child {
+  margin-bottom: 0;
+}

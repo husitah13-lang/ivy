@@ -1,0 +1,210 @@
+.card-section {
+  padding: 140px 5% 80px 5%; /* Increased top padding */
+  background-color: #000000;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.content-card {
+  position: relative;
+  height: 500px; /* Increased height slightly for better aspect ratio */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  background-color: #000000; /* Black base to avoid light edges */
+  transition: transform 0.3s ease;
+}
+
+/* Integrated Hover Effects (Replacing Swipes) */
+.card-image-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1), 
+              opacity 0.8s ease, 
+              filter 0.8s ease;
+}
+
+/* Base Hover: darken and slight scale for all */
+.content-card:hover .card-image-layer {
+  filter: brightness(0.3) grayscale(0.5);
+}
+
+.anim-reveal-up:hover .card-image-layer { transform: translateY(-10px) scale(1.05); }
+.anim-reveal-scale:hover .card-image-layer { transform: scale(1.15); }
+.anim-reveal-right:hover .card-image-layer { transform: translateX(10px) scale(1.05); }
+.anim-reveal-left:hover .card-image-layer { transform: translateX(-10px) scale(1.05); }
+.anim-reveal-blur:hover .card-image-layer { filter: brightness(0.2) blur(5px); transform: scale(1.1); }
+.anim-reveal-zoom:hover .card-image-layer { transform: scale(0.9) translateY(0); }
+
+/* Content reveal adjustments */
+.card-content {
+  position: absolute; /* Stacked on top of image */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 15; /* Above image layer */
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background-color: transparent; /* Show image underneath */
+  color: #fff;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+  pointer-events: none;
+}
+
+.content-card:hover .card-content {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+/* Image Title (Initial State) */
+.card-image-title {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1), opacity 0.4s ease;
+}
+
+.content-card:hover .card-image-title {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.card-image-overlay {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* Slightly darker for better title contrast */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+}
+
+.card-image-title {
+  color: #fff;
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+  transition: transform 0.5s ease;
+}
+
+.content-card:hover .card-image-title {
+  transform: scale(0.8);
+}
+
+/* Content reveal is handled in the unified .card-content section above */
+
+/* Unique delays for expand buttons to make them feel separate */
+/* Unique delays for expand buttons */
+.anim-reveal-up .card-expand { transition-delay: 0.1s; }
+.anim-reveal-scale .card-expand { transition-delay: 0.2s; }
+.anim-reveal-right .card-expand { transition-delay: 0.3s; }
+.anim-reveal-left .card-expand { transition-delay: 0.4s; }
+.anim-reveal-blur .card-expand { transition-delay: 0.5s; }
+.anim-reveal-zoom .card-expand { transition-delay: 0.2s; }
+
+.card-category {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: #00aeef; /* Blue accent */
+}
+
+.card-title {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 30px;
+}
+
+.card-body {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  color: #ccc;
+}
+
+.card-expand-container {
+  overflow: hidden;
+  margin-top: auto;
+  align-self: flex-end;
+}
+
+.card-expand {
+  font-weight: 700;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+  transition-delay: 0.2s;
+  color: #fff;
+}
+
+.content-card:hover .card-expand {
+  transform: translateY(0);
+}
+
+.card-expand svg {
+  transition: transform 0.3s ease;
+}
+
+.card-expand:hover svg {
+  transform: translateX(5px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+  .content-card {
+    height: 400px;
+  }
+}
+

@@ -1,0 +1,67 @@
+.service-cta {
+  padding: 100px 5%;
+  width: 100%;
+  display: flex;
+}
+
+.service-cta-container {
+  max-width: 1400px; /* Match the rest of the site's max-width for perfect left-edge alignment */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.service-cta.center {
+  justify-content: center;
+}
+
+.service-cta.center .service-cta-container {
+  align-items: center;
+  text-align: center;
+}
+
+.service-cta.left {
+  justify-content: flex-start;
+}
+
+.service-cta.left .service-cta-container {
+  align-items: flex-start;
+  text-align: left;
+  margin: 0 auto; /* Keep it centered in the page but text left aligned */
+}
+
+.service-cta-headline {
+  color: #ffffff;
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.service-cta-subheadline {
+  color: #ffffff;
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin: 0;
+  margin-bottom: 20px;
+}
+
+.service-cta-button {
+  background-color: #45b4c4; /* Teal/Cyan color from screenshot */
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1rem;
+  padding: 15px 40px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  display: inline-block;
+}
+
+.service-cta-button:hover {
+  background-color: #3895a3;
+  transform: translateY(-2px);
+}

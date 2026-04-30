@@ -1,0 +1,190 @@
+.recognition-scroll-wrapper {
+  position: relative;
+  height: 400vh; /* 4 screens worth of scrolling */
+  background-color: #000000;
+}
+
+.recognition-sticky-container {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recognition-banner-wrapper {
+  position: relative;
+  background-color: #000000;
+  /* Wrapper height is determined by the scrolling cards inside */
+}
+
+.recognition-sticky-bg {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1; /* Stays behind cards */
+  overflow: hidden;
+}
+
+.recognition-title {
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-align: center;
+  text-shadow: 0 4px 20px rgba(0,0,0,0.5);
+}
+
+.recognition-scrolling-cards {
+  position: relative;
+  z-index: 2; /* Scrolls over the sticky text */
+  display: flex;
+  flex-direction: column;
+  /* Pull the container up so it overlaps the sticky background */
+  margin-top: -100vh; 
+}
+
+.scroll-spacer-top {
+  height: 80vh; /* Delays the first card from appearing immediately */
+}
+
+.scroll-spacer-bottom {
+  height: 120vh; /* Gives huge space after the last card before unpinning so text shows */
+}
+
+/* Card Base */
+.award-card {
+  position: relative;
+  width: 500px;
+  max-width: 90%;
+  height: 320px;
+  margin-bottom: 25vh; /* Reduced space between cards */
+  opacity: 0;
+  transform: translateY(100px);
+  transition: all 1.2s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.award-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Exact Alignment for cards */
+.blue-card {
+  align-self: flex-start;
+  margin-inline-start: 10vw;
+  background-color: #0044ff;
+}
+
+.red-card {
+  align-self: flex-end;
+  margin-inline-end: 10vw;
+  background-color: #e60028;
+}
+
+.cyan-card {
+  align-self: center;
+  margin-bottom: 0; /* Last card doesn't need huge bottom margin, spacer handles it */
+  background-color: #00aeef;
+}
+
+/* Hover States for cards */
+.award-card .award-card-front,
+.award-card .award-card-back {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  color: #ffffff;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 2;
+}
+
+.award-card .award-card-back {
+  opacity: 0;
+  justify-content: center; /* Center the text vertically */
+  background-color: inherit;
+}
+
+.award-card:hover .award-card-front {
+  opacity: 0;
+}
+
+.award-card:hover .award-card-back {
+  opacity: 1;
+  transform: scale(1.02);
+}
+
+.award-card-front h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.award-card-back p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin: 0 0 20px 0;
+}
+
+.award-card-back a {
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  align-self: flex-end;
+}
+
+/* Subtle geometric line patterns via CSS background */
+.award-card::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; right: -50%; bottom: -50%;
+  background-image: 
+    radial-gradient(circle at center, transparent 30%, rgba(255,255,255,0.1) 31%, transparent 32%),
+    radial-gradient(circle at 80% 20%, transparent 40%, rgba(255,255,255,0.1) 41%, transparent 42%),
+    linear-gradient(45deg, transparent 49%, rgba(255,255,255,0.1) 49%, rgba(255,255,255,0.1) 51%, transparent 51%);
+  background-size: 300px 300px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 1;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hide background pattern on hover */
+.award-card:hover::before {
+  opacity: 0;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+  .award-card {
+    align-self: center !important; 
+    margin-left: 0;
+    margin-right: 0;
+  }
+  
+  .recognition-sticky-container {
+    flex-direction: column;
+    height: auto;
+    position: relative;
+    padding: 100px 0;
+  }
+  
+  .recognition-scroll-wrapper {
+    height: auto;
+  }
+}

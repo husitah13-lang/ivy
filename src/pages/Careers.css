@@ -1,0 +1,74 @@
+.careers-page {
+  background-color: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  padding-top: 100px; /* Added more padding since hero is gone */
+}
+
+.careers-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+
+
+.careers-cta-section {
+  padding: 0 0 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.careers-iframe-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 800px;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10px, black calc(100% - 10px), transparent), linear-gradient(to bottom, transparent, black 10px, black calc(100% - 10px), transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to right, transparent, black 10px, black calc(100% - 10px), transparent), linear-gradient(to bottom, transparent, black 10px, black calc(100% - 10px), transparent);
+  mask-composite: intersect;
+}
+
+.iframe-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  border-top-color: #ffffff;
+  animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.careers-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: black;
+  transition: opacity 0.5s ease;
+}
+
+.careers-iframe.loading {
+  opacity: 0;
+}
+
+@media (max-width: 768px) {
+  .careers-page {
+    padding-top: 80px;
+  }
+}

@@ -1,0 +1,61 @@
+.partners-section {
+  background-color: #000000;
+  color: #ffffff;
+  padding: 100px 5%;
+}
+
+.partners-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.partners-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  margin-bottom: 60px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  max-width: 800px;
+}
+
+.partners-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 60px;
+  align-items: center;
+}
+
+.partner-logo-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  filter: grayscale(1) brightness(2); /* Make logos white like the screenshot */
+  opacity: 0.8;
+  transition: opacity 0.3s ease, filter 0.3s ease;
+}
+
+.partner-logo-item:hover {
+  opacity: 1;
+  filter: grayscale(0) brightness(1);
+}
+
+.partner-logo-item img {
+  max-width: 180px;
+  max-height: 60px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 1024px) {
+  .partners-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .partners-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+  }
+}
