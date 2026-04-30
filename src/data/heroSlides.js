@@ -9,6 +9,6 @@ export const heroSlides = [
     subtitle: "Digitally Transforming Sales & Distribution",
     description: "Targets Live provides a centralized hub for exceptional control and real-time insight. We empower organizations to track on-field activities, optimize dispatches, and move from intuition-based decisions to evidence-based planning.",
     ctaText: "Explore our work",
-    ctaLink: "/service/targets"
+    ctaLink: "/services/targets"
   }
 ];
