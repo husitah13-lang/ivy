@@ -10,7 +10,7 @@ import CareersSection from '../components/CareersSection';
 import { fetchAPI } from '../utils/api';
 
 import { homeContent } from '../data/content/homepage.js';
-import { homeContent as homeContentAr } from '../data/content/homepage.ar.js';
+import { homeContentAr } from '../data/content/homepage.ar.js';
 
 const HomePage = () => {
   const { t, i18n } = useTranslation();
