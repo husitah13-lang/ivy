@@ -30,7 +30,14 @@ const AdminLayout = () => {
   const arPages = filteredCollections.filter(c => c.endsWith('.ar') && !mainPages.includes(c) && !hiddenCollections.includes(c));
   const otherPages = filteredCollections.filter(c => !c.endsWith('.ar') && !mainPages.includes(c) && !hiddenCollections.includes(c));
   
-  const [isDarkMode, setIsDarkMode] = React.useState(true);
+  const [isDarkMode, setIsDarkMode] = React.useState(() => {
+    const saved = localStorage.getItem('adminTheme');
+    return saved !== null ? JSON.parse(saved) : true;
+  });
+
+  React.useEffect(() => {
+    localStorage.setItem('adminTheme', JSON.stringify(isDarkMode));
+  }, [isDarkMode]);
 
   const theme = {
     bg: isDarkMode ? '#050505' : '#f8f9fa',
