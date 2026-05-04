@@ -9,43 +9,39 @@ import NewsSection from '../components/NewsSection';
 import CareersSection from '../components/CareersSection';
 import { fetchAPI } from '../utils/api';
 
+import { homeContent } from '../data/content/homepage.js';
+import { homeContent as homeContentAr } from '../data/content/homepage.ar.js';
+
 const HomePage = () => {
   const { t, i18n } = useTranslation();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  
+  // Initialize with local fallback data instantly
+  const initialData = i18n.language === 'ar' ? homeContentAr : homeContent;
+  const [data, setData] = useState(initialData);
 
   useEffect(() => {
+    // Also update instantly when language changes
+    setData(i18n.language === 'ar' ? homeContentAr : homeContent);
+
     const loadData = async () => {
-      setLoading(true);
       try {
         const collection = i18n.language === 'ar' ? 'homepage.ar' : 'homepage';
+        // Fetch CMS data in background
         const cmsData = await fetchAPI(`/content/${collection}`);
         if (cmsData) {
           setData(cmsData);
-        } else {
-          // Fallback to local file if CMS fails
-          const { homeContent } = await import('../data/content/homepage.js');
-          setData(homeContent);
         }
       } catch (error) {
         console.error("Failed to load homepage data:", error);
-        // Fallback on error
-        const { homeContent } = await import('../data/content/homepage.js');
-        setData(homeContent);
-      } finally {
-        setLoading(false);
       }
     };
-    loadData();
+    
+    // Slight delay to ensure UI renders instantly before network request
+    const timer = setTimeout(loadData, 50);
+    return () => clearTimeout(timer);
   }, [i18n.language]);
 
-  if (loading || !data) {
-    return (
-      <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#000' }}>
-        <h2 style={{ color: '#fff' }}>{t('common.loading')}</h2>
-      </div>
-    );
-  }
+  if (!data) return null;
 
   return (
     <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
