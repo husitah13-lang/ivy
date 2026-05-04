@@ -7,6 +7,7 @@ import logo2 from '../assets/2.png';
 
 const Navbar = () => {
   const [isHidden, setIsHidden] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const { t, i18n } = useTranslation();
@@ -20,14 +21,26 @@ const Navbar = () => {
     let lastScrollY = window.scrollY;
 
     const handleScroll = () => {
-      if (isMenuOpen) return; // Don't hide navbar if mobile menu is open
+      if (isMenuOpen) return;
       
-      if (window.scrollY > 50) {
+      const currentScrollY = window.scrollY;
+      
+      // Show navbar if scrolling up, hide if scrolling down
+      // Only hide after some initial scroll (e.g. 100px)
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsHidden(true);
       } else {
         setIsHidden(false);
       }
-      lastScrollY = window.scrollY;
+
+      // Add background blur/color if scrolled past top
+      if (currentScrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
@@ -47,7 +60,7 @@ const Navbar = () => {
   const closeMenu = () => setIsMenuOpen(false);
 
   return (
-    <nav className={`navbar ${isHidden ? 'navbar-hidden' : ''} ${isMenuOpen ? 'navbar-open' : ''}`}>
+    <nav className={`navbar ${isHidden ? 'navbar-hidden' : ''} ${isScrolled ? 'navbar-scrolled' : ''} ${isMenuOpen ? 'navbar-open' : ''}`}>
       <div className="navbar-container">
         <Link to="/" className="navbar-logo" onClick={closeMenu}>
           <img src={logoB} className="logo-main" alt="Logo" />
