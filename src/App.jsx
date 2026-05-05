@@ -41,6 +41,20 @@ function AppContent() {
   const { i18n } = useTranslation();
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
+  const [layoutData, setLayoutData] = useState(null);
+
+  useEffect(() => {
+    const loadLayout = async () => {
+      try {
+        const collection = i18n.language === 'ar' ? 'layout.ar' : 'layout';
+        const data = await fetchAPI(`/content/${collection}`);
+        if (data) setLayoutData(data);
+      } catch (err) {
+        console.warn("CMS layout fetch failed", err);
+      }
+    };
+    loadLayout();
+  }, [i18n.language]);
 
   useEffect(() => {
     document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
@@ -56,7 +70,7 @@ function AppContent() {
   return (
     <>
       <ScrollHandler />
-      {!isAdmin && <Navbar />}
+      {!isAdmin && <Navbar data={layoutData} />}
       <main className={isAdmin ? "" : "main-content"}>
         <PageTransition>
           <Routes>
@@ -74,8 +88,8 @@ function AppContent() {
             </Route>
           </Routes>
         </PageTransition>
-        {!isAdmin && <Footer />}
       </main>
+      {!isAdmin && <Footer data={layoutData} />}
     </>
   );
 }
