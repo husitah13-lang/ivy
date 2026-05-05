@@ -2,20 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import './NewsSection.css';
 import { useTranslation } from 'react-i18next';
 
-const NewsSection = () => {
+const NewsSection = ({ data }) => {
   const { t, i18n } = useTranslation();
   const containerRef = useRef(null);
   const trackRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
   
-  // Get news items from translations
-  // Note: we need to handle the array mapping from i18next
-  const newsItems = [0, 1, 2, 3, 4, 5].map(i => ({
-    category: t(`home.news.items.${i}.category`),
-    date: t(`home.news.items.${i}.date`),
-    headline: t(`home.news.items.${i}.headline`)
-  }));
-
+  const newsItems = data?.items || [];
   const extendedData = [...newsItems, ...newsItems];
   
   // Animation state refs to avoid re-renders
@@ -112,7 +105,7 @@ const NewsSection = () => {
 
         <div className="news-footer">
           <div className="news-footer-label">
-            <span>{t('home.news.title')}</span>
+            <span>{data?.headline || t('home.news.title')}</span>
           </div>
         </div>
       </div>

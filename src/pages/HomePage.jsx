@@ -45,11 +45,11 @@ const HomePage = () => {
 
   return (
     <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
-      <Hero data={data.hero_custom} />
+      <Hero data={data.hero_custom} slides={data.hero_slides} />
       <CardSection id="services" cards={data.tilegrid} />
-      <QuoteSection data={data.carousel} />
+      <QuoteSection data={data.carousel || data.quote} />
       <CarouselSection items={data.client_carousel} />
-      <RecognitionBanner title={t('hero.ai_agentic_leap')} />
+      <RecognitionBanner title={data.recognition?.title} awards={data.recognition?.awards} />
       <CareersSection data={data.careers} />
       <NewsSection data={data.news} />
     </div>

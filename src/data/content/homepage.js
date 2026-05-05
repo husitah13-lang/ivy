@@ -6,6 +6,20 @@ export const homeContent = {
     "sub_headline": "FOR GROWTH",
     "body_text": "In an era defined by technological change, continuous innovation is the core of competitive advantage. We partner with ambitious organizations to architect, develop, and scale the software solutions that define tomorrow's market leaders."
   },
+  "hero_slides": [
+    {
+      "subtitle": "Shaping tomorrow, today",
+      "description": "In a world of constant change, reinvention is a continuous strategy. That’s why we work with organizations to rewrite the rules of growth, innovation and resilience.",
+      "ctaText": "See what we do",
+      "ctaLink": "/services"
+    },
+    {
+      "subtitle": "Digitally Transforming Sales & Distribution",
+      "description": "Targets Live provides a centralized hub for exceptional control and real-time insight. We empower organizations to track on-field activities, optimize dispatches, and move from intuition-based decisions to evidence-based planning.",
+      "ctaText": "Explore our work",
+      "ctaLink": "/services/targets"
+    }
+  ],
   "tilegrid": [
     {
       "id": "service-saas-001",
@@ -68,11 +82,53 @@ export const homeContent = {
       {
         "category": "Partnership",
         "date": "Latest",
-        "headline": "Accenture and Google Cloud Expand Partnership to Scale Agentic Transformation for Global Enterprises",
+        "headline": "Accenture and Google Cloud Expand Partnership to Scale Agentic Transformation for Global Enterprises"
+      },
+      {
+        "category": "AI & Security",
+        "date": "March 25, 2026",
+        "headline": "Accenture and Anthropic Team to Help Organizations Secure, Scale AI-Driven Cybersecurity Operations"
+      },
+      {
+        "category": "Acquisition",
+        "date": "March 20, 2026",
+        "headline": "Accenture Acquires Udacity to Build a Learning Platform for the AI Era"
+      },
+      {
+        "category": "Investment",
+        "date": "March 15, 2026",
+        "headline": "Accenture Invests in Sanctuary AI to Bring Humanoid Robots to Workplaces"
+      },
+      {
+        "category": "Cloud",
+        "date": "March 10, 2026",
+        "headline": "Accenture Recognized as a Leader in Cloud Services by Major Analysts"
+      },
+      {
+        "category": "Research",
+        "date": "March 05, 2026",
+        "headline": "New Research: How Generative AI is Reshaping the Global Workforce"
       }
     ]
   },
   "recognition": {
-    "title": "AI Agentic Leap"
+    "title": "AI Agentic Leap",
+    "awards": [
+      {
+        "shortTitle": "A Leader in Reinvention",
+        "description": "Recognized globally for continuously reinventing core operations and setting new industry standards.",
+        "linkText": "See related awards >"
+      },
+      {
+        "shortTitle": "A Great Place To Work®",
+        "description": "Certified as a great workplace, built on trust, innovation, and empowering people to succeed everywhere.",
+        "linkText": "See related awards >"
+      },
+      {
+        "shortTitle": "A Trusted Industry Leader",
+        "description": "Accenture is a Leader in the 2025 Gartner Magic Quadrant for Public Cloud IT Transformation Services.",
+        "linkText": "See related awards >"
+      }
+    ]
   }
 };
