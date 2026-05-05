@@ -69,19 +69,31 @@ const Hero = ({ data, slides = [] }) => {
       <div className="hero-container">
         <div className="hero-left animate-on-scroll-left">
           <h1 className="hero-title">
-            <span className="title-line-1">{data?.headline_prefix || t('hero.title_line_1')}</span>
-            <span className="title-line-2">{data?.headline_suffix_start || t('hero.title_line_2')}</span>
-            <span className="title-line-3">{data?.headline_suffix_end || t('hero.title_line_3')}</span>
-            <span className="title-line-4">
-              {i18n.language === 'ar' ? (
-                data?.sub_headline || t('hero.title_line_4')
-              ) : (
-                <>
-                  {(data?.sub_headline || t('hero.title_line_4')).replace('GROWTH', '')} 
-                  <span className="accent-g">G</span>ROWTH
-                </>
-              )}
-            </span>
+            {data?.title_lines ? (
+              data.title_lines.map((line, idx) => (
+                <span 
+                  key={idx} 
+                  className={`title-line-${idx + 1}`} 
+                  dangerouslySetInnerHTML={{ __html: line }}
+                />
+              ))
+            ) : (
+              <>
+                <span className="title-line-1">{t('hero.title_line_1')}</span>
+                <span className="title-line-2">{t('hero.title_line_2')}</span>
+                <span className="title-line-3">{t('hero.title_line_3')}</span>
+                <span className="title-line-4">
+                  {i18n.language === 'ar' ? (
+                    t('hero.title_line_4')
+                  ) : (
+                    <>
+                      {t('hero.title_line_4').replace('GROWTH', '')} 
+                      <span className="accent-g">G</span>ROWTH
+                    </>
+                  )}
+                </span>
+              </>
+            )}
           </h1>
         </div>
         

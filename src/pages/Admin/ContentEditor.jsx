@@ -130,6 +130,7 @@ const ContentEditor = ({ collectionName: propCollection }) => {
     'web-development': 'Web Development Page',
     'web-development.ar': 'Web Development Page (Arabic)',
     'tilegrid': 'Service Cards (Homepage)',
+    'title_lines': 'Main Headline Lines (Supports HTML)',
     'hero_slides': 'Hero Content Slides',
     'subtitle': 'Slide Subtitle / Heading',
     'description': 'Slide Description Paragraph',
