@@ -1,4 +1,15 @@
 export default {
+    "seo": {
+        "title": "Marketing Services | IVY Interactive",
+        "description": "Professional Marketing Services services provided by IVY Interactive. Empowering your business with AI and advanced technology.",
+        "keywords": "Marketing Services, SEO, GEO, IVY Interactive",
+        "schema": {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Marketing Services",
+            "provider": { "@type": "Organization", "name": "IVY Interactive" }
+        }
+    },
     "subnavigation": {
         "title": "Marketing Services",
         "anchors": [

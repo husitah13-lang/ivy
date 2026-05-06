@@ -1,4 +1,21 @@
 export const contactContent = {
+    "seo": {
+        "title": "Contact Us | IVY Interactive Global Offices",
+        "description": "Get in touch with IVY Interactive. We have a global presence in the UK, UAE, Pakistan, and Australia to support your digital transformation and software engineering needs.",
+        "keywords": "Contact IVY, Global Offices, Digital Transformation, Software Engineering, UK, UAE",
+        "schema": {
+            "@context": "https://schema.org",
+            "@type": "ContactPage",
+            "name": "Contact IVY Interactive",
+            "description": "Contact information for IVY Interactive's global offices.",
+            "mainEntity": {
+                "@type": "Organization",
+                "name": "IVY Interactive",
+                "telephone": "+44 (0) 208 1237 737",
+                "email": "contact@your-domain.com"
+            }
+        }
+    },
   hero: {
     title: "Global Presence",
     subtitle: "Connecting with our clients and communities across the globe to drive meaningful change."

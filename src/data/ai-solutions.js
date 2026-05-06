@@ -1,4 +1,15 @@
 export default {
+    "seo": {
+        "title": "Ai Solutions | IVY Interactive",
+        "description": "Professional Ai Solutions services provided by IVY Interactive. Empowering your business with AI and advanced technology.",
+        "keywords": "Ai Solutions, SEO, GEO, IVY Interactive",
+        "schema": {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Ai Solutions",
+            "provider": { "@type": "Organization", "name": "IVY Interactive" }
+        }
+    },
     "subnavigation":  {
                           "title": "AI Solutions",
                           "anchors":  [

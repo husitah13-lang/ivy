@@ -52,6 +52,45 @@ app.post('/api/login', (req, res) => {
   }
 });
 
+app.get('/api/sitemap.xml', async (req, res) => {
+  try {
+    const collections = await Content.find(
+      { name: { $nin: ['index', 'index.ar', 'articleContent', 'articleContent.ar'] } }, 
+      'name lastUpdated'
+    );
+
+    const baseUrl = 'https://your-domain.com';
+    
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+    
+    const staticRoutes = [
+      { path: '/', priority: '1.0' },
+      { path: '/services', priority: '0.8' },
+      { path: '/what-we-think', priority: '0.8' },
+      { path: '/careers', priority: '0.6' },
+      { path: '/contact', priority: '0.6' }
+    ];
+
+    staticRoutes.forEach(route => {
+      xml += `  <url>\n    <loc>${baseUrl}${route.path}</loc>\n    <lastmod>${new Date().toISOString()}</lastmod>\n    <priority>${route.priority}</priority>\n  </url>\n`;
+    });
+    
+    collections.forEach(item => {
+      const path = item.name.includes('service') ? `/services/${item.name}` : `/what-we-think/${item.name}`;
+      const date = item.lastUpdated ? new Date(item.lastUpdated).toISOString() : new Date().toISOString();
+      xml += `  <url>\n    <loc>${baseUrl}${path}</loc>\n    <lastmod>${date}</lastmod>\n    <priority>0.7</priority>\n  </url>\n`;
+    });
+    
+    xml += `</urlset>`;
+
+    res.header('Content-Type', 'application/xml');
+    res.send(xml);
+  } catch (err) {
+    res.status(500).send('Error generating sitemap');
+  }
+});
+
 app.get('/api/collections', async (req, res) => {
   try {
     const collections = await Content.find({}, 'name').sort({ name: 1 });
@@ -106,6 +145,7 @@ const storage = multer.diskStorage({
   }
 });
 const upload = multer({ storage: storage });
+
 
 app.post('/api/upload', authenticateToken, upload.single('file'), (req, res) => {
   if (!req.file) return res.status(400).json({ error: 'No file uploaded' });

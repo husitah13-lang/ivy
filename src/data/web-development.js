@@ -1,4 +1,15 @@
 export default {
+    "seo": {
+        "title": "Web Development | IVY Interactive",
+        "description": "Professional Web Development services provided by IVY Interactive. Empowering your business with AI and advanced technology.",
+        "keywords": "Web Development, SEO, GEO, IVY Interactive",
+        "schema": {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Web Development",
+            "provider": { "@type": "Organization", "name": "IVY Interactive" }
+        }
+    },
     "subnavigation": {
         "anchors": [
             {

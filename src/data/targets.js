@@ -1,4 +1,15 @@
 export default {
+    "seo": {
+        "title": "Targets | IVY Interactive",
+        "description": "Professional Targets services provided by IVY Interactive. Empowering your business with AI and advanced technology.",
+        "keywords": "Targets, SEO, GEO, IVY Interactive",
+        "schema": {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Targets",
+            "provider": { "@type": "Organization", "name": "IVY Interactive" }
+        }
+    },
     "subnavigation": {
         "title": "Targets Live",
         "anchors": [

@@ -1,4 +1,15 @@
 export default {
+    "seo": {
+        "title": "App Development | IVY Interactive",
+        "description": "Professional App Development services provided by IVY Interactive. Empowering your business with AI and advanced technology.",
+        "keywords": "App Development, SEO, GEO, IVY Interactive",
+        "schema": {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "App Development",
+            "provider": { "@type": "Organization", "name": "IVY Interactive" }
+        }
+    },
     "subnavigation":  {
                           "anchors":  [
                                           {
