@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import SEO from '../components/SEO';
 import Hero from '../components/Hero';
 import CardSection from '../components/CardSection';
 import QuoteSection from '../components/QuoteSection';
@@ -49,6 +50,7 @@ const HomePage = () => {
 
   return (
     <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
+      <SEO seoData={data.seo} />
       <Hero data={data.hero_custom} />
       <CardSection id="services" cards={data.tilegrid} />
       <QuoteSection data={data.carousel} />

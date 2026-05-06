@@ -1,4 +1,15 @@
 export default {
+    "seo": {
+        "title": "Ecommerce | IVY Interactive",
+        "description": "Professional Ecommerce services provided by IVY Interactive. Empowering your business with AI and advanced technology.",
+        "keywords": "Ecommerce, SEO, GEO, IVY Interactive",
+        "schema": {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Ecommerce",
+            "provider": { "@type": "Organization", "name": "IVY Interactive" }
+        }
+    },
     "subnavigation": {
         "anchors": [
             {

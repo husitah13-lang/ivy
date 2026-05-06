@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import SubNavbar from '../components/SubNavbar';
+import SEO from '../components/SEO';
 import ArticleHero from '../components/ArticleHero';
 import ArticleInBrief from '../components/ArticleInBrief';
 import ArticleTextSection from '../components/ArticleTextSection';
@@ -100,6 +101,7 @@ const ArticlePage = () => {
 
   return (
     <div style={{ backgroundColor: '#000', minHeight: '100vh' }} dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
+      <SEO seoData={article.seo} />
       <SubNavbar title={article.eyebrow || subNavbarTitle} anchors={article.anchors || []} />
       
       <div id="overview">

@@ -1,4 +1,15 @@
 export default {
+    "seo": {
+        "title": "Branding And Design | IVY Interactive",
+        "description": "Professional Branding And Design services provided by IVY Interactive. Empowering your business with AI and advanced technology.",
+        "keywords": "Branding And Design, SEO, GEO, IVY Interactive",
+        "schema": {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Branding And Design",
+            "provider": { "@type": "Organization", "name": "IVY Interactive" }
+        }
+    },
     "subnavigation": {
         "title": "العلامة التجارية والتصميم",
         "anchors": [

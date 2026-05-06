@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import SubNavbar from '../components/SubNavbar';
+import SEO from '../components/SEO';
 import ServiceHero from '../components/ServiceHero';
 import ServiceStats from '../components/ServiceStats';
 import ServiceCapabilities from '../components/ServiceCapabilities';
@@ -127,6 +128,7 @@ const ServicePage = () => {
 
   return (
     <>
+      <SEO seoData={data.seo} />
       <SubNavbar title={data.subnavigation?.title || "Service"} anchors={data.subnavigation?.anchors} />
       <div style={{ backgroundColor: '#000', minHeight: '100vh', paddingBottom: '80px' }}>
 

@@ -1,6 +1,16 @@
 export default [
     {
         "id": "future-cmo-2026",
+        "seo": {
+            "title": "Future Cmo 2026 | IVY Insights",
+            "description": "Insights and analysis from IVY Interactive regarding Future Cmo 2026.",
+            "schema": {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": "Future Cmo 2026",
+                "author": { "@type": "Organization", "name": "IVY Interactive" }
+            }
+        },
         "title": "The future of the CMO: Driving growth in 2026",
         "date": "March 15, 2026",
         "category": "White Paper",
@@ -8,6 +18,16 @@ export default [
     },
     {
         "id": "legacy-brand-transformation",
+        "seo": {
+            "title": "Legacy Brand Transformation | IVY Insights",
+            "description": "Insights and analysis from IVY Interactive regarding Legacy Brand Transformation.",
+            "schema": {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": "Legacy Brand Transformation",
+                "author": { "@type": "Organization", "name": "IVY Interactive" }
+            }
+        },
         "title": "Modernizing a legacy brand for digital growth",
         "date": "March 10, 2026",
         "category": "Case Study",

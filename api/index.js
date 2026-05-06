@@ -53,6 +53,56 @@ app.post('/api/login', (req, res) => {
   return res.status(401).json({ error: 'Invalid credentials' });
 });
 
+app.get('/api/sitemap.xml', async (req, res) => {
+  try {
+    await connectToDatabase();
+    
+    // Fetch active collections for dynamic routes
+    const collections = await Content.find(
+      { name: { $nin: ['index', 'index.ar', 'articleContent', 'articleContent.ar'] } }, 
+      'name lastUpdated'
+    );
+
+    const baseUrl = 'https://your-domain.com'; // TODO: Replace with production domain
+    
+    let xml = `<?xml version="1.0" encoding="UTF-8"?>\n`;
+    xml += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`;
+    
+    // Core Static Routes
+    const staticRoutes = [
+      { path: '/', priority: '1.0' },
+      { path: '/services', priority: '0.8' },
+      { path: '/what-we-think', priority: '0.8' },
+      { path: '/careers', priority: '0.6' },
+      { path: '/contact', priority: '0.6' }
+    ];
+
+    staticRoutes.forEach(route => {
+      xml += `  <url>\n    <loc>${baseUrl}${route.path}</loc>\n    <lastmod>${new Date().toISOString()}</lastmod>\n    <priority>${route.priority}</priority>\n  </url>\n`;
+    });
+    
+    // Dynamic Routes
+    collections.forEach(item => {
+      // Basic routing heuristic. Adjust depending on how collections map to URLs
+      const path = item.name.includes('service') ? `/services/${item.name}` : `/what-we-think/${item.name}`;
+      const date = item.lastUpdated ? new Date(item.lastUpdated).toISOString() : new Date().toISOString();
+      
+      xml += `  <url>\n`;
+      xml += `    <loc>${baseUrl}${path}</loc>\n`;
+      xml += `    <lastmod>${date}</lastmod>\n`;
+      xml += `    <priority>0.7</priority>\n`;
+      xml += `  </url>\n`;
+    });
+    
+    xml += `</urlset>`;
+
+    res.header('Content-Type', 'application/xml');
+    res.send(xml);
+  } catch (err) {
+    res.status(500).send('Error generating sitemap');
+  }
+});
+
 app.get('/api/collections', async (req, res) => {
   try {
     await connectToDatabase();
@@ -114,6 +164,7 @@ app.post('/api/content/:collection', authenticateToken, async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 });
+
 
 app.post('/api/upload', (req, res) => {
   res.status(501).json({ error: 'Uploads are temporarily disabled for stability. Coming soon!' });

@@ -1,4 +1,15 @@
 export default {
+    "seo": {
+        "title": "Insights | IVY Interactive",
+        "description": "Professional Insights services provided by IVY Interactive. Empowering your business with AI and advanced technology.",
+        "keywords": "Insights, SEO, GEO, IVY Interactive",
+        "schema": {
+            "@context": "https://schema.org",
+            "@type": "Service",
+            "name": "Insights",
+            "provider": { "@type": "Organization", "name": "IVY Interactive" }
+        }
+    },
     "hero": {
         "title": "ماذا نفكر",
         "description": "أحدث أفكارنا حول القوى الجديدة لسلوك المستهلك والتكنولوجيا والاتجاهات التي تشكل الصناعة."

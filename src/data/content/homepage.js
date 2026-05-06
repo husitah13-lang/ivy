@@ -1,4 +1,22 @@
 export const homeContent = {
+    "seo": {
+        "title": "IVY Interactive | Engineering Digital Systems for Growth",
+        "description": "Leading global technology partner specializing in AI-driven digital systems, SaaS platforms, and enterprise e-commerce solutions. We build the future of digital business.",
+        "keywords": "AI Solutions, SaaS Development, Digital Transformation, E-commerce, IVY Interactive",
+        "schema": {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "IVY Interactive",
+            "url": "https://your-domain.com",
+            "logo": "https://your-domain.com/logo.png",
+            "description": "Global technology partner specializing in engineering digital systems for growth.",
+            "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "London",
+                "addressCountry": "UK"
+            }
+        }
+    },
   "hero_custom": {
     "headline_prefix": "ENGINEERING",
     "headline_suffix_start": "DIGITAL",
