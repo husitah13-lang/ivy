@@ -8,27 +8,10 @@ const RecognitionBanner = ({ title, awards }) => {
   const redRef = useRef(null);
   const cyanRef = useRef(null);
 
-  // Map awards from translation JSON
-  const defaultAwards = [
-    {
-      shortTitle: t('home.awards.0.shortTitle'),
-      description: t('home.awards.0.description'),
-      linkText: t('home.awards.0.linkText')
-    },
-    {
-      shortTitle: t('home.awards.1.shortTitle'),
-      description: t('home.awards.1.description'),
-      linkText: t('home.awards.1.linkText')
-    },
-    {
-      shortTitle: t('home.awards.2.shortTitle'),
-      description: t('home.awards.2.description'),
-      linkText: t('home.awards.2.linkText')
-    }
-  ];
+  const displayData = awards || [];
+  const bannerTitle = title || "";
 
-  const displayData = awards || defaultAwards;
-  const bannerTitle = title || t('home.recognition.title');
+  if (displayData.length < 3) return null;
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => {

@@ -10,46 +10,66 @@ import NewsSection from '../components/NewsSection';
 import CareersSection from '../components/CareersSection';
 import { fetchAPI } from '../utils/api';
 
+import { homeContent } from '../data/content/homepage.js';
+import { homeContentAr } from '../data/content/homepage.ar.js';
+
 const HomePage = () => {
   const { t, i18n } = useTranslation();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  
+  // Initialize with local fallback data instantly
+  const initialData = i18n.language === 'ar' ? homeContentAr : homeContent;
+  const [data, setData] = useState(initialData);
 
   useEffect(() => {
+    // Also update instantly when language changes
+    setData(i18n.language === 'ar' ? homeContentAr : homeContent);
+
     const loadData = async () => {
-      setLoading(true);
       try {
         const collection = i18n.language === 'ar' ? 'homepage.ar' : 'homepage';
+        // Fetch CMS data in background
         const cmsData = await fetchAPI(`/content/${collection}`);
         if (cmsData) {
           setData(cmsData);
-        } else {
-          // Fallback to local file if CMS fails
-          const { homeContent } = await import('../data/content/homepage.js');
-          setData(homeContent);
         }
       } catch (error) {
         console.error("Failed to load homepage data:", error);
-        // Fallback on error
-        const { homeContent } = await import('../data/content/homepage.js');
-        setData(homeContent);
-      } finally {
-        setLoading(false);
       }
     };
-    loadData();
+    
+    // Slight delay to ensure UI renders instantly before network request
+    const timer = setTimeout(loadData, 50);
+    return () => clearTimeout(timer);
   }, [i18n.language]);
 
-  if (loading || !data) {
-    return (
-      <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center', backgroundColor: '#000' }}>
-        <h2 style={{ color: '#fff' }}>{t('common.loading')}</h2>
-      </div>
-    );
-  }
+  if (!data) return null;
+
+  const renderSection = (section) => {
+    if (!section.visible) return null;
+    
+    switch (section.id) {
+      case 'hero': 
+        return <Hero key="hero" data={data.hero_custom} slides={data.hero_slides} />;
+      case 'services': 
+        return <CardSection key="services" id="services" cards={data.tilegrid} />;
+      case 'quote': 
+        return <QuoteSection key="quote" data={data.carousel || data.quote} />;
+      case 'clients': 
+        return <CarouselSection key="clients" items={data.client_carousel} />;
+      case 'recognition': 
+        return <RecognitionBanner key="recognition" title={data.recognition?.title} awards={data.recognition?.awards} />;
+      case 'careers': 
+        return <CareersSection key="careers" data={data.careers} />;
+      case 'news': 
+        return <NewsSection key="news" data={data.news} />;
+      default: 
+        return null;
+    }
+  };
 
   return (
     <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
+<<<<<<< HEAD
       <SEO seoData={data.seo} />
       <Hero data={data.hero_custom} />
       <CardSection id="services" cards={data.tilegrid} />
@@ -58,6 +78,21 @@ const HomePage = () => {
       <RecognitionBanner title={t('hero.ai_agentic_leap')} />
       <CareersSection data={data.careers} />
       <NewsSection data={data.news} />
+=======
+      {data.section_layout ? (
+        data.section_layout.map(renderSection)
+      ) : (
+        <>
+          <Hero data={data.hero_custom} slides={data.hero_slides} />
+          <CardSection id="services" cards={data.tilegrid} />
+          <QuoteSection data={data.carousel || data.quote} />
+          <CarouselSection items={data.client_carousel} />
+          <RecognitionBanner title={data.recognition?.title} awards={data.recognition?.awards} />
+          <CareersSection data={data.careers} />
+          <NewsSection data={data.news} />
+        </>
+      )}
+>>>>>>> a9580986328c2153b7f11a345730af961dde560a
     </div>
   );
 };

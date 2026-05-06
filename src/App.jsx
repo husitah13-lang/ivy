@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import HomePage from './pages/HomePage'
@@ -14,7 +14,7 @@ import ContentEditor from './pages/Admin/ContentEditor'
 import Footer from './components/Footer'
 import PageTransition from './components/PageTransition'
 import './App.css'
-import { useEffect } from 'react'
+import { fetchAPI } from './utils/api'
 import { useLocation } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
@@ -41,6 +41,20 @@ function AppContent() {
   const { i18n } = useTranslation();
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
+  const [layoutData, setLayoutData] = useState(null);
+
+  useEffect(() => {
+    const loadLayout = async () => {
+      try {
+        const collection = i18n.language === 'ar' ? 'layout.ar' : 'layout';
+        const data = await fetchAPI(`/content/${collection}`);
+        if (data) setLayoutData(data);
+      } catch (err) {
+        console.warn("CMS layout fetch failed", err);
+      }
+    };
+    loadLayout();
+  }, [i18n.language]);
 
   useEffect(() => {
     document.documentElement.dir = i18n.language === 'ar' ? 'rtl' : 'ltr';
@@ -56,7 +70,7 @@ function AppContent() {
   return (
     <>
       <ScrollHandler />
-      {!isAdmin && <Navbar />}
+      {!isAdmin && <Navbar data={layoutData} />}
       <main className={isAdmin ? "" : "main-content"}>
         <PageTransition>
           <Routes>
@@ -74,8 +88,8 @@ function AppContent() {
             </Route>
           </Routes>
         </PageTransition>
-        {!isAdmin && <Footer />}
       </main>
+      {!isAdmin && <Footer data={layoutData} />}
     </>
   );
 }

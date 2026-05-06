@@ -100,16 +100,45 @@ const ContentEditor = ({ collectionName: propCollection }) => {
 
   const fieldMap = {
     'homepage': 'Homepage Content',
+    'homepage.ar': 'Homepage Content (Arabic)',
     'services_main': 'Services Overview Page',
     'settings': 'Global Site Settings',
     'careers': 'Careers & Job Board',
     'contact': 'Contact & Offices',
     'insights': 'Blog & Perspectives',
-    'tilegrid': 'Service Cards (Homepage)',
-    'hero_custom': 'Hero Section',
-    'cta_link': 'Link to Page',
+    'insights.ar': 'Blog & Perspectives (Arabic)',
+    'branding-and-design': 'Branding & Design Page',
+    'branding-and-design.ar': 'Branding & Design Page (Arabic)',
+    'layout': 'Global Layout (Nav & Footer)',
+    'layout.ar': 'Global Layout (Arabic)',
+    'targets': 'Targets Live Page',
+    'targets.ar': 'Targets Live Page (Arabic)',
+    'ai-solutions': 'AI Solutions Page',
+    'ai-solutions.ar': 'AI Solutions Page (Arabic)',
+    'app-development': 'App Development Page',
+    'app-development.ar': 'App Development Page (Arabic)',
+    'business-intelligence': 'Business Intelligence Page',
+    'business-intelligence.ar': 'Business Intelligence Page (Arabic)',
+    'ecommerce': 'Ecommerce Page',
+    'ecommerce.ar': 'Ecommerce Page (Arabic)',
+    'marketing-services': 'Marketing Services Page',
+    'marketing-services.ar': 'Marketing Services Page (Arabic)',
+    'saas-platforms': 'SaaS Platforms Page',
+    'saas-platforms.ar': 'SaaS Platforms Page (Arabic)',
+    'talent-training': 'Talent & Training Page',
+    'talent-training.ar': 'Talent & Training Page (Arabic)',
+    'web-development': 'Web Development Page',
+    'web-development.ar': 'Web Development Page (Arabic)',
+    'section_layout': 'Page Structure / Sections Order',
+    'visible': 'Is Section Visible?',
+    'name': 'Section Display Name',
+    'title_lines': 'Main Headline Lines (Supports HTML)',
+    'hero_slides': 'Hero Content Slides',
+    'subtitle': 'Slide Subtitle / Heading',
+    'description': 'Slide Description Paragraph',
+    'cta_link': 'Button Link (URL)',
     'cta_text': 'Button Text',
-    'body_text': 'Description Paragraph',
+    'body_text': 'Main Hero Description (Left Side)',
     'eyebrow': 'Small Header (Eyebrow)',
     'sub_headline': 'Subtitle',
     'iframe_url': 'Job Board Web Address (URL)',
@@ -143,18 +172,46 @@ const ContentEditor = ({ collectionName: propCollection }) => {
               <div key={`${path}.${index}`} style={{ marginBottom: '1rem', padding: '1.5rem', background: theme.card, borderRadius: '8px', position: 'relative', border: `1px solid ${theme.border}` }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                   <h5 style={{ color: theme.textMuted, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{label} #{index + 1}</h5>
-                  <button 
-                    onClick={() => {
-                      if (window.confirm("Are you sure you want to remove this item?")) {
-                        const newArr = [...value];
-                        newArr.splice(index, 1);
-                        handleUpdateField(path, newArr);
-                      }
-                    }}
-                    style={{ background: 'rgba(255,77,77,0.1)', color: '#ff4d4d', border: '1px solid rgba(255,77,77,0.2)', padding: '0.3rem 0.6rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.7rem' }}
-                  >
-                    Remove Item
-                  </button>
+                  <div style={{ display: 'flex', gap: '0.5rem' }}>
+                    {index > 0 && (
+                      <button 
+                        onClick={() => {
+                          const newArr = [...value];
+                          const item = newArr.splice(index, 1)[0];
+                          newArr.splice(index - 1, 0, item);
+                          handleUpdateField(path, newArr);
+                        }}
+                        style={{ background: 'rgba(0,174,239,0.1)', color: '#00aeef', border: '1px solid rgba(0,174,239,0.2)', padding: '0.3rem 0.6rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.7rem' }}
+                      >
+                        ↑ Move Up
+                      </button>
+                    )}
+                    {index < value.length - 1 && (
+                      <button 
+                        onClick={() => {
+                          const newArr = [...value];
+                          const item = newArr.splice(index, 1)[0];
+                          newArr.splice(index + 1, 0, item);
+                          handleUpdateField(path, newArr);
+                        }}
+                        style={{ background: 'rgba(0,174,239,0.1)', color: '#00aeef', border: '1px solid rgba(0,174,239,0.2)', padding: '0.3rem 0.6rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.7rem' }}
+                      >
+                        ↓ Move Down
+                      </button>
+                    )}
+                    <button 
+                      onClick={() => {
+                        if (window.confirm("Are you sure you want to remove this item?")) {
+                          const newArr = [...value];
+                          newArr.splice(index, 1);
+                          handleUpdateField(path, newArr);
+                        }
+                      }}
+                      style={{ background: 'rgba(255,77,77,0.1)', color: '#ff4d4d', border: '1px solid rgba(255,77,77,0.2)', padding: '0.3rem 0.6rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.7rem' }}
+                    >
+                      Remove Item
+                    </button>
+                  </div>
                 </div>
                 {typeof item === 'object' ? renderFields(item, `${path}.${index}`) : (
                     <input 

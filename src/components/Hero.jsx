@@ -2,10 +2,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import heroVideo from '../videos/hero.mp4';
-import { heroSlides as slides } from '../data/heroSlides';
 import './Hero.css';
 
-const Hero = ({ data }) => {
+const Hero = ({ data, slides = [] }) => {
   const { t, i18n } = useTranslation();
   const heroRef = useRef(null);
   const videoRef = useRef(null);
@@ -70,19 +69,31 @@ const Hero = ({ data }) => {
       <div className="hero-container">
         <div className="hero-left animate-on-scroll-left">
           <h1 className="hero-title">
-            <span className="title-line-1">{data?.headline_prefix || t('hero.title_line_1')}</span>
-            <span className="title-line-2">{data?.headline_suffix_start || t('hero.title_line_2')}</span>
-            <span className="title-line-3">{data?.headline_suffix_end || t('hero.title_line_3')}</span>
-            <span className="title-line-4">
-              {i18n.language === 'ar' ? (
-                data?.sub_headline || t('hero.title_line_4')
-              ) : (
-                <>
-                  {(data?.sub_headline || t('hero.title_line_4')).replace('GROWTH', '')} 
-                  <span className="accent-g">G</span>ROWTH
-                </>
-              )}
-            </span>
+            {data?.title_lines ? (
+              data.title_lines.map((line, idx) => (
+                <span 
+                  key={idx} 
+                  className={`title-line-${idx + 1}`} 
+                  dangerouslySetInnerHTML={{ __html: line }}
+                />
+              ))
+            ) : (
+              <>
+                <span className="title-line-1">{t('hero.title_line_1')}</span>
+                <span className="title-line-2">{t('hero.title_line_2')}</span>
+                <span className="title-line-3">{t('hero.title_line_3')}</span>
+                <span className="title-line-4">
+                  {i18n.language === 'ar' ? (
+                    t('hero.title_line_4')
+                  ) : (
+                    <>
+                      {t('hero.title_line_4').replace('GROWTH', '')} 
+                      <span className="accent-g">G</span>ROWTH
+                    </>
+                  )}
+                </span>
+              </>
+            )}
           </h1>
         </div>
         
@@ -91,10 +102,10 @@ const Hero = ({ data }) => {
             <div className="accent-divider animate-right-1"></div>
             <div className="hero-main-content-row">
               <div className="hero-text-block">
-                <h2 className="hero-subtitle animate-right-2">{t(`hero.slide_${activeSlide}.subtitle`)}</h2>
+                <h2 className="hero-subtitle animate-right-2">{slides[activeSlide]?.subtitle}</h2>
                 <div className="animate-right-3">
                   <p className="hero-description">
-                    {t(`hero.slide_${activeSlide}.description`)}
+                    {slides[activeSlide]?.description}
                   </p>
                 </div>
               </div>
@@ -107,9 +118,9 @@ const Hero = ({ data }) => {
             </div>
 
             <div className="animate-right-4 hero-cta-container">
-              {slides[activeSlide].ctaLink.startsWith('http') ? (
-                <a href={slides[activeSlide].ctaLink} className="hero-cta" target="_blank" rel="noopener noreferrer">
-                  {t(`hero.slide_${activeSlide}.cta`)}
+              {slides[activeSlide]?.ctaLink?.startsWith('http') ? (
+                <a href={slides[activeSlide]?.ctaLink} className="hero-cta" target="_blank" rel="noopener noreferrer">
+                  {slides[activeSlide]?.ctaText}
                   <span className="cta-arrow-box">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M4 2L9 6L4 10" stroke="white" strokeWidth="2" strokeLinecap="square"/>
@@ -117,8 +128,8 @@ const Hero = ({ data }) => {
                   </span>
                 </a>
               ) : (
-                <Link to={slides[activeSlide].ctaLink} className="hero-cta">
-                  {t(`hero.slide_${activeSlide}.cta`)}
+                <Link to={slides[activeSlide]?.ctaLink || '#'} className="hero-cta">
+                  {slides[activeSlide]?.ctaText}
                   <span className="cta-arrow-box">
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M4 2L9 6L4 10" stroke="white" strokeWidth="2" strokeLinecap="square"/>

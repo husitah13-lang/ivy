@@ -5,12 +5,20 @@ import './Navbar.css';
 import logoB from '../assets/b.png';
 import logo2 from '../assets/2.png';
 
-const Navbar = () => {
+const Navbar = ({ data }) => {
   const [isHidden, setIsHidden] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
   const { t, i18n } = useTranslation();
+
+  const nav = data?.nav || {
+    services: t('nav.services'),
+    news: t('nav.news'),
+    careers: t('nav.careers'),
+    contact: t('nav.contact'),
+    language: i18n.language === 'ar' ? 'English' : 'Arabic'
+  };
 
   const toggleLanguage = () => {
     const nextLang = i18n.language === 'en' ? 'ar' : 'en';
@@ -82,22 +90,22 @@ const Navbar = () => {
         <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
           <li className="nav-item" style={{ '--item-index': 0 }}>
             <Link to="/#services" className="nav-link" onClick={closeMenu}>
-              {t('nav.services')}
+              {nav.services}
             </Link>
           </li>
           <li className="nav-item" style={{ '--item-index': 1 }}>
             <Link to="/what-we-think" className="nav-link" onClick={closeMenu}>
-              {t('nav.news')}
+              {nav.news}
             </Link>
           </li>
           <li className="nav-item" style={{ '--item-index': 2 }}>
             <Link to="/careers" className="nav-link" onClick={closeMenu}>
-              {t('nav.careers')}
+              {nav.careers}
             </Link>
           </li>
           <li className="nav-item" style={{ '--item-index': 3 }}>
             <Link to="/contact" className="nav-link" onClick={closeMenu}>
-              {t('nav.contact')}
+              {nav.contact}
             </Link>
           </li>
           <li className="nav-item lang-switcher-item" style={{ '--item-index': 4 }}>
@@ -111,7 +119,7 @@ const Navbar = () => {
                 <line x1="2" y1="12" x2="22" y2="12"></line>
                 <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
               </svg>
-              <span>{i18n.language === 'ar' ? 'العربية' : 'USA'}</span>
+              <span>{nav.language}</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <polyline points="6 9 12 15 18 9"></polyline>
               </svg>
