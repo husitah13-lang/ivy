@@ -28,22 +28,24 @@ const ArticlePage = () => {
         let insightsData = insightsDataEn;
 
         // Try CMS first
-        try {
-          const contentCollection = i18n.language === 'ar' ? 'articleContent.ar' : 'articleContent';
-          const insightsCollection = i18n.language === 'ar' ? 'insights.ar' : 'insights';
-          
-          const cmsContent = await fetchAPI(`/api/${contentCollection}`);
-          const cmsInsights = await fetchAPI(`/api/${insightsCollection}`);
-          
-          if (cmsContent) contentData = cmsContent;
-          if (cmsInsights) insightsData = cmsInsights;
-        } catch (cmsErr) {
-          console.warn("CMS fetch for article failed, using local fallback", cmsErr);
-          if (i18n.language === 'ar') {
+        const contentCollection = i18n.language === 'ar' ? 'articleContent.ar' : 'articleContent';
+        const insightsCollection = i18n.language === 'ar' ? 'insights.ar' : 'insights';
+        
+        const cmsContent = await fetchAPI(`/content/${contentCollection}`);
+        const cmsInsights = await fetchAPI(`/content/${insightsCollection}`);
+        
+        if (cmsContent) contentData = cmsContent;
+        if (cmsInsights) insightsData = cmsInsights;
+
+        // If CMS failed or returned null, and we're in Arabic, load local Arabic files
+        if ((!cmsContent || !cmsInsights) && i18n.language === 'ar') {
+          try {
             const arContent = await import('../data/articleContent.ar.js');
             const arInsights = await import('../data/insights.ar.js');
-            contentData = arContent.default;
-            insightsData = arInsights.default;
+            if (!cmsContent) contentData = arContent.default;
+            if (!cmsInsights) insightsData = arInsights.default;
+          } catch (err) {
+            console.warn("Local Arabic fallback failed", err);
           }
         }
 
@@ -55,7 +57,11 @@ const ArticlePage = () => {
           setArticle(content);
         } else {
           // Fallback for other articles (find in basic insights data)
-          const foundArticle = insightsData.insights.find(item => item.cta_link && item.cta_link.includes(id));
+          // Search by ID or by cta_link
+          const foundArticle = insightsData.insights.find(item => 
+            (item.id && item.id.toString() === id.toString()) || 
+            (item.cta_link && item.cta_link.includes(id))
+          );
           if (foundArticle) {
             setArticle({
               eyebrow: foundArticle.type,

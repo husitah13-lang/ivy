@@ -144,7 +144,23 @@ const ContentEditor = ({ collectionName: propCollection }) => {
     'iframe_url': 'Job Board Web Address (URL)',
     'value360': 'Methodology Section',
     'client_carousel': 'Success Stories',
-    'awards': 'Testimonials & Awards'
+    'awards': 'Testimonials & Awards',
+    'articleContent': 'Detailed Articles (EN)',
+    'articleContent.ar': 'Detailed Articles (AR)',
+    'inBrief': 'Article Highlights (In Brief)',
+    'introSection': 'Introduction Section',
+    'readinessSection': 'Readiness/Strategy Section',
+    'realitiesSection': 'Market Realities (FAQ Style)',
+    'phasesSection': 'Implementation Phases',
+    'conclusionSection': 'Conclusion & Final Thoughts',
+    'faqs': 'Questions & Answers',
+    'points': 'Bullet Points',
+    'paragraphs': 'Content Paragraphs',
+    'items': 'List Items / Entries',
+    'readTime': 'Estimated Reading Time',
+    'authors': 'Article Authors',
+    'eyebrow': 'Small Category Header',
+    'anchors': 'Sticky Navigation Links'
   };
 
   const getLabel = (key) => {
@@ -157,148 +173,158 @@ const ContentEditor = ({ collectionName: propCollection }) => {
 
   // Recursive renderer for nested objects
   const renderFields = (obj, prefix = '') => {
-    return Object.keys(obj).map(key => {
-      const value = obj[key];
-      const path = prefix ? `${prefix}.${key}` : key;
-      const label = getLabel(key);
+    const keys = Object.keys(obj);
+    
+    return (
+      <div style={{ 
+        display: 'grid', 
+        gridTemplateColumns: 'repeat(auto-fill, minmax(400px, 1fr))', 
+        gap: '1.5rem',
+        alignItems: 'start'
+      }}>
+        {keys.map(key => {
+          const value = obj[key];
+          const path = prefix ? `${prefix}.${key}` : key;
+          const label = getLabel(key);
+          const isFullWidth = Array.isArray(value) || (typeof value === 'string' && value.length > 100) || (typeof value === 'object' && value !== null);
 
-      if (Array.isArray(value)) {
-        return (
-          <div key={path} style={{ marginBottom: '2.5rem', padding: '1.5rem', background: isDarkMode ? 'rgba(255,255,255,0.02)' : 'rgba(0,0,0,0.02)', border: `1px solid ${theme.border}`, borderRadius: '12px' }}>
-            <h4 style={{ marginBottom: '1.2rem', color: theme.accent, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              <span style={{ fontSize: '1.2rem' }}>☰</span> {label}
-            </h4>
-            {value.map((item, index) => (
-              <div key={`${path}.${index}`} style={{ marginBottom: '1rem', padding: '1.5rem', background: theme.card, borderRadius: '8px', position: 'relative', border: `1px solid ${theme.border}` }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
-                  <h5 style={{ color: theme.textMuted, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{label} #{index + 1}</h5>
-                  <div style={{ display: 'flex', gap: '0.5rem' }}>
-                    {index > 0 && (
-                      <button
-                        onClick={() => {
-                          const newArr = [...value];
-                          const item = newArr.splice(index, 1)[0];
-                          newArr.splice(index - 1, 0, item);
-                          handleUpdateField(path, newArr);
-                        }}
-                        style={{ background: 'rgba(0,174,239,0.1)', color: '#00aeef', border: '1px solid rgba(0,174,239,0.2)', padding: '0.3rem 0.6rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.7rem' }}
-                      >
-                        ↑ Move Up
-                      </button>
-                    )}
-                    {index < value.length - 1 && (
-                      <button
-                        onClick={() => {
-                          const newArr = [...value];
-                          const item = newArr.splice(index, 1)[0];
-                          newArr.splice(index + 1, 0, item);
-                          handleUpdateField(path, newArr);
-                        }}
-                        style={{ background: 'rgba(0,174,239,0.1)', color: '#00aeef', border: '1px solid rgba(0,174,239,0.2)', padding: '0.3rem 0.6rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.7rem' }}
-                      >
-                        ↓ Move Down
-                      </button>
-                    )}
-                    <button
-                      onClick={() => {
-                        if (window.confirm("Are you sure you want to remove this item?")) {
-                          const newArr = [...value];
-                          newArr.splice(index, 1);
-                          handleUpdateField(path, newArr);
-                        }
-                      }}
-                      style={{ background: 'rgba(255,77,77,0.1)', color: '#ff4d4d', border: '1px solid rgba(255,77,77,0.2)', padding: '0.3rem 0.6rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.7rem' }}
-                    >
-                      Remove Item
-                    </button>
-                  </div>
-                </div>
-                {typeof item === 'object' ? renderFields(item, `${path}.${index}`) : (
-                  <input
-                    type="text"
-                    value={item}
-                    onChange={(e) => {
+          if (Array.isArray(value)) {
+            return (
+              <div key={path} style={{ gridColumn: '1 / -1', marginBottom: '1.5rem', padding: '1.5rem', background: 'rgba(0,0,0,0.03)', border: `1px solid ${theme.border}`, borderRadius: '12px' }}>
+                <h4 style={{ marginBottom: '1.2rem', color: theme.accent, display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '1.2rem' }}>☰</span> {label}
+                </h4>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(450px, 1fr))', gap: '1.5rem' }}>
+                  {value.map((item, index) => (
+                    <div key={`${path}.${index}`} style={{ padding: '1.2rem', background: theme.card, borderRadius: '8px', border: `1px solid ${theme.border}`, boxShadow: '0 2px 8px rgba(0,0,0,0.05)' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
+                        <h5 style={{ color: theme.textMuted, fontSize: '0.75rem', fontWeight: 'bold' }}>{label} #{index + 1}</h5>
+                        <div style={{ display: 'flex', gap: '0.4rem' }}>
+                          <button
+                            onClick={() => {
+                              const newArr = [...value];
+                              const item = newArr.splice(index, 1)[0];
+                              newArr.splice(Math.max(0, index - 1), 0, item);
+                              handleUpdateField(path, newArr);
+                            }}
+                            style={{ background: '#f0f0f0', border: '1px solid #ddd', padding: '0.2rem 0.5rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.65rem' }}
+                          >
+                            ↑
+                          </button>
+                          <button
+                            onClick={() => {
+                              const newArr = [...value];
+                              const item = newArr.splice(index, 1)[0];
+                              newArr.splice(index + 1, 0, item);
+                              handleUpdateField(path, newArr);
+                            }}
+                            style={{ background: '#f0f0f0', border: '1px solid #ddd', padding: '0.2rem 0.5rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.65rem' }}
+                          >
+                            ↓
+                          </button>
+                          <button
+                            onClick={() => {
+                              if (window.confirm("Remove this item?")) {
+                                const newArr = [...value];
+                                newArr.splice(index, 1);
+                                handleUpdateField(path, newArr);
+                              }
+                            }}
+                            style={{ background: '#fff0f0', color: '#ff4d4d', border: '1px solid #ffdada', padding: '0.2rem 0.5rem', borderRadius: '4px', cursor: 'pointer', fontSize: '0.65rem' }}
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      </div>
+                      {typeof item === 'object' ? renderFields(item, `${path}.${index}`) : (
+                        <input
+                          type="text"
+                          value={item}
+                          onChange={(e) => {
+                            const newArr = [...value];
+                            newArr[index] = e.target.value;
+                            handleUpdateField(path, newArr);
+                          }}
+                          style={{ width: '100%', padding: '0.6rem', border: `1px solid ${theme.border}`, borderRadius: '4px' }}
+                        />
+                      )}
+                    </div>
+                  ))}
+                  <button
+                    onClick={() => {
                       const newArr = [...value];
-                      newArr[index] = e.target.value;
+                      const template = value.length > 0 ? (typeof value[0] === 'object' ? { ...JSON.parse(JSON.stringify(value[0])) } : '') : '';
+                      if (typeof template === 'object') {
+                        Object.keys(template).forEach(k => template[k] = '');
+                      }
+                      newArr.push(template);
                       handleUpdateField(path, newArr);
                     }}
-                    style={{ width: '100%', padding: '0.75rem', background: theme.bg, border: `1px solid ${theme.border}`, color: theme.text, borderRadius: '4px' }}
-                  />
+                    style={{ padding: '1rem', background: '#fff', border: `2px dashed ${theme.border}`, color: theme.accent, borderRadius: '8px', cursor: 'pointer', fontWeight: 'bold' }}
+                  >
+                    + Add {label.replace(/s$/, '')}
+                  </button>
+                </div>
+              </div>
+            );
+          }
+
+          if (typeof value === 'object' && value !== null) {
+            return (
+              <div key={path} style={{ gridColumn: '1 / -1', marginBottom: '1rem', padding: '1.2rem', border: `1px solid ${theme.border}`, borderRadius: '8px', background: '#fff' }}>
+                <h4 style={{ marginBottom: '1rem', fontSize: '0.85rem', color: theme.accent, fontWeight: 'bold', textTransform: 'uppercase' }}>{label}</h4>
+                {renderFields(value, path)}
+              </div>
+            );
+          }
+
+          const isImage = key.toLowerCase().includes('image') || key.toLowerCase().includes('src') || key.toLowerCase().includes('url');
+
+          return (
+            <div key={path} style={{ gridColumn: isFullWidth ? '1 / -1' : 'auto', marginBottom: '0.5rem' }}>
+              <label style={{ display: 'block', fontSize: '0.75rem', fontWeight: 'bold', color: '#666', marginBottom: '0.4rem' }}>{label}</label>
+              <div style={{ display: 'flex', gap: '0.8rem' }}>
+                <div style={{ flex: 1 }}>
+                  {value.length > 100 ? (
+                    <textarea
+                      value={value}
+                      onChange={(e) => handleUpdateField(path, e.target.value)}
+                      style={{ width: '100%', height: '100px', padding: '0.75rem', border: `1px solid ${theme.border}`, borderRadius: '6px', fontSize: '0.9rem', lineHeight: '1.5' }}
+                    />
+                  ) : (
+                    <input
+                      type="text"
+                      value={value}
+                      onChange={(e) => handleUpdateField(path, e.target.value)}
+                      style={{ width: '100%', padding: '0.7rem', border: `1px solid ${theme.border}`, borderRadius: '6px', fontSize: '0.9rem' }}
+                    />
+                  )}
+                </div>
+                {isImage && (
+                  <div style={{ width: '80px' }}>
+                    <div style={{ width: '80px', height: '50px', background: '#f5f5f5', border: `1px solid ${theme.border}`, borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', marginBottom: '0.3rem' }}>
+                      {value ? <img src={value.startsWith('http') ? value : `${import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrm'}${value}`} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span style={{ fontSize: '0.5rem', color: '#999' }}>No Image</span>}
+                    </div>
+                    <input
+                      type="file"
+                      id={`file-${path}`}
+                      style={{ display: 'none' }}
+                      onChange={(e) => handleImageUpload(path, e.target.files[0])}
+                    />
+                    <label
+                      htmlFor={`file-${path}`}
+                      style={{ display: 'block', textAlign: 'center', fontSize: '0.65rem', padding: '0.2rem', background: '#eee', borderRadius: '4px', cursor: 'pointer' }}
+                    >
+                      Upload
+                    </label>
+                  </div>
                 )}
               </div>
-            ))}
-            <button
-              onClick={() => {
-                const newArr = [...value];
-                const template = value.length > 0 ? (typeof value[0] === 'object' ? { ...JSON.parse(JSON.stringify(value[0])) } : '') : '';
-                if (typeof template === 'object') {
-                  Object.keys(template).forEach(k => template[k] = '');
-                }
-                newArr.push(template);
-                handleUpdateField(path, newArr);
-              }}
-              style={{ padding: '0.8rem 1.5rem', background: '#00aeef', color: '#fff', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold', width: '100%' }}
-            >
-              + Add New {label.replace(/s$/, '')}
-            </button>
-          </div>
-        );
-      }
-
-      if (typeof value === 'object' && value !== null) {
-        return (
-          <div key={path} style={{ marginBottom: '1.5rem', paddingLeft: '1rem', borderLeft: '2px solid #222' }}>
-            <h4 style={{ marginBottom: '1rem', fontSize: '0.9rem', color: '#888' }}>{label}</h4>
-            {renderFields(value, path)}
-          </div>
-        );
-      }
-
-      const isImage = key.toLowerCase().includes('image') || key.toLowerCase().includes('src') || key.toLowerCase().includes('url');
-
-      return (
-        <div key={path} style={{ marginBottom: '1.5rem' }}>
-          <label style={{ display: 'block', fontSize: '0.75rem', color: '#888', marginBottom: '0.4rem' }}>{label}</label>
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <div style={{ flex: 1 }}>
-              {value.length > 100 ? (
-                <textarea
-                  value={value}
-                  onChange={(e) => handleUpdateField(path, e.target.value)}
-                  style={{ width: '100%', height: '80px', padding: '0.75rem', background: theme.input, border: `1px solid ${theme.border}`, color: theme.text, borderRadius: '4px' }}
-                />
-              ) : (
-                <input
-                  type="text"
-                  value={value}
-                  onChange={(e) => handleUpdateField(path, e.target.value)}
-                  style={{ width: '100%', padding: '0.75rem', background: theme.input, border: `1px solid ${theme.border}`, color: theme.text, borderRadius: '4px' }}
-                />
-              )}
             </div>
-            {isImage && (
-              <div style={{ width: '120px' }}>
-                <div style={{ width: '120px', height: '80px', background: '#111', border: '1px solid #333', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', marginBottom: '0.5rem' }}>
-                  {value ? <img src={value.startsWith('http') ? value : `${import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrm'}${value}`} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span style={{ fontSize: '0.6rem', color: '#444' }}>No Image</span>}
-                </div>
-                <input
-                  type="file"
-                  id={`file-${path}`}
-                  style={{ display: 'none' }}
-                  onChange={(e) => handleImageUpload(path, e.target.files[0])}
-                />
-                <label
-                  htmlFor={`file-${path}`}
-                  style={{ display: 'block', textAlign: 'center', fontSize: '0.7rem', padding: '0.3rem', background: '#222', color: '#fff', borderRadius: '4px', cursor: 'pointer' }}
-                >
-                  Upload
-                </label>
-              </div>
-            )}
-          </div>
-        </div>
-      );
-    });
+          );
+        })}
+      </div>
+    );
   };
 
   return (

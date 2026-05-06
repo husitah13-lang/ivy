@@ -25,19 +25,13 @@ const AdminLayout = () => {
 
   // Grouping logic
   const mainPages = ['homepage', 'index', 'settings', 'careers', 'contact', 'services_main'];
-  const hiddenCollections = ['index', 'index.ar', 'articleContent', 'articleContent.ar', 'heroSlides', 'update-links', 'services'];
+  const hiddenCollections = ['index', 'index.ar', 'heroSlides', 'update-links', 'services'];
 
   const arPages = filteredCollections.filter(c => c.endsWith('.ar') && !mainPages.includes(c) && !hiddenCollections.includes(c));
   const otherPages = filteredCollections.filter(c => !c.endsWith('.ar') && !mainPages.includes(c) && !hiddenCollections.includes(c));
 
-  const [isDarkMode, setIsDarkMode] = React.useState(() => {
-    const saved = localStorage.getItem('adminTheme');
-    return saved !== null ? JSON.parse(saved) : true;
-  });
+  const isDarkMode = false;
 
-  React.useEffect(() => {
-    localStorage.setItem('adminTheme', JSON.stringify(isDarkMode));
-  }, [isDarkMode]);
 
   const theme = {
     bg: isDarkMode ? '#050505' : '#f8f9fa',
@@ -87,23 +81,6 @@ const AdminLayout = () => {
               <div style={{ fontSize: '0.6rem', color: theme.textMuted, textTransform: 'uppercase' }}>Cloud Manager</div>
             </div>
           </div>
-          <button
-            onClick={() => setIsDarkMode(!isDarkMode)}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              cursor: 'pointer',
-              fontSize: '1.2rem',
-              padding: '4px',
-              borderRadius: '4px',
-              transition: 'background 0.2s'
-            }}
-            onMouseOver={(e) => e.currentTarget.style.background = isDarkMode ? 'rgba(255,255,255,0.05)' : 'rgba(0,0,0,0.05)'}
-            onMouseOut={(e) => e.currentTarget.style.background = 'transparent'}
-            title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-          >
-            {isDarkMode ? '🌞' : '🌙'}
-          </button>
         </div>
 
         <div style={{ position: 'relative', marginBottom: '1.5rem', padding: '0 0.5rem' }}>
@@ -154,6 +131,18 @@ const AdminLayout = () => {
               </ul>
             </div>
           )}
+
+          <div style={{ marginTop: '2rem' }}>
+            <h3 style={{ fontSize: '0.65rem', color: theme.textMuted, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem', padding: '0 0.5rem' }}>Detailed Articles</h3>
+            <ul style={{ listStyle: 'none', padding: 0 }}>
+              {collections.includes('articleContent') && (
+                <NavItem name="Article Content (EN)" path="/admin/articleContent" icon="📝" />
+              )}
+              {collections.includes('articleContent.ar') && (
+                <NavItem name="Article Content (AR)" path="/admin/articleContent.ar" icon="📝" />
+              )}
+            </ul>
+          </div>
         </nav>
 
         <div style={{ padding: '1rem', background: `${theme.accent}05`, borderRadius: '8px', border: `1px solid ${theme.accent}22`, marginTop: '1rem' }}>

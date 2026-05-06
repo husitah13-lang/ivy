@@ -69,16 +69,7 @@ const HomePage = () => {
 
   return (
     <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
-<<<<<<< HEAD
       <SEO seoData={data.seo} />
-      <Hero data={data.hero_custom} />
-      <CardSection id="services" cards={data.tilegrid} />
-      <QuoteSection data={data.carousel} />
-      <CarouselSection items={data.client_carousel} />
-      <RecognitionBanner title={t('hero.ai_agentic_leap')} />
-      <CareersSection data={data.careers} />
-      <NewsSection data={data.news} />
-=======
       {data.section_layout ? (
         data.section_layout.map(renderSection)
       ) : (
@@ -92,7 +83,6 @@ const HomePage = () => {
           <NewsSection data={data.news} />
         </>
       )}
->>>>>>> a9580986328c2153b7f11a345730af961dde560a
     </div>
   );
 };
