@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './NewsSection.css';
 import { useTranslation } from 'react-i18next';
 
 const NewsSection = ({ data }) => {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
   const containerRef = useRef(null);
   const trackRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -75,7 +77,15 @@ const NewsSection = ({ data }) => {
         >
           <div className="news-track" ref={trackRef}>
             {extendedData.map((item, index) => (
-              <div className="news-card" key={`${index}`}>
+              <div 
+                className="news-card" 
+                key={`${index}`}
+                onClick={() => {
+                  const articleId = item.id || item.cta_link?.replace('.html', '').replace(/^\//, '') || index;
+                  navigate(`/what-we-think/${articleId}`);
+                }}
+                style={{ cursor: 'pointer' }}
+              >
                 <div className="news-card-header">
                   <span className="news-category">{item.category}</span>
                   <span className="news-date">{item.date}</span>

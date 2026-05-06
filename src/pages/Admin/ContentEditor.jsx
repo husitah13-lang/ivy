@@ -19,7 +19,7 @@ const ContentEditor = ({ collectionName: propCollection }) => {
     }
 
     setLoading(true);
-    const baseUrl = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '');
+    const baseUrl = import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrm';
     fetch(`${baseUrl}/api/content/${collection}`)
       .then(res => {
         if (!res.ok) throw new Error('Not found');
@@ -53,16 +53,16 @@ const ContentEditor = ({ collectionName: propCollection }) => {
     setMessage('');
     try {
       const token = localStorage.getItem('adminToken');
-      const baseUrl = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '');
+      const baseUrl = import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrm';
       const res = await fetch(`${baseUrl}/api/content/${collection}`, {
         method: 'POST',
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(data)
       });
-      
+
       if (res.ok) {
         setMessage('Changes saved successfully!');
       } else {
@@ -83,7 +83,7 @@ const ContentEditor = ({ collectionName: propCollection }) => {
     formData.append('file', file);
 
     try {
-      const baseUrl = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '');
+      const baseUrl = import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrm';
       const res = await fetch(`${baseUrl}/api/upload`, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${token}` },
@@ -174,7 +174,7 @@ const ContentEditor = ({ collectionName: propCollection }) => {
                   <h5 style={{ color: theme.textMuted, fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '1px' }}>{label} #{index + 1}</h5>
                   <div style={{ display: 'flex', gap: '0.5rem' }}>
                     {index > 0 && (
-                      <button 
+                      <button
                         onClick={() => {
                           const newArr = [...value];
                           const item = newArr.splice(index, 1)[0];
@@ -187,7 +187,7 @@ const ContentEditor = ({ collectionName: propCollection }) => {
                       </button>
                     )}
                     {index < value.length - 1 && (
-                      <button 
+                      <button
                         onClick={() => {
                           const newArr = [...value];
                           const item = newArr.splice(index, 1)[0];
@@ -199,7 +199,7 @@ const ContentEditor = ({ collectionName: propCollection }) => {
                         ↓ Move Down
                       </button>
                     )}
-                    <button 
+                    <button
                       onClick={() => {
                         if (window.confirm("Are you sure you want to remove this item?")) {
                           const newArr = [...value];
@@ -214,9 +214,9 @@ const ContentEditor = ({ collectionName: propCollection }) => {
                   </div>
                 </div>
                 {typeof item === 'object' ? renderFields(item, `${path}.${index}`) : (
-                    <input 
-                    type="text" 
-                    value={item} 
+                  <input
+                    type="text"
+                    value={item}
                     onChange={(e) => {
                       const newArr = [...value];
                       newArr[index] = e.target.value;
@@ -227,12 +227,12 @@ const ContentEditor = ({ collectionName: propCollection }) => {
                 )}
               </div>
             ))}
-            <button 
+            <button
               onClick={() => {
                 const newArr = [...value];
                 const template = value.length > 0 ? (typeof value[0] === 'object' ? { ...JSON.parse(JSON.stringify(value[0])) } : '') : '';
                 if (typeof template === 'object') {
-                   Object.keys(template).forEach(k => template[k] = '');
+                  Object.keys(template).forEach(k => template[k] = '');
                 }
                 newArr.push(template);
                 handleUpdateField(path, newArr);
@@ -262,14 +262,14 @@ const ContentEditor = ({ collectionName: propCollection }) => {
           <div style={{ display: 'flex', gap: '1rem' }}>
             <div style={{ flex: 1 }}>
               {value.length > 100 ? (
-                <textarea 
+                <textarea
                   value={value}
                   onChange={(e) => handleUpdateField(path, e.target.value)}
                   style={{ width: '100%', height: '80px', padding: '0.75rem', background: theme.input, border: `1px solid ${theme.border}`, color: theme.text, borderRadius: '4px' }}
                 />
               ) : (
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={value}
                   onChange={(e) => handleUpdateField(path, e.target.value)}
                   style={{ width: '100%', padding: '0.75rem', background: theme.input, border: `1px solid ${theme.border}`, color: theme.text, borderRadius: '4px' }}
@@ -279,15 +279,15 @@ const ContentEditor = ({ collectionName: propCollection }) => {
             {isImage && (
               <div style={{ width: '120px' }}>
                 <div style={{ width: '120px', height: '80px', background: '#111', border: '1px solid #333', borderRadius: '4px', display: 'flex', alignItems: 'center', justifyContent: 'center', overflow: 'hidden', marginBottom: '0.5rem' }}>
-                  {value ? <img src={value.startsWith('http') ? value : `${import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '')}${value}`} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span style={{ fontSize: '0.6rem', color: '#444' }}>No Image</span>}
+                  {value ? <img src={value.startsWith('http') ? value : `${import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrm'}${value}`} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span style={{ fontSize: '0.6rem', color: '#444' }}>No Image</span>}
                 </div>
-                <input 
-                  type="file" 
+                <input
+                  type="file"
                   id={`file-${path}`}
                   style={{ display: 'none' }}
                   onChange={(e) => handleImageUpload(path, e.target.files[0])}
                 />
-                <label 
+                <label
                   htmlFor={`file-${path}`}
                   style={{ display: 'block', textAlign: 'center', fontSize: '0.7rem', padding: '0.3rem', background: '#222', color: '#fff', borderRadius: '4px', cursor: 'pointer' }}
                 >
@@ -304,15 +304,15 @@ const ContentEditor = ({ collectionName: propCollection }) => {
   return (
     <div style={{ maxWidth: '1000px', margin: '0 auto' }}>
       {/* Sticky Header */}
-      <div style={{ 
-        position: 'sticky', 
-        top: '-2rem', 
-        zIndex: 100, 
-        background: theme.bg, 
+      <div style={{
+        position: 'sticky',
+        top: '-2rem',
+        zIndex: 100,
+        background: theme.bg,
         padding: '1.5rem 0',
-        display: 'flex', 
-        justifyContent: 'space-between', 
-        alignItems: 'center', 
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
         marginBottom: '2rem',
         borderBottom: `1px solid ${theme.border}`,
         width: '100%'
@@ -322,15 +322,15 @@ const ContentEditor = ({ collectionName: propCollection }) => {
           <p style={{ fontSize: '0.9rem', color: theme.textMuted, marginTop: '0.3rem' }}>Configure the content for this page</p>
         </div>
         <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
-          <a 
+          <a
             href={collection === 'homepage' ? window.location.origin : (collection === 'services_main' ? `${window.location.origin}/services` : `${window.location.origin}/services/${collection}`)}
             target="_blank"
             rel="noopener noreferrer"
-            style={{ 
-              color: theme.textMuted, 
-              fontSize: '0.9rem', 
-              textDecoration: 'none', 
-              borderBottom: `1px solid ${theme.border}`, 
+            style={{
+              color: theme.textMuted,
+              fontSize: '0.9rem',
+              textDecoration: 'none',
+              borderBottom: `1px solid ${theme.border}`,
               paddingBottom: '2px',
               display: 'flex',
               alignItems: 'center',
@@ -340,16 +340,16 @@ const ContentEditor = ({ collectionName: propCollection }) => {
             Preview Page <span style={{ fontSize: '1rem' }}>↗</span>
           </a>
 
-          <button 
+          <button
             onClick={handleSave}
             disabled={saving}
-            style={{ 
-              padding: '0.9rem 2rem', 
-              background: theme.accent, 
-              color: '#fff', 
-              border: 'none', 
-              borderRadius: '8px', 
-              fontWeight: 'bold', 
+            style={{
+              padding: '0.9rem 2rem',
+              background: theme.accent,
+              color: '#fff',
+              border: 'none',
+              borderRadius: '8px',
+              fontWeight: 'bold',
               fontSize: '0.95rem',
               cursor: 'pointer',
               transition: 'all 0.2s ease',
@@ -372,7 +372,7 @@ const ContentEditor = ({ collectionName: propCollection }) => {
       <div style={{ background: theme.card, padding: '2.5rem', borderRadius: '16px', border: `1px solid ${theme.border}`, boxShadow: isDarkMode ? '0 8px 32px rgba(0,0,0,0.4)' : '0 8px 32px rgba(0,0,0,0.05)' }}>
         {renderFields(data)}
       </div>
-      
+
       <style>{`
         @keyframes fadeIn {
           from { opacity: 0; transform: translateY(10px); }

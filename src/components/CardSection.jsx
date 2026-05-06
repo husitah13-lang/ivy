@@ -14,7 +14,7 @@ const visualPatterns = [
   { type: 'light', image: '/julie_sweet.png', anim: 'reveal-scale' }
 ];
 
-const CardSection = ({ cards = [], id }) => {
+const CardSection = ({ cards = [], id, basePath = '/services' }) => {
   const navigate = useNavigate();
 
   return (
@@ -22,7 +22,7 @@ const CardSection = ({ cards = [], id }) => {
       <div className="card-grid">
         {cards.map((card, index) => {
           const pattern = visualPatterns[index % visualPatterns.length];
-          const routeId = card.cta_link ? card.cta_link.replace('.html', '') : card.id;
+          const routeId = card.cta_link ? card.cta_link.replace('.html', '').replace(/^\//, '') : card.id;
 
           return (
             <div
@@ -32,7 +32,10 @@ const CardSection = ({ cards = [], id }) => {
                 if (card.cta_link && card.cta_link.startsWith('/')) {
                   navigate(card.cta_link);
                 } else {
-                  navigate(`/service/${routeId}`);
+                  // Ensure basePath doesn't end with slash if routeId starts with one
+                  const cleanBasePath = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
+                  const cleanRouteId = routeId.toString().startsWith('/') ? routeId.toString().slice(1) : routeId;
+                  navigate(`${cleanBasePath}/${cleanRouteId}`);
                 }
               }}
             >

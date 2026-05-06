@@ -11,6 +11,24 @@ export default {
     "sortOptions": ["Editor's picks", "Newest", "Oldest"],
     "insights": [
         {
+            "id": "future-cmo-2026",
+            "topic": "Marketing",
+            "industry": "Enterprise",
+            "type": "White Paper",
+            "date": "2026-03-15",
+            "title": "The future of the CMO: Driving growth in 2026",
+            "body": "How the role of marketing leadership is evolving to encompass technology, data, and customer experience at every touchpoint."
+        },
+        {
+            "id": "legacy-brand-transformation",
+            "topic": "Transformation",
+            "industry": "Retail",
+            "type": "Case Study",
+            "date": "2026-03-10",
+            "title": "Modernizing a legacy brand for digital growth",
+            "body": "How an integrated marketing transformation program helped a traditional retailer increase online sales by 120% in 18 months."
+        },
+        {
             "id": "1",
             "topic": "AI",
             "industry": "Healthcare",

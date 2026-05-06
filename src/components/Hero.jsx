@@ -9,27 +9,21 @@ const Hero = ({ data, slides = [] }) => {
   const heroRef = useRef(null);
   const videoRef = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
-  const [hasInteracted, setHasInteracted] = useState(false);
+
   const [isInitialLoad, setIsInitialLoad] = useState(true);
 
-  const nextSlide = () => {
-    setHasInteracted(true);
-    setIsInitialLoad(false);
-    setActiveSlide((prev) => (prev + 1) % slides.length);
-  };
 
 
-  // Auto-advance slides every 5 seconds if no interaction
+
+  // Auto-advance slides every 5 seconds
   useEffect(() => {
-    if (hasInteracted) return;
-
     const timer = setInterval(() => {
       setIsInitialLoad(false);
       setActiveSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [hasInteracted]);
+  }, [slides.length]);
 
   useEffect(() => {
     let requestRunning = false;
@@ -110,11 +104,7 @@ const Hero = ({ data, slides = [] }) => {
                 </div>
               </div>
               
-              <button className="hero-nav-btn simple-chevron" onClick={nextSlide} aria-label="Next Slide">
-                <svg width="24" height="24" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M4 2L9 6L4 10" stroke="white" strokeWidth="1.5" strokeLinecap="square"/>
-                </svg>
-              </button>
+
             </div>
 
             <div className="animate-right-4 hero-cta-container">

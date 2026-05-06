@@ -15,15 +15,15 @@ export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
     };
 
     const queryString = new URLSearchParams(urlParamsObject).toString();
-    const baseUrl = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '');
+    const baseUrl = import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrms';
     const requestUrl = `${baseUrl}/api${path}${queryString ? `?${queryString}` : ''}`;
 
     const response = await fetch(requestUrl, mergedOptions);
-    
+
     if (!response.ok) {
       throw new Error(`API Error: ${response.status}`);
     }
-    
+
     return await response.json();
   } catch (error) {
     console.error('Fetch API Error:', error);

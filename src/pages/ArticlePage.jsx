@@ -46,7 +46,9 @@ const ArticlePage = () => {
           }
         }
 
-        const content = contentData[id];
+        const content = Array.isArray(contentData) 
+          ? contentData.find(item => item.id === id)
+          : contentData[id];
         
         if (content) {
           setArticle(content);

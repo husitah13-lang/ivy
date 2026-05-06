@@ -15,7 +15,7 @@ const AdminDashboard = () => {
       return;
     }
 
-    const baseUrl = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '');
+    const baseUrl = import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrm';
     fetch(`${baseUrl}/api/homepage`)
       .then(res => res.json())
       .then(json => {
@@ -34,18 +34,18 @@ const AdminDashboard = () => {
     try {
       // Validate JSON
       const parsedData = JSON.parse(data);
-      
+
       const token = localStorage.getItem('adminToken');
-      const baseUrl = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'http://localhost:3001' : '');
+      const baseUrl = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'https://betaapi.ivy-staging.com/apicrm' : 'https://betaapi.ivy-staging.com/apicrm');
       const res = await fetch(`${baseUrl}/api/homepage`, {
         method: 'POST', // Match server.js logic
-        headers: { 
+        headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify(parsedData)
       });
-      
+
       if (res.ok) {
         setMessage('Saved successfully!');
       } else {
@@ -75,21 +75,21 @@ const AdminDashboard = () => {
           <h2>Ivy CMS Dashboard</h2>
           <button onClick={handleLogout} style={{ padding: '0.5rem 1rem', background: '#333', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Logout</button>
         </div>
-        
+
         <div style={{ background: '#1a1a1a', padding: '1.5rem', borderRadius: '8px' }}>
           <h3 style={{ marginBottom: '1rem' }}>Edit Homepage Content (JSON)</h3>
           <p style={{ marginBottom: '1rem', color: '#888' }}>
             Modify the structured content below. This directly updates the live website.
           </p>
-          
-          <textarea 
+
+          <textarea
             value={data}
             onChange={(e) => setData(e.target.value)}
-            style={{ 
-              width: '100%', 
-              height: '500px', 
-              background: '#000', 
-              color: '#0f0', 
+            style={{
+              width: '100%',
+              height: '500px',
+              background: '#000',
+              color: '#0f0',
               border: '1px solid #333',
               padding: '1rem',
               fontFamily: 'monospace',
@@ -97,19 +97,19 @@ const AdminDashboard = () => {
               marginBottom: '1rem'
             }}
           />
-          
+
           <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-            <button 
-              onClick={handleSave} 
+            <button
+              onClick={handleSave}
               disabled={saving}
-              style={{ 
-                padding: '0.75rem 2rem', 
-                background: saving ? '#555' : '#fff', 
-                color: '#000', 
-                border: 'none', 
-                borderRadius: '4px', 
-                cursor: saving ? 'not-allowed' : 'pointer', 
-                fontWeight: 'bold' 
+              style={{
+                padding: '0.75rem 2rem',
+                background: saving ? '#555' : '#fff',
+                color: '#000',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: saving ? 'not-allowed' : 'pointer',
+                fontWeight: 'bold'
               }}
             >
               {saving ? 'Saving...' : 'Publish Changes'}

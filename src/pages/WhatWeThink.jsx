@@ -204,7 +204,7 @@ const WhatWeThink = () => {
 
       <section className="insights-grid-section">
         {filteredInsights.length > 0 ? (
-          <CardSection cards={filteredInsights} />
+          <CardSection cards={filteredInsights} basePath="/what-we-think" />
         ) : (
           <div className="no-results">
             <h3>{t('insights.no_results')}</h3>
