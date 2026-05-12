@@ -39,6 +39,19 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ limit: '50mb', extended: true }));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
+app.get('/api/debug-env', (req, res) => {
+  res.json({
+    has_mongo_uri: !!process.env.MONGO_URI,
+    has_cloudinary_name: !!process.env.CLOUDINARY_CLOUD_NAME,
+    has_cloudinary_key: !!process.env.CLOUDINARY_API_KEY,
+    has_cloudinary_secret: !!process.env.CLOUDINARY_API_SECRET,
+    env_loaded_from_root: fs.existsSync(path.join(__dirname, '../.env')),
+    env_loaded_from_local: fs.existsSync(path.join(__dirname, '.env')),
+    node_env: process.env.NODE_ENV || 'not set',
+    port: PORT
+  });
+});
+
 app.get('/', (req, res) => {
   res.send('<h1>Ivy Cloud CMS is Running</h1><p>Visit your production URL to manage content.</p>');
 });
