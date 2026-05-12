@@ -1,4 +1,16 @@
-require('dotenv').config({ path: '../.env' });
+const fs = require('fs');
+const path = require('path');
+const dotenv = require('dotenv');
+
+// Look for .env in root first, then fallback to local directory
+const rootEnvPath = path.join(__dirname, '../.env');
+const localEnvPath = path.join(__dirname, '.env');
+
+if (fs.existsSync(rootEnvPath)) {
+  dotenv.config({ path: rootEnvPath });
+} else {
+  dotenv.config({ path: localEnvPath });
+}
 const mongoose = require('mongoose');
 const Content = require('./models/Content');
 const fs = require('fs');
