@@ -19,7 +19,7 @@ import { useTranslation } from 'react-i18next'
 import { VisualEditorProvider, useVisualEditor } from './context/VisualEditorContext'
 import AdminToolbar from './components/Admin/AdminToolbar'
 import AdminSidebar from './components/Admin/AdminSidebar'
-import { fetchAPI } from './utils/api'
+import { fetchAPI, getCachedData } from './utils/api'
 
 const ProtectedRoute = ({ children }) => {
   const token = localStorage.getItem('adminToken');
@@ -66,16 +66,25 @@ function AppContent() {
   }, [location.pathname, isLoginPath, isAdminPath, setIsCMS]);
 
   useEffect(() => {
-    const loadLayout = async () => {
+    const prefetchData = async () => {
       try {
-        const collection = i18n.language === 'ar' ? 'layout.ar' : 'layout';
-        const data = await fetchAPI(`/content/${collection}`);
-        if (data) setLayoutData(data);
+        const lang = i18n.language === 'ar' ? 'ar' : 'en';
+        const suffix = lang === 'ar' ? '.ar' : '';
+        
+        // Parallel pre-fetching of critical data
+        Promise.all([
+          fetchAPI(`/content/layout${suffix}`),
+          fetchAPI(`/content/homepage${suffix}`),
+          fetchAPI(`/content/services${suffix}`)
+        ]).then(([layout, home, services]) => {
+          if (layout) setLayoutData(layout);
+          console.log('Critical content pre-loaded');
+        });
       } catch (err) {
-        console.warn("CMS layout fetch failed", err);
+        console.warn("Pre-fetch failed", err);
       }
     };
-    loadLayout();
+    prefetchData();
   }, [i18n.language]);
 
   useEffect(() => {
