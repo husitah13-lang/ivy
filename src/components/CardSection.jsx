@@ -79,10 +79,62 @@ const CardSection = ({ cards = [], id, basePath = '/services', pathPrefix = 'til
                       borderRadius: '4px',
                       padding: '4px 8px',
                       fontSize: '0.75rem',
-                      cursor: 'pointer'
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      boxShadow: '0 2px 5px rgba(0,0,0,0.5)'
                     }}
                   >
                     ×
+                  </button>
+                  <button 
+                    className="cms-image-swap-btn"
+                    title="Change the background image of this tile"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const input = document.createElement('input');
+                      input.type = 'file';
+                      input.accept = 'image/*';
+                      input.onchange = async (event) => {
+                        const file = event.target.files[0];
+                        if (!file) return;
+                        const formData = new FormData();
+                        formData.append('file', file);
+                        const baseUrl = import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrms';
+                        const token = localStorage.getItem('adminToken');
+                        try {
+                          const res = await fetch(`${baseUrl}/api/upload`, {
+                            method: 'POST',
+                            headers: { 'Authorization': `Bearer ${token}` },
+                            body: formData
+                          });
+                          const result = await res.json();
+                          if (result.url) {
+                            updateField(`${pathPrefix}.${realIndex}.image`, result.url);
+                          }
+                        } catch (err) {
+                          console.error("Upload failed", err);
+                        }
+                      };
+                      input.click();
+                    }}
+                    style={{
+                      background: 'rgba(0,174,239,0.8)',
+                      color: 'white',
+                      border: 'none',
+                      padding: '4px 8px',
+                      borderRadius: '4px',
+                      fontSize: '0.75rem',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      boxShadow: '0 2px 5px rgba(0,0,0,0.5)'
+                    }}
+                  >
+                    Change Image
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>
                   </button>
                   <button 
                     className="cms-navigate-btn"
@@ -122,7 +174,7 @@ const CardSection = ({ cards = [], id, basePath = '/services', pathPrefix = 'til
               {/* Image layer that will swipe to the right */}
               <div 
                 className="card-image-layer" 
-                style={{ backgroundImage: `url(${pattern.image})` }}
+                style={{ backgroundImage: `url(${card.image || pattern.image})` }}
               >
                 <div className="card-image-overlay">
                   <EditableText path={`${pathPrefix}.${realIndex}.title`} component="h3" className="card-image-title">
