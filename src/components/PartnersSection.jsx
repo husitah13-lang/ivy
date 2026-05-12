@@ -1,5 +1,6 @@
 import React from 'react';
 import './PartnersSection.css';
+import { EditableText } from './Admin/Editable';
 
 const partners = [
   { name: 'Shopify', logo: 'https://upload.wikimedia.org/wikipedia/commons/e/e7/Shopify_logo.svg' },
@@ -12,11 +13,13 @@ const partners = [
   { name: 'Salesforce', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f9/Salesforce.com_logo.svg' }
 ];
 
-const PartnersSection = () => {
+const PartnersSection = ({ pathPrefix }) => {
   return (
     <section className="partners-section">
       <div className="partners-container">
-        <h2 className="partners-title">partnerships to help accelerate change</h2>
+        <EditableText path={pathPrefix ? `${pathPrefix}.title` : 'title'} component="h2" className="partners-title">
+          partnerships to help accelerate change
+        </EditableText>
         
         <div className="partners-grid">
           {partners.map((partner, idx) => (

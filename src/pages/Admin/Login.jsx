@@ -11,7 +11,7 @@ const AdminLogin = () => {
     e.submitter && e.preventDefault();
     e.preventDefault();
     try {
-      const baseUrl = import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrm';
+      const baseUrl = import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrms';
       const res = await fetch(`${baseUrl}/api/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

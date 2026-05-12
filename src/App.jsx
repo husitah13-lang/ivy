@@ -14,9 +14,18 @@ import ContentEditor from './pages/Admin/ContentEditor'
 import Footer from './components/Footer'
 import PageTransition from './components/PageTransition'
 import './App.css'
-import { fetchAPI } from './utils/api'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Navigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { VisualEditorProvider, useVisualEditor } from './context/VisualEditorContext'
+import AdminToolbar from './components/Admin/AdminToolbar'
+import AdminSidebar from './components/Admin/AdminSidebar'
+import { fetchAPI } from './utils/api'
+
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('adminToken');
+  if (!token) return <Navigate to="/admin/login" replace />;
+  return children;
+};
 
 const ScrollHandler = () => {
   const { pathname, hash } = useLocation();
@@ -40,8 +49,21 @@ const ScrollHandler = () => {
 function AppContent() {
   const { i18n } = useTranslation();
   const location = useLocation();
-  const isAdmin = location.pathname.startsWith('/admin');
+  const { isCMS, setIsCMS } = useVisualEditor();
+  
+  const isAdminPath = location.pathname.startsWith('/admin');
+  const isLoginPath = location.pathname === '/admin/login';
   const [layoutData, setLayoutData] = useState(null);
+
+  useEffect(() => {
+    if (isAdminPath && !isLoginPath) {
+      setIsCMS(true);
+      document.body.classList.add('cms-mode-active');
+    } else {
+      setIsCMS(false);
+      document.body.classList.remove('cms-mode-active');
+    }
+  }, [location.pathname, isLoginPath, isAdminPath, setIsCMS]);
 
   useEffect(() => {
     const loadLayout = async () => {
@@ -68,37 +90,59 @@ function AppContent() {
   }, [i18n.language]);
 
   return (
-    <>
+    <div className={isCMS ? "cms-layout-wrapper" : ""}>
       <ScrollHandler />
-      {!isAdmin && <Navbar data={layoutData} />}
-      <main className={isAdmin ? "" : "main-content"}>
-        <PageTransition>
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/services/:id" element={<ServicePage />} />
-            <Route path="/what-we-think" element={<WhatWeThink />} />
-            <Route path="/what-we-think/:id" element={<ArticlePage />} />
-            <Route path="/careers" element={<Careers />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/services" element={<ServicesMain />} />
-            <Route path="/admin/login" element={<AdminLogin />} />
-            <Route path="/admin" element={<AdminLayout />}>
-              <Route index element={<ContentEditor collectionName="homepage" />} />
-              <Route path=":collection" element={<ContentEditor />} />
-            </Route>
-          </Routes>
-        </PageTransition>
-      </main>
-      {!isAdmin && <Footer data={layoutData} />}
-    </>
+      <AdminSidebar />
+      <div className={isCMS ? "cms-main-area" : ""}>
+        <AdminToolbar />
+        {(!isCMS && !isLoginPath) && <Navbar data={layoutData} />}
+        <main className={(isCMS || isLoginPath) ? "" : "main-content"}>
+          <PageTransition>
+            <Routes>
+              {/* Live Website Routes */}
+              <Route path="/" element={<HomePage />} />
+              <Route path="/services/:id" element={<ServicePage />} />
+              <Route path="/what-we-think" element={<WhatWeThink />} />
+              <Route path="/what-we-think/:id" element={<ArticlePage />} />
+              <Route path="/careers" element={<Careers />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/services" element={<ServicesMain />} />
+
+              {/* Arabic Aliases to prevent broken links */}
+              <Route path="/الخدمات" element={<ServicesMain />} />
+              <Route path="/الخدمات/:id" element={<ServicePage />} />
+              <Route path="/ما-نفكر-فيه" element={<WhatWeThink />} />
+              <Route path="/ما-نفكر-فيه/:id" element={<ArticlePage />} />
+              <Route path="/الوظائف" element={<Careers />} />
+              <Route path="/اتصل-بنا" element={<Contact />} />
+
+              {/* Admin Authentication */}
+              <Route path="/admin/login" element={<AdminLogin />} />
+
+              {/* CMS Clone Routes (Protected) */}
+              <Route path="/admin" element={<ProtectedRoute><HomePage /></ProtectedRoute>} />
+              <Route path="/admin/services/:id" element={<ProtectedRoute><ServicePage /></ProtectedRoute>} />
+              <Route path="/admin/what-we-think" element={<ProtectedRoute><WhatWeThink /></ProtectedRoute>} />
+              <Route path="/admin/what-we-think/:id" element={<ProtectedRoute><ArticlePage /></ProtectedRoute>} />
+              <Route path="/admin/careers" element={<ProtectedRoute><Careers /></ProtectedRoute>} />
+              <Route path="/admin/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
+              <Route path="/admin/services" element={<ProtectedRoute><ServicesMain /></ProtectedRoute>} />
+            </Routes>
+          </PageTransition>
+        </main>
+        {(!isCMS && !isLoginPath) && <Footer data={layoutData} />}
+      </div>
+    </div>
   );
 }
 
 function App() {
   return (
-    <Router>
-      <AppContent />
-    </Router>
+    <VisualEditorProvider>
+      <Router>
+        <AppContent />
+      </Router>
+    </VisualEditorProvider>
   )
 }
 

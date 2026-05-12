@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import './CarouselSection.css';
 import { useTranslation } from 'react-i18next';
+import { EditableText } from './Admin/Editable';
 
-const CarouselSection = () => {
+const CarouselSection = ({ items, pathPrefix = 'client_carousel' }) => {
   const { t, i18n } = useTranslation();
   const [currentIndex, setCurrentIndex] = useState(1);
   const [isTransitioning, setIsTransitioning] = useState(false);
@@ -16,11 +17,15 @@ const CarouselSection = () => {
     { id: 5, imageColor: '#9b2c2c' }
   ];
 
-  const carouselData = carouselConfig.map((item, index) => ({
-    ...item,
-    title: t(`carousel.items.${index}.title`),
-    description: t(`carousel.items.${index}.description`)
-  }));
+  const carouselData = carouselConfig.map((configItem, index) => {
+    const dataItem = items && items[index] ? items[index] : {};
+    return {
+      ...configItem,
+      originalIndex: index,
+      title: dataItem.title || t(`carousel.items.${index}.title`),
+      body: dataItem.body || t(`carousel.items.${index}.description`)
+    };
+  });
 
   // Create extended array for infinite looping
   const extendedData = [
@@ -87,8 +92,12 @@ const CarouselSection = () => {
                 </button>
               </div>
               <div className="slide-content">
-                <h2 className="slide-title">{item.title}</h2>
-                <p className="slide-description">{item.description}</p>
+                <EditableText path={`${pathPrefix}.${item.originalIndex}.title`} component="h2" className="slide-title">
+                  {item.title}
+                </EditableText>
+                <EditableText path={`${pathPrefix}.${item.originalIndex}.body`} component="p" className="slide-description">
+                  {item.body}
+                </EditableText>
                 <a href="#read-more" className="slide-cta">
                   {t('carousel.readMore')}
                   <span className="cta-arrow-box">

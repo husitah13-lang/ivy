@@ -1,0 +1,63 @@
+.section-cms-controls {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 6px 12px;
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  pointer-events: all;
+}
+
+.cms-reorderable-section:hover .section-cms-controls {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.section-cms-controls button {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: white;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.section-cms-controls button:hover:not(:disabled) {
+  background: #fff;
+  color: #000;
+}
+
+.section-cms-controls button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-left: 4px;
+}
+
+.cms-reorderable-section {
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Add a subtle highlight when hovering over an editable section */
+.cms-reorderable-section:hover {
+  outline: 2px solid rgba(255, 255, 255, 0.05);
+}

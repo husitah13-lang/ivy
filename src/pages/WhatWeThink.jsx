@@ -1,12 +1,15 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
 import './WhatWeThink.css';
-import insightsDataEn from '../data/insights';
+import insightsDataEn from '../data/insights.json';
 import CardSection from '../components/CardSection';
 import { fetchAPI } from '../utils/api';
+import { useVisualEditor } from '../context/VisualEditorContext';
+import { EditableText } from '../components/Admin/Editable';
 
 const WhatWeThink = () => {
   const { t, i18n } = useTranslation();
+  const { isCMS, draftData, initDraft } = useVisualEditor();
   const [data, setData] = useState(insightsDataEn);
   const [loading, setLoading] = useState(false);
 
@@ -16,7 +19,7 @@ const WhatWeThink = () => {
       try {
         const collection = i18n.language === 'ar' ? 'insights.ar' : 'insights';
         const cmsData = await fetchAPI(`/content/${collection}`);
-        if (cmsData) {
+        if (cmsData && Object.keys(cmsData).length > 0) {
           setData(cmsData);
         } else {
           // Fallback to static
@@ -43,14 +46,18 @@ const WhatWeThink = () => {
     loadData();
   }, [i18n.language]);
 
-  const { hero, filterCategories, sortOptions, insights } = data;
+  useEffect(() => {
+    if (isCMS && data) {
+      const collection = i18n.language === 'ar' ? 'insights.ar' : 'insights';
+      initDraft(data, collection);
+    }
+  }, [isCMS, data, i18n.language]);
+
+  const activeData = isCMS && draftData ? draftData : data;
+  const { hero, filterCategories, sortOptions, insights } = activeData || {};
 
   // States for filters and sort
-  const [activeFilters, setActiveFilters] = useState({
-    Topic: "All",
-    Industry: "All",
-    "Content Type": "All"
-  });
+  const [activeFilters, setActiveFilters] = useState({});
 
   // Effect to reset filters when language changes (categories keys/values change)
   useEffect(() => {
@@ -75,28 +82,29 @@ const WhatWeThink = () => {
 
   // Deriving the filtered and sorted list
   const filteredInsights = useMemo(() => {
-    if (!insights) return [];
-    let result = [...insights];
+    let result = insights ? [...insights].map((item, idx) => ({ ...item, originalIndex: idx })) : [];
 
     // Filter Logic
-    Object.entries(activeFilters).forEach(([category, activeValue]) => {
-      const allText = filterCategories[category]?.[0];
-      if (activeValue !== allText) {
-        // Map the category to the data field
-        const fieldMap = {
-          "Topic": "topic",
-          "الموضوع": "topic",
-          "Industry": "industry",
-          "الصناعة": "industry",
-          "Content Type": "type",
-          "نوع المحتوى": "type"
-        };
-        const field = fieldMap[category];
-        if (field) {
-          result = result.filter(item => item[field] === activeValue);
+    if (filterCategories && Object.keys(activeFilters).length > 0) {
+      Object.entries(activeFilters).forEach(([category, activeValue]) => {
+        const allText = filterCategories[category]?.[0];
+        if (activeValue && allText && activeValue !== allText) {
+          // Map the category to the data field
+          const fieldMap = {
+            "Topic": "topic",
+            "الموضوع": "topic",
+            "Industry": "industry",
+            "الصناعة": "industry",
+            "Content Type": "type",
+            "نوع المحتوى": "type"
+          };
+          const field = fieldMap[category];
+          if (field) {
+            result = result.filter(item => item[field] === activeValue);
+          }
         }
-      }
-    });
+      });
+    }
 
     // Sort Logic
     const newestText = i18n.language === 'ar' ? "الأحدث" : "Newest";
@@ -125,20 +133,18 @@ const WhatWeThink = () => {
     setOpenDropdown(null);
   };
 
-  if (loading) {
-    return (
-      <div className="insights-page" style={{ minHeight: '60vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <h2 style={{ color: '#fff' }}>{t('common.loading')}</h2>
-      </div>
-    );
-  }
+  // Content loads instantly via fallback or cache; background update happens silently
 
   return (
     <div className="insights-page" dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
       <header className="insights-hero">
         <div className="insights-container">
-          <h1 className="insights-title">{hero.title}</h1>
-          <p className="insights-subtitle">{hero.description}</p>
+          <EditableText path="hero.title" component="h1" className="insights-title">
+            {hero?.title}
+          </EditableText>
+          <EditableText path="hero.description" component="p" className="insights-subtitle">
+            {hero?.description}
+          </EditableText>
         </div>
       </header>
 
@@ -203,8 +209,8 @@ const WhatWeThink = () => {
       </section>
 
       <section className="insights-grid-section">
-        {filteredInsights.length > 0 ? (
-          <CardSection cards={filteredInsights} basePath="/what-we-think" />
+        {filteredInsights?.length > 0 ? (
+          <CardSection cards={filteredInsights} basePath="/what-we-think" pathPrefix="insights" />
         ) : (
           <div className="no-results">
             <h3>{t('insights.no_results')}</h3>

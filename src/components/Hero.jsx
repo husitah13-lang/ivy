@@ -3,27 +3,35 @@ import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import heroVideo from '../videos/hero.mp4';
 import './Hero.css';
+import { EditableText } from './Admin/Editable';
+import { useVisualEditor } from '../context/VisualEditorContext';
 
 const Hero = ({ data, slides = [] }) => {
   const { t, i18n } = useTranslation();
+  const { isCMS } = useVisualEditor();
   const heroRef = useRef(null);
   const videoRef = useRef(null);
   const [activeSlide, setActiveSlide] = useState(0);
-
+  const [isPaused, setIsPaused] = useState(false);
   const [isInitialLoad, setIsInitialLoad] = useState(true);
-
-
-
 
   // Auto-advance slides every 5 seconds
   useEffect(() => {
+    if (isPaused || isCMS) return; // Don't auto-advance in CMS or if paused
     const timer = setInterval(() => {
       setIsInitialLoad(false);
       setActiveSlide((prev) => (prev + 1) % slides.length);
     }, 5000);
 
     return () => clearInterval(timer);
-  }, [slides.length]);
+  }, [slides.length, isPaused, isCMS]);
+
+  // Handle manual slide change in CMS mode
+  const goToSlide = (idx) => {
+    setIsInitialLoad(false);
+    setActiveSlide(idx);
+    setIsPaused(true); // Stay on this slide while editing
+  };
 
   useEffect(() => {
     let requestRunning = false;
@@ -34,6 +42,7 @@ const Hero = ({ data, slides = [] }) => {
       if (!requestRunning) {
         requestRunning = true;
         requestAnimationFrame(() => {
+          if (!heroRef.current) return;
           const scrollTop = window.scrollY;
           const heroHeight = heroRef.current.offsetHeight || 800;
           
@@ -60,35 +69,17 @@ const Hero = ({ data, slides = [] }) => {
       </video>
       <div className="hero-bg-overlay"></div>
       
-      <div className="hero-container">
+      <div className={`hero-container ${i18n.language === 'ar' ? 'is-rtl' : ''}`}>
         <div className="hero-left animate-on-scroll-left">
-          <h1 className="hero-title">
-            {data?.title_lines ? (
-              data.title_lines.map((line, idx) => (
-                <span 
-                  key={idx} 
-                  className={`title-line-${idx + 1}`} 
-                  dangerouslySetInnerHTML={{ __html: line }}
-                />
-              ))
-            ) : (
-              <>
-                <span className="title-line-1">{t('hero.title_line_1')}</span>
-                <span className="title-line-2">{t('hero.title_line_2')}</span>
-                <span className="title-line-3">{t('hero.title_line_3')}</span>
-                <span className="title-line-4">
-                  {i18n.language === 'ar' ? (
-                    t('hero.title_line_4')
-                  ) : (
-                    <>
-                      {t('hero.title_line_4').replace('GROWTH', '')} 
-                      <span className="accent-g">G</span>ROWTH
-                    </>
-                  )}
-                </span>
-              </>
-            )}
-          </h1>
+          <EditableText 
+            path="hero_custom.headline" 
+            component="h1" 
+            className="hero-title"
+            placeholder="ENGINEERING DIGITAL SYSTEMS..."
+            richText={true}
+          >
+            {data?.headline}
+          </EditableText>
         </div>
         
         <div className="hero-right animate-on-scroll-right">
@@ -96,11 +87,23 @@ const Hero = ({ data, slides = [] }) => {
             <div className="accent-divider animate-right-1"></div>
             <div className="hero-main-content-row">
               <div className="hero-text-block">
-                <h2 className="hero-subtitle animate-right-2">{slides[activeSlide]?.subtitle}</h2>
+                <EditableText 
+                  path={`hero_slides.${activeSlide}.subtitle`} 
+                  component="h2" 
+                  className="hero-subtitle animate-right-2"
+                  placeholder="Slide Title..."
+                >
+                  {slides[activeSlide]?.subtitle}
+                </EditableText>
                 <div className="animate-right-3">
-                  <p className="hero-description">
+                  <EditableText 
+                    path={`hero_slides.${activeSlide}.description`} 
+                    component="p" 
+                    className="hero-description"
+                    placeholder="Slide Description..."
+                  >
                     {slides[activeSlide]?.description}
-                  </p>
+                  </EditableText>
                 </div>
               </div>
               
@@ -128,6 +131,33 @@ const Hero = ({ data, slides = [] }) => {
                 </Link>
               )}
             </div>
+
+            {/* Slide Navigation for CMS */}
+            {slides.length > 1 && (
+              <div className="hero-slide-nav" style={{ marginTop: '20px', display: 'flex', gap: '8px' }}>
+                {slides.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => goToSlide(idx)}
+                    style={{
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '50%',
+                      background: activeSlide === idx ? '#00aeef' : 'rgba(255,255,255,0.3)',
+                      border: 'none',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease'
+                    }}
+                    title={`Go to slide ${idx + 1}`}
+                  />
+                ))}
+                {isCMS && (
+                  <span style={{ fontSize: '0.7rem', color: '#888', marginLeft: '10px' }}>
+                    Edit Slide {activeSlide + 1}
+                  </span>
+                )}
+              </div>
+            )}
           </div>
         </div>
 

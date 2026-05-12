@@ -1,0 +1,146 @@
+.cms-styling-toolbar {
+  position: absolute;
+  top: -45px;
+  left: 0;
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 6px;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  animation: slideUp 0.2s ease;
+  direction: ltr; /* Keep controls consistent in Arabic mode */
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.toolbar-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.tool-input {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.7rem;
+  color: #888;
+}
+
+.tool-input input {
+  width: 40px;
+  background: #111;
+  border: 1px solid #444;
+  color: white;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-size: 0.75rem;
+}
+
+.cms-styling-toolbar button {
+  background: transparent;
+  border: 1px solid #444;
+  color: white;
+  width: 24px;
+  height: 24px;
+  font-size: 0.8rem;
+  cursor: pointer;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cms-styling-toolbar button:hover {
+  background: #444;
+}
+
+.cms-styling-toolbar button.active {
+  background: #fff;
+  color: #000;
+}
+
+.cms-styling-toolbar button.active svg {
+  stroke: #000;
+}
+
+.cms-html-editor {
+  z-index: 5;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.cms-html-editor:focus {
+  border-color: #fff !important;
+  box-shadow: 0 0 10px rgba(0, 174, 239, 0.3);
+}
+
+.is-source-mode {
+  z-index: 100;
+}
+
+.cms-styling-toolbar select, .cms-select {
+  background: #333 !important;
+  border: 1px solid #555 !important;
+  color: white !important;
+  font-size: 0.75rem !important;
+  padding: 4px !important;
+  border-radius: 4px !important;
+  cursor: pointer;
+  appearance: auto;
+}
+
+.cms-select option {
+  background: #333 !important;
+  color: white !important;
+  padding: 10px;
+}
+
+.cms-focused {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cms-editable-image-wrapper:hover {
+  outline: 2px solid #fff;
+}
+
+/* Placeholder Styling */
+.show-placeholder:empty:before {
+  content: attr(data-placeholder);
+  color: rgba(255, 255, 255, 0.3);
+  font-style: italic;
+  pointer-events: none;
+  display: block;
+}
+
+/* Ensure empty containers are still reachable */
+.is-empty .cms-editable-text {
+  min-height: 1.5em;
+  min-width: 100px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 4px;
+}
+
+.is-empty .cms-editable-text:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.cms-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: cms-spin 0.8s linear infinite;
+}
+
+@keyframes cms-spin {
+  to { transform: rotate(360deg); }
+}

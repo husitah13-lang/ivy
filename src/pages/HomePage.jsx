@@ -9,12 +9,27 @@ import RecognitionBanner from '../components/RecognitionBanner';
 import NewsSection from '../components/NewsSection';
 import CareersSection from '../components/CareersSection';
 import { fetchAPI } from '../utils/api';
+import { useVisualEditor } from '../context/VisualEditorContext';
 
 import { homeContent } from '../data/content/homepage.js';
 import { homeContentAr } from '../data/content/homepage.ar.js';
+import './HomePage.css';
+
+export const SectionControl = ({ index, total, onMove }) => (
+  <div className="section-cms-controls">
+    <button onClick={() => onMove(index, -1)} disabled={index === 0} title="Move Up">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+    <button onClick={() => onMove(index, 1)} disabled={index === total - 1} title="Move Down">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M6 9l6 6 6-6"/></svg>
+    </button>
+    <span className="section-label">Section</span>
+  </div>
+);
 
 const HomePage = () => {
   const { t, i18n } = useTranslation();
+  const { isCMS, draftData, initDraft, reorderSections, setDataContext } = useVisualEditor();
   
   // Initialize with local fallback data instantly
   const initialData = i18n.language === 'ar' ? homeContentAr : homeContent;
@@ -22,67 +37,101 @@ const HomePage = () => {
 
   useEffect(() => {
     // Also update instantly when language changes
-    setData(i18n.language === 'ar' ? homeContentAr : homeContent);
+    const currentLocal = i18n.language === 'ar' ? homeContentAr : homeContent;
+    setData(currentLocal);
+    setDataContext(currentLocal);
 
     const loadData = async () => {
       try {
         const collection = i18n.language === 'ar' ? 'homepage.ar' : 'homepage';
-        // Fetch CMS data in background
         const cmsData = await fetchAPI(`/content/${collection}`);
+        const fallbackData = i18n.language === 'ar' ? homeContentAr : homeContent;
+
+        if (isCMS) {
+          // Initialize draft with CMS data or local fallback
+          initDraft(cmsData || fallbackData, collection);
+        }
+
         if (cmsData) {
-          setData(cmsData);
+          if (!isCMS) {
+            setData(cmsData);
+            setDataContext(cmsData);
+          }
         }
       } catch (error) {
         console.error("Failed to load homepage data:", error);
       }
     };
     
-    // Slight delay to ensure UI renders instantly before network request
-    const timer = setTimeout(loadData, 50);
-    return () => clearTimeout(timer);
-  }, [i18n.language]);
+    loadData();
+  }, [i18n.language, isCMS]);
 
-  if (!data) return null;
+  const activeData = (isCMS && draftData) ? draftData : data;
 
-  const renderSection = (section) => {
+  if (!activeData && !isCMS) return null;
+
+  const renderSection = (section, index, array) => {
     if (!section.visible) return null;
     
+    let content = null;
     switch (section.id) {
       case 'hero': 
-        return <Hero key="hero" data={data.hero_custom} slides={data.hero_slides} />;
+        content = <Hero key="hero" data={activeData.hero_custom} slides={activeData.hero_slides} />;
+        break;
       case 'services': 
-        return <CardSection key="services" id="services" cards={data.tilegrid} />;
+        content = <CardSection key="services" id="services" cards={activeData.tilegrid} pathPrefix="tilegrid" />;
+        break;
       case 'quote': 
-        return <QuoteSection key="quote" data={data.carousel || data.quote} />;
+        content = <QuoteSection key="quote" data={activeData.carousel || activeData.quote} />;
+        break;
       case 'clients': 
-        return <CarouselSection key="clients" items={data.client_carousel} />;
+        content = <CarouselSection key="clients" items={activeData.client_carousel} />;
+        break;
       case 'recognition': 
-        return <RecognitionBanner key="recognition" title={data.recognition?.title} awards={data.recognition?.awards} />;
+        content = <RecognitionBanner key="recognition" title={activeData.recognition?.title} awards={activeData.recognition?.awards} />;
+        break;
       case 'careers': 
-        return <CareersSection key="careers" data={data.careers} />;
+        content = <CareersSection key="careers" data={activeData.careers} />;
+        break;
       case 'news': 
-        return <NewsSection key="news" data={data.news} />;
+        content = <NewsSection key="news" data={activeData.news} />;
+        break;
       default: 
-        return null;
+        content = null;
     }
+
+    if (isCMS && content) {
+      return (
+        <div key={section.id || index} className="cms-reorderable-section" style={{ position: 'relative' }}>
+          <SectionControl 
+            index={index} 
+            total={array.length} 
+            onMove={(idx, dir) => reorderSections(idx, dir, 'section_layout', defaultLayout)} 
+          />
+          {content}
+        </div>
+      );
+    }
+
+    return content;
   };
+
+  const defaultLayout = [
+    { id: 'hero', visible: true },
+    { id: 'services', visible: true },
+    { id: 'quote', visible: true },
+    { id: 'clients', visible: true },
+    { id: 'recognition', visible: true },
+    { id: 'careers', visible: true },
+    { id: 'news', visible: true }
+  ];
+
+  const layout = activeData.section_layout || defaultLayout;
 
   return (
     <div dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
-      <SEO seoData={data.seo} />
-      {data.section_layout ? (
-        data.section_layout.map(renderSection)
-      ) : (
-        <>
-          <Hero data={data.hero_custom} slides={data.hero_slides} />
-          <CardSection id="services" cards={data.tilegrid} />
-          <QuoteSection data={data.carousel || data.quote} />
-          <CarouselSection items={data.client_carousel} />
-          <RecognitionBanner title={data.recognition?.title} awards={data.recognition?.awards} />
-          <CareersSection data={data.careers} />
-          <NewsSection data={data.news} />
-        </>
-      )}
+      <SEO seoData={activeData.seo} />
+      {layout.map(renderSection)}
     </div>
   );
 };

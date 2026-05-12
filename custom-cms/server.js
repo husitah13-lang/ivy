@@ -1,4 +1,4 @@
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
@@ -32,7 +32,10 @@ const authenticateToken = (req, res, next) => {
   const token = authHeader && authHeader.split(' ')[1];
   if (token == null) return res.sendStatus(401);
   jwt.verify(token, SECRET_KEY, (err, user) => {
-    if (err) return res.sendStatus(403);
+    if (err) {
+      console.error("JWT Verification failed:", err.message);
+      return res.sendStatus(403);
+    }
     req.user = user;
     next();
   });
@@ -134,25 +137,90 @@ app.post('/api/content/:collection', authenticateToken, async (req, res) => {
   }
 });
 
-// Image Upload (Local persistence for now - advise Cloudinary for Railway)
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'uploads/')
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+
+// Cloudinary Configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+});
+
+// Image Upload (Cloudinary Storage)
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: 'ivy_interactive',
+    allowed_formats: ['jpg', 'png', 'jpeg', 'webp', 'svg'],
+    transformation: [{ width: 1000, height: 1000, crop: 'limit' }]
   },
-  filename: function (req, file, cb) {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9)
-    cb(null, uniqueSuffix + path.extname(file.originalname))
-  }
 });
 const upload = multer({ storage: storage });
 
 
-app.post('/api/upload', authenticateToken, upload.single('file'), (req, res) => {
-  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
-  // For production, this should return a full URL or relative path handled by frontend
-  const protocol = req.headers['x-forwarded-proto'] || req.protocol;
-  const host = req.get('host');
-  res.json({ url: `${protocol}://${host}/uploads/${req.file.filename}` });
+app.post('/api/upload', authenticateToken, (req, res) => {
+  upload.single('file')(req, res, (err) => {
+    if (err) {
+      console.error('Cloudinary Upload Error:', err);
+      return res.status(500).json({ 
+        error: 'Image upload failed', 
+        details: err.message || 'Unknown server error'
+      });
+    }
+    
+    if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
+    
+    // Multer-storage-cloudinary provides the secure_url in path or url
+    res.json({ url: req.file.path || req.file.secure_url });
+  });
+});
+
+app.post('/api/translate', authenticateToken, async (req, res) => {
+  const { text, target_lang } = req.body;
+  const DEEPL_KEY = 'e710c1c0-b075-4a6f-979b-654773e77869:fx';
+
+  if (!text) return res.status(400).json({ error: 'Text is required' });
+
+  let attempts = 0;
+  const maxAttempts = 3;
+
+  const tryTranslate = async () => {
+    try {
+      console.log(`DeepL Translating: "${text.substring(0, 50)}..."`);
+      const response = await fetch('https://api-free.deepl.com/v2/translate', {
+        method: 'POST',
+        headers: {
+          'Authorization': `DeepL-Auth-Key ${DEEPL_KEY}`,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+          text: text,
+          target_lang: target_lang || 'AR'
+        })
+      });
+
+      if (response.status === 429 && attempts < maxAttempts) {
+        attempts++;
+        console.log(`DeepL rate limit hit. Retry attempt ${attempts}...`);
+        await new Promise(resolve => setTimeout(resolve, 2000)); // Wait 2 seconds
+        return tryTranslate();
+      }
+
+      if (!response.ok) {
+        const error = await response.text();
+        return res.status(response.status).json({ error });
+      }
+
+      const data = await response.json();
+      res.json({ translatedText: data.translations[0].text });
+    } catch (err) {
+      console.error("Server translation error:", err);
+      res.status(500).json({ error: 'Translation failed' });
+    }
+  };
+
+  await tryTranslate();
 });
 
 app.listen(PORT, () => {

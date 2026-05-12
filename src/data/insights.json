@@ -1,0 +1,147 @@
+{
+  "hero": {
+    "title": "Stay ahead of change",
+    "description": "Explore our research, insights, and examples of real client impact, designed to help you embrace the key forces of change and get to value faster."
+  },
+  "filterCategories": {
+    "Topic": [
+      "All",
+      "AI & Generative AI",
+      "Cloud",
+      "Sustainability",
+      "Security",
+      "Supply Chain"
+    ],
+    "Industry": [
+      "All",
+      "Energy",
+      "Manufacturing",
+      "Finance",
+      "Technology",
+      "Healthcare"
+    ],
+    "Content Type": [
+      "All",
+      "Perspective",
+      "Research Report",
+      "Case Study"
+    ]
+  },
+  "sortOptions": [
+    "Editor's picks",
+    "Newest",
+    "Oldest"
+  ],
+  "insights": [
+    {
+      "id": "ai-superhighway",
+      "type": "Perspective",
+      "title": "The intelligent superhighway you need to unlock value from AI",
+      "body": "Unlocking the full potential of AI requires a robust digital foundation. Learn how to build the 'intelligent superhighway'.",
+      "cta_text": "Read Perspective",
+      "cta_link": "/what-we-think/ai-superhighway",
+      "topic": "AI & Generative AI",
+      "industry": "Technology",
+      "date": "2024-04-20"
+    },
+    {
+      "id": "ai-upstream-energy",
+      "type": "Perspective",
+      "title": "Scaling AI in upstream energy",
+      "body": "How energy companies are leveraging generative AI to transform exploration and production at scale.",
+      "cta_text": "Read Perspective",
+      "cta_link": "/what-we-think/ai-upstream-energy",
+      "topic": "AI & Generative AI",
+      "industry": "Energy",
+      "date": "2024-03-15"
+    },
+    {
+      "id": "cloud-foundation",
+      "type": "Research Report",
+      "title": "AI innovation is nonstop. Your cloud foundation should be too",
+      "body": "Our latest research highlights why a cloud-first strategy is the essential fuel for continuous AI innovation.",
+      "cta_text": "View Report",
+      "cta_link": "/what-we-think/cloud-foundation",
+      "topic": "Cloud",
+      "industry": "Technology",
+      "date": "2024-04-10"
+    },
+    {
+      "id": "talent-reinventors",
+      "type": "Research Report",
+      "title": "Talent Reinventors: Delivering value with and for people",
+      "body": "Organizations that prioritize talent reinvention are 2.6x more likely to outperform their peers in growth.",
+      "cta_text": "View Report",
+      "cta_link": "/what-we-think/talent-reinventors",
+      "topic": "Sustainability",
+      "industry": "Manufacturing",
+      "date": "2024-02-28"
+    },
+    {
+      "id": "supply-chain",
+      "type": "Case Study",
+      "title": "Transforming Global Supply Chains",
+      "body": "How digital twins are helping manufacturers build resilience against global supply chain disruptions.",
+      "cta_text": "View Case Study",
+      "cta_link": "/what-we-think/supply-chain",
+      "topic": "Supply Chain",
+      "industry": "Manufacturing",
+      "date": "2024-04-05"
+    },
+    {
+      "id": "digital-identity",
+      "type": "Perspective",
+      "title": "The Future of Digital Identity",
+      "body": "As the internet evolves, how we verify who we are must evolve with it. Exploring decentralized identity systems.",
+      "cta_text": "Read Perspective",
+      "cta_link": "/what-we-think/digital-identity",
+      "topic": "Security",
+      "industry": "Finance",
+      "date": "2024-03-22"
+    },
+    {
+      "id": "tech-vision",
+      "type": "Research Report",
+      "title": "2025 Technology Vision",
+      "body": "Our annual report on the top technology trends that will redefine business and society over the next three years.",
+      "cta_text": "View Report",
+      "cta_link": "/what-we-think/tech-vision",
+      "topic": "Technology",
+      "industry": "Technology",
+      "date": "2024-01-15"
+    },
+    {
+      "id": "sustainable-tech",
+      "type": "Perspective",
+      "title": "Sustainable Tech by Design",
+      "body": "Why sustainability must be a core architectural requirement for modern software engineering teams.",
+      "cta_text": "Read Perspective",
+      "cta_link": "/what-we-think/sustainable-tech",
+      "topic": "Sustainability",
+      "industry": "Healthcare",
+      "date": "2024-04-18"
+    },
+    {
+      "id": "future-cmo-2026",
+      "type": "White Paper",
+      "topic": "Marketing",
+      "industry": "Enterprise",
+      "title": "The future of the CMO: Driving growth in 2026",
+      "body": "How the role of marketing leadership is evolving to encompass technology, data, and customer experience at every touchpoint.",
+      "cta_text": "Read White Paper",
+      "cta_link": "/what-we-think/future-cmo-2026",
+      "date": "2026-03-15"
+    },
+    {
+      "id": "legacy-brand-transformation",
+      "type": "Case Study",
+      "topic": "Transformation",
+      "industry": "Retail",
+      "title": "Modernizing a legacy brand for digital growth",
+      "body": "How an integrated marketing transformation program helped a traditional retailer increase online sales by 120% in 18 months.",
+      "cta_text": "Read Case Study",
+      "cta_link": "/what-we-think/legacy-brand-transformation",
+      "date": "2026-03-10"
+    }
+  ]
+}

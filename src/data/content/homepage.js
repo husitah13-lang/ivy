@@ -18,10 +18,7 @@ export const homeContent = {
         }
     },
   "hero_custom": {
-    "headline_prefix": "ENGINEERING",
-    "headline_suffix_start": "DIGITAL",
-    "headline_suffix_end": "SYSTEMS",
-    "sub_headline": "FOR GROWTH",
+    "headline": "ENGINEERING<br/>DIGITAL<br/>SYSTEMS<br/>FOR <span style=\"color: #00aeef\">G</span>ROWTH",
     "body_text": "In an era defined by technological change, continuous innovation is the core of competitive advantage. We partner with ambitious organizations to architect, develop, and scale the software solutions that define tomorrow's market leaders."
   },
   "hero_slides": [

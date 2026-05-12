@@ -15,8 +15,8 @@ const AdminDashboard = () => {
       return;
     }
 
-    const baseUrl = import.meta.env.VITE_API_URL || 'https://betaapi.ivy-staging.com/apicrm';
-    fetch(`${baseUrl}/api/homepage`)
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+    fetch(`${baseUrl}/api/homepage`, { cache: 'no-store' })
       .then(res => res.json())
       .then(json => {
         setData(JSON.stringify(json, null, 2));
@@ -36,14 +36,15 @@ const AdminDashboard = () => {
       const parsedData = JSON.parse(data);
 
       const token = localStorage.getItem('adminToken');
-      const baseUrl = import.meta.env.VITE_API_URL || (window.location.hostname === 'localhost' ? 'https://betaapi.ivy-staging.com/apicrm' : 'https://betaapi.ivy-staging.com/apicrm');
+      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
       const res = await fetch(`${baseUrl}/api/homepage`, {
         method: 'POST', // Match server.js logic
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`
         },
-        body: JSON.stringify(parsedData)
+        body: JSON.stringify(parsedData),
+        cache: 'no-store'
       });
 
       if (res.ok) {

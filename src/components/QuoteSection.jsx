@@ -2,23 +2,36 @@ import React from 'react';
 import './QuoteSection.css';
 import { useTranslation } from 'react-i18next';
 
-const QuoteSection = () => {
+import { EditableText, EditableImage } from './Admin/Editable';
+
+const QuoteSection = ({ data }) => {
   const { t } = useTranslation();
+  
+  // Use passed data or fallback to translations
+  const quoteData = data || {
+    quote: t('home.quote.text'),
+    author: t('home.quote.author'),
+    image: "/julie_sweet.png"
+  };
+
   return (
     <section className="quote-section">
       <div className="quote-container">
         <div className="quote-image-container">
-          <img 
-            src="/julie_sweet.png" 
-            alt={t('home.quote.author')} 
+          <EditableImage 
+            path="carousel.image"
+            src={quoteData.image || "/julie_sweet.png"} 
+            alt={quoteData.author} 
             className="quote-image"
           />
         </div>
         <div className="quote-content">
-          <blockquote className="quote-text">
-            {t('home.quote.text')}
-          </blockquote>
-          <p className="quote-author">{t('home.quote.author')}</p>
+          <EditableText path="carousel.quote" component="blockquote" className="quote-text">
+            {quoteData.quote}
+          </EditableText>
+          <EditableText path="carousel.author" component="p" className="quote-author">
+            {quoteData.author}
+          </EditableText>
         </div>
       </div>
     </section>

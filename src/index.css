@@ -63,3 +63,72 @@ body {
 [dir="rtl"] .cta-arrow-box svg {
   transform: scaleX(-1);
 }
+
+/* CMS Mode - Visibility Overrides */
+.cms-mode-active .content-card:hover .card-content {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+  pointer-events: auto !important;
+}
+
+.cms-editing-active .card-content,
+.cms-editing-active .card-body,
+.cms-editing-active .capability-detail-panel,
+.cms-editing-active .industry-detail-panel {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+}
+
+/* Ensure hero text being edited is visible */
+.cms-editing-active .title-line-1,
+.cms-editing-active .title-line-2,
+.cms-editing-active .title-line-3,
+.cms-editing-active .title-line-4,
+.cms-editing-active .hero-subtitle,
+.cms-editing-active .hero-description {
+  opacity: 1 !important;
+  transform: none !important;
+  animation: none !important;
+}
+
+.cms-editable-text:focus {
+  outline: 2px solid #00aeef !important;
+  background: rgba(0, 174, 239, 0.1) !important;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+/* CMS Layout System */
+.cms-layout-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  background: #000;
+}
+
+.cms-main-area {
+  flex: 1;
+  width: 100%;
+  transition: padding-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.cms-mode-active .cms-main-area {
+  padding-left: 280px;
+}
+
+.cms-mode-active.sidebar-collapsed .cms-main-area {
+  padding-left: 0;
+}
+
+/* Override for fixed elements in CMS mode */
+.cms-mode-active .admin-toolbar {
+  left: 280px;
+  transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cms-mode-active.sidebar-collapsed .admin-toolbar {
+  left: 0;
+}

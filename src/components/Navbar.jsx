@@ -89,7 +89,7 @@ const Navbar = ({ data }) => {
         {/* Navigation Links */}
         <ul className={`navbar-menu ${isMenuOpen ? 'active' : ''}`}>
           <li className="nav-item" style={{ '--item-index': 0 }}>
-            <Link to="/#services" className="nav-link" onClick={closeMenu}>
+            <Link to="/services" className="nav-link" onClick={closeMenu}>
               {nav.services}
             </Link>
           </li>

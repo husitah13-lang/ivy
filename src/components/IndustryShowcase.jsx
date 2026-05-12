@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './IndustryShowcase.css';
+import { EditableText, EditableImage } from './Admin/Editable';
 
-const IndustryShowcase = ({ industries }) => {
+const IndustryShowcase = ({ industries, pathPrefix }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   if (!industries || industries.length === 0) return null;
@@ -9,8 +10,12 @@ const IndustryShowcase = ({ industries }) => {
   return (
     <section className="industry-showcase">
       <div className="industry-container">
-        <p className="industry-eyebrow">INDUSTRIES</p>
-        <h2 className="industry-headline">Unmatched industry expertise</h2>
+        <EditableText path="industry_intro.eyebrow" component="p" className="industry-eyebrow">
+          INDUSTRIES
+        </EditableText>
+        <EditableText path="industry_intro.title" component="h2" className="industry-headline">
+          Unmatched industry expertise
+        </EditableText>
         
         <div className="industry-layout">
           <div className="industry-list">
@@ -21,19 +26,27 @@ const IndustryShowcase = ({ industries }) => {
                 onMouseEnter={() => setActiveIndex(idx)}
               >
                 <span className="industry-indicator"></span>
-                {industry.title}
+                <EditableText path={pathPrefix ? `${pathPrefix}.${idx}.title` : `${idx}.title`} component="span">
+                  {industry.title}
+                </EditableText>
               </div>
             ))}
           </div>
           
           <div className="industry-detail-panel">
             <div key={activeIndex} className="animate-fade-in">
-              <h3 className="industry-detail-title">{industries[activeIndex].detailTitle}</h3>
-              <p className="industry-detail-description">
+              <EditableText path={pathPrefix ? `${pathPrefix}.${activeIndex}.detailTitle` : `${activeIndex}.detailTitle`} component="h3" className="industry-detail-title">
+                {industries[activeIndex].detailTitle}
+              </EditableText>
+              <EditableText path={pathPrefix ? `${pathPrefix}.${activeIndex}.description` : `${activeIndex}.description`} component="p" className="industry-detail-description">
                 {industries[activeIndex].description}
-              </p>
+              </EditableText>
               <div className="industry-graphic">
-                <img src={industries[activeIndex].image} alt={industries[activeIndex].title} />
+                <EditableImage 
+                  path={pathPrefix ? `${pathPrefix}.${activeIndex}.image` : `${activeIndex}.image`} 
+                  src={industries[activeIndex].image} 
+                  alt={industries[activeIndex].title} 
+                />
               </div>
             </div>
           </div>

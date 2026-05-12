@@ -1,26 +1,35 @@
 import React from 'react';
 import './ServiceHero.css';
+import { EditableText, EditableImage } from './Admin/Editable';
 
-const ServiceHero = ({ title, description, imageSrc }) => {
+const ServiceHero = ({ title, description, imageSrc, pathPrefix }) => {
   return (
     <section className="service-hero">
       <div className="service-hero-container">
         <div className="service-hero-image">
-          <img src={imageSrc || "/service_hero_illustration.png"} alt="Service Visual" />
+          <EditableImage 
+            path={pathPrefix ? `${pathPrefix}.image_src` : 'image_src'}
+            src={imageSrc || "/service_hero_illustration.png"} 
+            alt="Service Visual" 
+          />
         </div>
         <div className="service-hero-content">
-          <h1 className="service-hero-title">
-            {title || (
-              <>
-                Resonate to create<br/>
-                relevance in today's<br/>
-                world of marketing
-              </>
-            )}
-          </h1>
-          <p className="service-hero-text">
-            {description || "Data overload, vague promises and uninspired content are drowning out meaningful customer experiences. To cut through the noise, relevance must take center stage—driven by a marketing function fueled by data, creativity and technology to create lasting interactions."}
-          </p>
+          <EditableText 
+            path={pathPrefix ? `${pathPrefix}.title` : 'title'} 
+            component="h1" 
+            className="service-hero-title"
+            placeholder="Enter Hero Title..."
+          >
+            {title || ""}
+          </EditableText>
+          <EditableText 
+            path={pathPrefix ? `${pathPrefix}.subtitle` : 'subtitle'} 
+            component="p" 
+            className="service-hero-text"
+            placeholder="Enter Hero Description..."
+          >
+            {description || ""}
+          </EditableText>
         </div>
       </div>
     </section>

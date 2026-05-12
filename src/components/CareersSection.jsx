@@ -2,12 +2,21 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CareersSection.css';
 import { useTranslation } from 'react-i18next';
+import { EditableText, EditableImage } from './Admin/Editable';
 
-const CareersSection = () => {
+const CareersSection = ({ data }) => {
   const { t } = useTranslation();
   const sectionRef = useRef(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const navigate = useNavigate();
+
+  const careersData = data || {
+    label: t('home.careers.label'),
+    title: t('home.careers.title'),
+    subtitle: t('home.careers.subtitle'),
+    cta: t('home.careers.cta'),
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -57,8 +66,9 @@ const CareersSection = () => {
             zIndex: scrollProgress < 0.7 ? 10 : 1
           }}
         >
-          <img
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80"
+          <EditableImage
+            path="careers.image"
+            src={careersData.image}
             alt="Professional team collaborating"
             className="cs-image"
           />
@@ -72,15 +82,19 @@ const CareersSection = () => {
           transform: `translateY(${textTranslateY}px)`
         }}
       >
-        <span className="cs-label">{t('home.careers.label')}</span>
-        <h2 className="cs-title">
-          {t('home.careers.title')}
-        </h2>
-        <p className="cs-subtitle">
-          {t('home.careers.subtitle')}
-        </p>
+        <EditableText path="careers.label" component="span" className="cs-label">
+          {careersData.label}
+        </EditableText>
+        <EditableText path="careers.title" component="h2" className="cs-title">
+          {careersData.title}
+        </EditableText>
+        <EditableText path="careers.subtitle" component="p" className="cs-subtitle">
+          {careersData.subtitle}
+        </EditableText>
         <div className="cs-cta" onClick={() => navigate('/careers')} style={{ cursor: 'pointer' }}>
-          <span className="cs-cta-text">{t('home.careers.cta')}</span>
+          <EditableText path="careers.cta" component="span" className="cs-cta-text">
+            {careersData.cta}
+          </EditableText>
           <button className="cs-cta-btn" aria-label={t('home.careers.cta')} onClick={(e) => { e.stopPropagation(); navigate('/careers'); }}>
             <svg
               width="12"

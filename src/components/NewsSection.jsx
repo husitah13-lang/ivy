@@ -2,12 +2,15 @@ import React, { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './NewsSection.css';
 import { useTranslation } from 'react-i18next';
+import { EditableText } from './Admin/Editable';
+import { useVisualEditor } from '../context/VisualEditorContext';
 
 const NewsSection = ({ data }) => {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const containerRef = useRef(null);
   const trackRef = useRef(null);
+  const { isCMS } = useVisualEditor();
   const [isPlaying, setIsPlaying] = useState(true);
   
   const newsItems = data?.items || [];
@@ -81,16 +84,52 @@ const NewsSection = ({ data }) => {
                 className="news-card" 
                 key={`${index}`}
                 onClick={() => {
+                  if (isCMS) return;
                   const articleId = item.id || item.cta_link?.replace('.html', '').replace(/^\//, '') || index;
                   navigate(`/what-we-think/${articleId}`);
                 }}
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: isCMS ? 'default' : 'pointer', position: 'relative' }}
               >
+                {isCMS && (
+                  <button 
+                    className="cms-navigate-btn"
+                    title="Navigate to this article to edit it"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const articleId = item.id || item.cta_link?.replace('.html', '').replace(/^\//, '') || index;
+                      navigate(`/admin/what-we-think/${articleId}`);
+                    }}
+                    style={{
+                      position: 'absolute',
+                      top: '12px',
+                      right: '12px',
+                      zIndex: 100,
+                      background: 'rgba(0,0,0,0.8)',
+                      color: 'white',
+                      border: '1px solid rgba(255,255,255,0.3)',
+                      padding: '4px 8px',
+                      borderRadius: '4px',
+                      fontSize: '0.75rem',
+                      cursor: 'pointer',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                      boxShadow: '0 2px 5px rgba(0,0,0,0.5)'
+                    }}
+                  >
+                    Edit Page
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                  </button>
+                )}
                 <div className="news-card-header">
-                  <span className="news-category">{item.category}</span>
+                  <EditableText path={`news.items.${index % newsItems.length}.category`} component="span" className="news-category">
+                    {item.category}
+                  </EditableText>
                   <span className="news-date">{item.date}</span>
                 </div>
-                <h2 className="news-headline">{item.headline}</h2>
+                <EditableText path={`news.items.${index % newsItems.length}.headline`} component="h2" className="news-headline">
+                  {item.headline}
+                </EditableText>
                 <div className="news-card-footer">
                   <span className="news-read-more">
                     {t('home.news.readMore')}
@@ -115,7 +154,9 @@ const NewsSection = ({ data }) => {
 
         <div className="news-footer">
           <div className="news-footer-label">
-            <span>{data?.headline || t('home.news.title')}</span>
+            <EditableText path="news.headline" component="span">
+              {data?.headline || t('home.news.title')}
+            </EditableText>
           </div>
         </div>
       </div>
