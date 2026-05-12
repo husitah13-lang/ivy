@@ -1,29 +1,4 @@
-const fs = require('fs');
-const path = require('path');
-const dotenv = require('dotenv');
-
-// Look for .env in root first, then fallback to local directory
-const rootEnvPath = path.resolve(__dirname, '../.env');
-const localEnvPath = path.resolve(__dirname, '.env');
-const cwdEnvPath = path.resolve(process.cwd(), '.env');
-
-console.log('Checking for .env at:', rootEnvPath);
-console.log('Checking for .env at:', localEnvPath);
-console.log('Checking for .env at:', cwdEnvPath);
-
-if (fs.existsSync(rootEnvPath)) {
-  dotenv.config({ path: rootEnvPath });
-  console.log('SUCCESS: Loaded .env from root directory');
-} else if (fs.existsSync(localEnvPath)) {
-  dotenv.config({ path: localEnvPath });
-  console.log('SUCCESS: Loaded .env from local directory');
-} else if (fs.existsSync(cwdEnvPath)) {
-  dotenv.config({ path: cwdEnvPath });
-  console.log('SUCCESS: Loaded .env from Current Working Directory');
-} else {
-  console.error('CRITICAL ERROR: No .env file found in any checked directory!');
-  dotenv.config(); // Final fallback
-}
+require('dotenv').config(); // Load from the same directory as server.js
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
