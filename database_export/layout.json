@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "services": "Services",
+    "expertise": "Expertise",
+    "careers": "Careers",
+    "news": "What we think",
+    "contact": "Contact",
+    "language": "Arabic"
+  },
+  "footer": {
+    "brand": "Let there be change",
+    "links": {
+      "preference": "Preference Center",
+      "careers": "Careers",
+      "about": "About Us",
+      "contact": "Contact Us",
+      "locations": "Locations",
+      "sitemap": "Sitemap",
+      "privacy": "Privacy Statement",
+      "terms": "Terms & Conditions",
+      "cookie": "Cookie Policy/Settings",
+      "accessibility": "Accessibility Statement",
+      "donotsell": "Do Not Sell/Share My Personal Information"
+    },
+    "copyright": "© 2026 Ivy Interactive. All Rights Reserved."
+  }
+}

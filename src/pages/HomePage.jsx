@@ -8,7 +8,7 @@ import CarouselSection from '../components/CarouselSection';
 import RecognitionBanner from '../components/RecognitionBanner';
 import NewsSection from '../components/NewsSection';
 import CareersSection from '../components/CareersSection';
-import { fetchAPI } from '../utils/api';
+import { fetchAPI, getCachedData } from '../utils/api';
 import { useVisualEditor } from '../context/VisualEditorContext';
 
 import { homeContent } from '../data/content/homepage.js';
@@ -31,13 +31,18 @@ const HomePage = () => {
   const { t, i18n } = useTranslation();
   const { isCMS, draftData, initDraft, reorderSections, setDataContext } = useVisualEditor();
   
-  // Initialize with local fallback data instantly
-  const initialData = i18n.language === 'ar' ? homeContentAr : homeContent;
-  const [data, setData] = useState(initialData);
+  // Initialize with the BEST available data instantly (Cache > Local File)
+  const getInitialData = () => {
+    const collection = i18n.language === 'ar' ? 'homepage.ar' : 'homepage';
+    const cached = getCachedData(`/content/${collection}`);
+    if (cached) return cached;
+    return i18n.language === 'ar' ? homeContentAr : homeContent;
+  };
+
+  const [data, setData] = useState(getInitialData());
 
   useEffect(() => {
-    // Also update instantly when language changes
-    const currentLocal = i18n.language === 'ar' ? homeContentAr : homeContent;
+    const currentLocal = getInitialData();
     setData(currentLocal);
     setDataContext(currentLocal);
 

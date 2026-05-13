@@ -1,0 +1,214 @@
+{
+  "hero_custom": {
+    "headline_prefix": "Together We",
+    "headline_suffix_start": "Build What's ",
+    "headline_suffix_end": "ext",
+    "sub_headline": "Engineering intelligent digital futures",
+    "body_text": "In an era defined by technological change, continuous innovation is the core of competitive advantage. We partner with ambitious organizations to architect, develop, and scale the software solutions that define tomorrow's market leaders."
+  },
+  "tilegrid": [
+    {
+      "id": "service-saas-001",
+      "type": "Core Service",
+      "title": "SaaS Platforms",
+      "body": "We deliver intelligent, scalable Software-as-a-Service solutions. From architecture to ongoing optimization, we build subscription-based platforms that drive recurring value and adapt to market needs.",
+      "cta_text": "Expand",
+      "cta_link": "saas-platforms.html"
+    },
+    {
+      "id": "service-ecommerce-002",
+      "type": "Core Service",
+      "title": "E-commerce Solutions",
+      "body": "Engineer seamless digital storefronts and complex purchase journeys. We build high-conversion platforms with integrated payments, inventory management, and personalized shopping experiences.",
+      "cta_text": "Expand",
+      "cta_link": "ecommerce.html"
+    },
+    {
+      "id": "service-marketing-003",
+      "type": "Core Service",
+      "title": "Marketing Services",
+      "body": "Deploy integrated Martech stacks that unify data, automate campaigns, and personalize engagement at scale. Turn marketing complexity into your greatest competitive advantage.",
+      "cta_text": "Expand",
+      "cta_link": "marketing-services.html"
+    },
+    {
+      "id": "service-talent-004",
+      "type": "Core Service",
+      "title": "Recruitment & Training Systems",
+      "body": "Modernize how you attract, onboard, and develop talent. We create platforms that streamline hiring, enable continuous learning, and foster a culture of innovation and growth.",
+      "cta_text": "Expand",
+      "cta_link": "talent-training.html"
+    },
+    {
+      "id": "service-web-dev-005",
+      "type": "Core Service",
+      "title": "Web Development",
+      "body": "Build robust, scalable web platforms and applications. Our full-stack expertise delivers secure, performant digital experiences engineered for growth and user engagement.",
+      "cta_text": "Expand",
+      "cta_link": "web-development.html"
+    },
+    {
+      "id": "service-bi-0056",
+      "type": "Core Service",
+      "title": "Business Intelligence",
+      "body": "Transform data into decisive action. We design custom dashboards, analytics pipelines, and predictive models that provide clear, actionable insights for smarter business decisions.",
+      "cta_text": "Expand",
+      "cta_link": "business-intelligence.html"
+    },
+    {
+      "id": "service-app-dev-007",
+      "type": "Core Service",
+      "title": "App Development",
+      "body": "Craft intuitive, high-performance mobile applications. From native iOS/Android to cross-platform solutions, we build engaging apps that users love and rely on daily.",
+      "cta_text": "Expand",
+      "cta_link": "app-development.html"
+    },
+    {
+      "id": "service-ai-008",
+      "type": "Core Service",
+      "title": "AI Solutions",
+      "body": "Implement practical artificial intelligence that solves real business challenges. From automation and predictive analytics to intelligent agents, we make AI a tangible driver of efficiency and innovation.",
+      "cta_text": "Expand",
+      "cta_link": "ai-solutions.html"
+    }
+  ],
+  "carousel": {
+    "quote": "\"Technology is the blueprint, but value is built in the execution. Our mission is to partner with clients not just to imagine the future, but to engineer it—line by line, pixel by pixel.\"",
+    "author": "Awais Rahat, CEO, Ivy Interactive",
+    "cta_text": "Read more",
+    "cta_link": "https://fortune.com/article/ivyinteractive-ceo-julie-sweet-global-500-ai/"
+  },
+  "client_carousel": [
+    {
+      "title": "Bristol Myers Squibb uses data and insights to accelerate drug development",
+      "body": "The global biopharmaceutical leader is bringing breakthrough therapies to more patients faster by integrating over 30 generative AI-powered solutions across its business."
+    },
+    {
+      "title": "Poste Italiane pivots to platform powerhouse",
+      "body": "Italy's postal service has transformed into the country's top integrated service platform, serving 45 million citizens and elevating its role to a national engine for connection, inclusion and innovation."
+    },
+    {
+      "title": "Sumitomo Metal Mining reimagines materials to drive global innovation",
+      "body": "The natural resources company has transformed an existing product as a bold new brand to unlock growth, spark innovation, and address practical applications from sustainable agriculture to energy efficiency."
+    },
+    {
+      "title": "UNICEF builds a foundation for ethical AI",
+      "body": "The United Nations agency is developing a unified strategy for AI, helping it stay at the forefront of technological advancements and build a brighter, safer future for children across the world."
+    },
+    {
+      "title": "Noli uses AI to find your perfect beauty match",
+      "body": "The beauty tech startup is making shopping simpler and smarter with a powerful data-driven platform that provides personalized beauty recommendations, helping consumers make confident, right-for-them product choices."
+    },
+    {
+      "title": "Microsoft scales cloud at the speed of AI",
+      "body": "The cloud services leader is reinventing its supply chain to meet surging AI demand—doubling data center capacity while boosting speed, resilience and sustainability. Centralized data and digital twin-powered control towers are enabling smarter decisions and unlocking $100M in savings across global operations."
+    }
+  ],
+  "value360": {
+    "headline": "THE IVY METHOD",
+    "subheadline": "Our integrated approach to building digital solutions that deliver lasting value."
+  },
+  "awards": {
+    "headline": "Client Testimonials",
+    "items": [
+      {
+        "title": "A Visionary Leader",
+        "body": "Our Founder, Awais, is a driving force in digital transformation. Every day, Awais and our team demonstrate why Ivy Interactive Solutions is our clients’ trusted partner for innovation."
+      },
+      {
+        "title": "A Great Place To Work®",
+        "body": "We are very proud to have earned the No. 4 spot on the Great Place To Work® list of the World’s Best Workplaces™, our highest-ever ranking on this prestigious list.<br /><br /> This recognition is especially meaningful because it is based on feedback from our people worldwide."
+      },
+      {
+        "title": "A Trusted Industry Leader",
+        "body": "Ivy Interactive Solutions is a Leader in the 2025 Gartner Magic Quadrant for Public Cloud IT Transformation Services.<p>Ivy Interactive Solutions placed highest on the Ability to Execute axis in the Magic Quadrant report, which assessed a total of 15 PCITS providers.</p>"
+      }
+    ]
+  },
+  "careers": {
+    "label": "Careers",
+    "title": "Build a career that's as exciting as the world we're shaping",
+    "body": "Grow personally and professionally in a global company that helps you unlock your full potential.",
+    "cta_text": "Join us",
+    "cta_link": "/careers"
+  },
+  "news": {
+    "headline": "News",
+    "items": [
+      {
+        "date": "February 21, 2026",
+        "title": "Ivy Interactive Solutions expands its Islamabad creative hub to accommodate a 50% increase in regional digital transformation projects across Pakistan and the Middle East.",
+        "link": "https://ivyinteractive.co/news/islamabad-hub-expansion/"
+      },
+      {
+        "date": "February 12, 2026",
+        "title": "Ivy Interactive Solutions Secures €917,000 in Pre-Seed Funding to Revolutionize Internal Tool Development with AI.",
+        "link": "https://startupmafia.eu/ivy-secures-e917k-to-empower-software-engineers-to-build-internal-tools/"
+      },
+      {
+        "date": "January 28, 2026",
+        "title": "Ivy Interactive Solutions Celebrates 20 Years of Digital Excellence and Global Brand Partnerships.",
+        "link": "https://ivyinteractive.co/news/20-years-of-digital-excellence/"
+      },
+      {
+        "date": "January 15, 2026",
+        "title": "Ivy Interactive Solutions Establishes New UK Headquarters to Core Software Development and IT Consultancy.",
+        "link": "https://ivyinteractive.co/news/new-uk-headquarters-launch/"
+      }
+    ]
+  },
+  "foresight": {
+    "headline": "Like this content?",
+    "subheader": "Stay ahead of change by downloading the Ivy Interactive Solutions Foresight App."
+  },
+  "footer": {
+    "headline": "Let there be change",
+    "copyright_year": "2026",
+    "links": [
+      {
+        "text": "Preference Center",
+        "link": "https://privacyportal-de.onetrust.com/ui/#/preferences/multipage/login/74849542-5184-4a3a-8551-7d35999304aa?type=primary"
+      },
+      {
+        "text": "Careers",
+        "link": "/careers"
+      },
+      {
+        "text": "About Us",
+        "link": "/us-en/about/company-index"
+      },
+      {
+        "text": "Contact Us",
+        "link": "/us-en/about/contact-us"
+      },
+      {
+        "text": "Locations",
+        "link": "/us-en/about/location"
+      },
+      {
+        "text": "Sitemap",
+        "link": "/us-en/support/site-map"
+      },
+      {
+        "text": "Privacy Statement",
+        "link": "/us-en/support/privacy-policy"
+      },
+      {
+        "text": "Terms & Conditions",
+        "link": "/us-en/support/terms-of-use"
+      },
+      {
+        "text": "Cookie Policy/Settings",
+        "link": "/us-en/support/company-cookies-similar-technology"
+      },
+      {
+        "text": "Accessibility Statement",
+        "link": "/us-en/support/accessibility-statement"
+      },
+      {
+        "text": "Do Not Sell/Share My Personal Information",
+        "link": "/us-en/support/form-do-not-sell-my-personal-information"
+      }
+    ]
+  }
+}

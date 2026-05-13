@@ -10,16 +10,12 @@ import ArticleFAQSection from '../components/ArticleFAQSection';
 import ArticleNumberedListSection from '../components/ArticleNumberedListSection';
 import insightsDataEn from '../data/insights.json';
 import articleContentEn from '../data/articleContent.json';
-import { fetchAPI } from '../utils/api';
+import { fetchAPI, getCachedData } from '../utils/api';
 import { useVisualEditor } from '../context/VisualEditorContext';
 
 const ArticlePage = () => {
   const { id: rawId } = useParams();
   const { t, i18n } = useTranslation();
-  const [article, setArticle] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [collectionData, setCollectionData] = useState(null);
-  const [insightsData, setInsightsData] = useState(null);
   
   const idMap = {
     "1": "ai-superhighway",
@@ -33,6 +29,20 @@ const ArticlePage = () => {
   };
   const id = idMap[rawId] || rawId;
 
+  const contentCollection = i18n.language === 'ar' ? 'articleContent.ar' : 'articleContent';
+  const cachedContent = getCachedData(`/content/${contentCollection}`);
+  let initialArticle = null;
+  if (cachedContent) {
+     initialArticle = Array.isArray(cachedContent) 
+          ? cachedContent.find(item => item.id?.toString() === id.toString())
+          : cachedContent[id];
+  }
+
+  const [article, setArticle] = useState(initialArticle || null);
+  const [loading, setLoading] = useState(!initialArticle);
+  const [collectionData, setCollectionData] = useState(cachedContent || null);
+  const [insightsData, setInsightsData] = useState(null);
+  
   const { isCMS, draftData, initDraft, setDataContext, updateField } = useVisualEditor();
 
   const getSkeleton = () => ({

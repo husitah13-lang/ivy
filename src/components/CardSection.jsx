@@ -5,15 +5,18 @@ import { EditableText } from './Admin/Editable';
 import { useVisualEditor } from '../context/VisualEditorContext';
 
 // To maintain the visual pattern from the original design
+const baseUrl = import.meta.env.BASE_URL;
+const getImgPath = (name) => `${baseUrl}${name}`;
+
 const visualPatterns = [
-  { type: 'light', image: '/careers_office.png', anim: 'reveal-up' },
-  { type: 'dark', image: '/purple_ai_wave.png', anim: 'reveal-scale' },
-  { type: 'light', image: '/service_phone.png', anim: 'reveal-right' },
-  { type: 'dark', image: '/talent_reinventors.png', anim: 'reveal-left' },
-  { type: 'dark', image: '/service_train.png', anim: 'reveal-blur' },
-  { type: 'light', image: '/service_hero_illustration.png', anim: 'reveal-zoom' },
-  { type: 'dark', image: '/service_posters.png', anim: 'reveal-up' },
-  { type: 'light', image: '/julie_sweet.png', anim: 'reveal-scale' }
+  { type: 'light', image: getImgPath('careers_office.png'), anim: 'reveal-up' },
+  { type: 'dark', image: getImgPath('purple_ai_wave.png'), anim: 'reveal-scale' },
+  { type: 'light', image: getImgPath('service_phone.png'), anim: 'reveal-right' },
+  { type: 'dark', image: getImgPath('talent_reinventors.png'), anim: 'reveal-left' },
+  { type: 'dark', image: getImgPath('service_train.png'), anim: 'reveal-blur' },
+  { type: 'light', image: getImgPath('service_hero_illustration.png'), anim: 'reveal-zoom' },
+  { type: 'dark', image: getImgPath('service_posters.png'), anim: 'reveal-up' },
+  { type: 'light', image: getImgPath('julie_sweet.png'), anim: 'reveal-scale' }
 ];
 
 const CardSection = ({ cards = [], id, basePath = '/services', pathPrefix = 'tilegrid' }) => {

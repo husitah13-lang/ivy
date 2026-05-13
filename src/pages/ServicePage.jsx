@@ -12,7 +12,7 @@ import ServiceCareers from '../components/ServiceCareers';
 import FAQSection from '../components/FAQSection';
 import ServiceCapabilityList from '../components/ServiceCapabilityList';
 import RecognitionBanner from '../components/RecognitionBanner';
-import { fetchAPI } from '../utils/api';
+import { fetchAPI, getCachedData } from '../utils/api';
 import { useVisualEditor } from '../context/VisualEditorContext';
 import { EditableText } from '../components/Admin/Editable';
 import { SectionControl } from './HomePage'; // Reusing the control component
@@ -37,15 +37,19 @@ const ServicePage = () => {
   };
   const id = idMap[rawId] || rawId;
 
+  const collection = i18n.language === 'ar' ? `${id}.ar` : id;
+  const initialData = getCachedData(`/content/${collection}`);
+
   const { isCMS, draftData, initDraft, reorderSections, setDataContext } = useVisualEditor();
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState(initialData);
+  const [loading, setLoading] = useState(!initialData);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    setLoading(true);
+    if (!initialData) {
+      setLoading(true);
+    }
     setError(null);
-    setData(null);
 
     const loadData = async () => {
       try {

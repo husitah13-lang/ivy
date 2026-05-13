@@ -148,7 +148,7 @@ function AppContent() {
 function App() {
   return (
     <VisualEditorProvider>
-      <Router>
+      <Router basename="/beta2">
         <AppContent />
       </Router>
     </VisualEditorProvider>

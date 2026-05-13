@@ -1,0 +1,68 @@
+{
+  "services": [
+    {
+      "id": "service-saas-001",
+      "type": "Core Service",
+      "title": "SaaS Platforms",
+      "body": "We deliver intelligent, scalable Software-as-a-Service solutions. From architecture to ongoing optimization, we build subscription-based platforms that drive recurring value and adapt to market needs.",
+      "cta_text": "Expand",
+      "cta_link": "saas-platforms.html"
+    },
+    {
+      "id": "service-ecommerce-002",
+      "type": "Core Service",
+      "title": "E-commerce Solutions",
+      "body": "Engineer seamless digital storefronts and complex purchase journeys. We build high-conversion platforms with integrated payments, inventory management, and personalized shopping experiences.",
+      "cta_text": "Expand",
+      "cta_link": "ecommerce.html"
+    },
+    {
+      "id": "service-marketing-003",
+      "type": "Core Service",
+      "title": "Marketing Services",
+      "body": "Deploy integrated Martech stacks that unify data, automate campaigns, and personalize engagement at scale. Turn marketing complexity into your greatest competitive advantage.",
+      "cta_text": "Expand",
+      "cta_link": "marketing-services.html"
+    },
+    {
+      "id": "service-talent-004",
+      "type": "Core Service",
+      "title": "Recruitment & Training Systems",
+      "body": "Modernize how you attract, onboard, and develop talent. We create platforms that streamline hiring, enable continuous learning, and foster a culture of innovation and growth.",
+      "cta_text": "Expand",
+      "cta_link": "talent-training.html"
+    },
+    {
+      "id": "service-web-dev-005",
+      "type": "Core Service",
+      "title": "Web Development",
+      "body": "Build robust, scalable web platforms and applications. Our full-stack expertise delivers secure, performant digital experiences engineered for growth and user engagement.",
+      "cta_text": "Expand",
+      "cta_link": "web-development.html"
+    },
+    {
+      "id": "service-bi-0056",
+      "type": "Core Service",
+      "title": "Business Intelligence",
+      "body": "Transform data into decisive action. We design custom dashboards, analytics pipelines, and predictive models that provide clear, actionable insights for smarter business decisions.",
+      "cta_text": "Expand",
+      "cta_link": "business-intelligence.html"
+    },
+    {
+      "id": "service-app-dev-007",
+      "type": "Core Service",
+      "title": "App Development",
+      "body": "Craft intuitive, high-performance mobile applications. From native iOS/Android to cross-platform solutions, we build engaging apps that users love and rely on daily.",
+      "cta_text": "Expand",
+      "cta_link": "app-development.html"
+    },
+    {
+      "id": "service-ai-008",
+      "type": "Core Service",
+      "title": "AI Solutions",
+      "body": "Implement practical artificial intelligence that solves real business challenges. From automation and predictive analytics to intelligent agents, we make AI a tangible driver of efficiency and innovation.",
+      "cta_text": "Expand",
+      "cta_link": "ai-solutions.html"
+    }
+  ]
+}

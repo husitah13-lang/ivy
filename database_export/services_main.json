@@ -1,0 +1,79 @@
+{
+  "hero": {
+    "title": "Business Reinvention",
+    "subtitle": "We help you reinvent your business with technology and innovation.",
+    "image": "/business_reinvention_hero.png"
+  },
+  "capabilities": [
+    {
+      "title": "SaaS Platforms",
+      "detailTitle": "Core Service",
+      "description": "We deliver intelligent, scalable Software-as-a-Service solutions. From architecture to ongoing optimization, we build subscription-based platforms that drive recurring value and adapt to market needs.",
+      "image": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg"
+    },
+    {
+      "title": "E-commerce Solutions",
+      "detailTitle": "Core Service",
+      "description": "Engineer seamless digital storefronts and complex purchase journeys. We build high-conversion platforms with integrated payments, inventory management, and personalized shopping experiences.",
+      "image": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg"
+    },
+    {
+      "title": "Marketing Services",
+      "detailTitle": "Core Service",
+      "description": "Deploy integrated Martech stacks that unify data, automate campaigns, and personalize engagement at scale. Turn marketing complexity into your greatest competitive advantage.",
+      "image": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg"
+    },
+    {
+      "title": "Recruitment & Training Systems",
+      "detailTitle": "Core Service",
+      "description": "Modernize how you attract, onboard, and develop talent. We create platforms that streamline hiring, enable continuous learning, and foster a culture of innovation and growth.",
+      "image": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg"
+    },
+    {
+      "title": "Web Development",
+      "detailTitle": "Core Service",
+      "description": "Build robust, scalable web platforms and applications. Our full-stack expertise delivers secure, performant digital experiences engineered for growth and user engagement.",
+      "image": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg"
+    },
+    {
+      "title": "Business Intelligence",
+      "detailTitle": "Core Service",
+      "description": "Transform data into decisive action. We design custom dashboards, analytics pipelines, and predictive models that provide clear, actionable insights for smarter business decisions.",
+      "image": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg"
+    },
+    {
+      "title": "App Development",
+      "detailTitle": "Core Service",
+      "description": "Craft intuitive, high-performance mobile applications. From native iOS/Android to cross-platform solutions, we build engaging apps that users love and rely on daily.",
+      "image": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg"
+    },
+    {
+      "title": "AI Solutions",
+      "detailTitle": "Core Service",
+      "description": "Implement practical artificial intelligence that solves real business challenges. From automation and predictive analytics to intelligent agents, we make AI a tangible driver of efficiency and innovation.",
+      "image": "https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg"
+    }
+  ],
+  "section_layout": [
+    {
+      "id": "overview",
+      "visible": true
+    },
+    {
+      "id": "capabilities",
+      "visible": true
+    },
+    {
+      "id": "partners",
+      "visible": true
+    },
+    {
+      "id": "industries",
+      "visible": true
+    },
+    {
+      "id": "recognition",
+      "visible": true
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+{
+  "hero": {
+    "title": "Brain AI",
+    "subtitle": "The Neural Intelligence That Powers Everything",
+    "description": "Our core neural network architecture that learns, adapts, and orchestrates your entire business ecosystem with human-like intelligence.",
+    "stats": [
+      {
+        "value": "99.7%",
+        "label": "Accuracy Rate",
+        "icon": "bullseye"
+      },
+      {
+        "value": "Real-time",
+        "label": "Processing",
+        "icon": "bolt"
+      },
+      {
+        "value": "100M+",
+        "label": "Parameters",
+        "icon": "network-wired"
+      },
+      {
+        "value": "10ms",
+        "label": "Response Time",
+        "icon": "clock"
+      }
+    ]
+  },
+  "coreFeatures": [
+    {
+      "id": "predictive-analytics",
+      "title": "Predictive Analytics",
+      "description": "Forecast trends and predict outcomes with unprecedented accuracy",
+      "icon": "chart-line",
+      "colorGradient": "from-blue-500 to-cyan-500",
+      "details": [
+        "Real-time trend analysis",
+        "Market prediction models",
+        "Risk assessment algorithms",
+        "Demand forecasting",
+        "Customer behavior prediction"
+      ],
+      "microInteraction": "pulse"
+    },
+    {
+      "id": "natural-language",
+      "title": "Natural Language Processing",
+      "description": "Understand and generate human-like text for seamless interactions",
+      "icon": "language",
+      "colorGradient": "from-purple-500 to-pink-500",
+      "details": [
+        "Advanced sentiment analysis",
+        "Context-aware chatbots",
+        "Document summarization",
+        "Multilingual translation",
+        "Voice command processing"
+      ],
+      "microInteraction": "wave"
+    },
+    {
+      "id": "computer-vision",
+      "title": "Computer Vision",
+      "description": "Analyze and interpret visual data for intelligent decision-making",
+      "icon": "eye",
+      "colorGradient": "from-green-500 to-emerald-500",
+      "details": [
+        "Image recognition",
+        "Object detection",
+        "Facial analysis",
+        "Quality control automation",
+        "Document digitization"
+      ],
+      "microInteraction": "scan"
+    },
+    {
+      "id": "autonomous-decision",
+      "title": "Autonomous Decision Making",
+      "description": "Make intelligent decisions without human intervention",
+      "icon": "robot",
+      "colorGradient": "from-orange-500 to-red-500",
+      "details": [
+        "Automated workflow optimization",
+        "Resource allocation algorithms",
+        "Risk management decisions",
+        "Process automation triggers",
+        "Self-learning decision trees"
+      ],
+      "microInteraction": "glow"
+    },
+    {
+      "id": "neural-networks",
+      "title": "Deep Neural Networks",
+      "description": "Multi-layered AI models that learn complex patterns",
+      "icon": "network-wired",
+      "colorGradient": "from-indigo-500 to-blue-500",
+      "details": [
+        "Deep learning architectures",
+        "Pattern recognition systems",
+        "Anomaly detection",
+        "Predictive modeling",
+        "Adaptive learning"
+      ],
+      "microInteraction": "neural"
+    },
+    {
+      "id": "reinforcement-learning",
+      "title": "Reinforcement Learning",
+      "description": "AI that learns optimal strategies through trial and error",
+      "icon": "graduation-cap",
+      "colorGradient": "from-teal-500 to-cyan-500",
+      "details": [
+        "Reward-based learning",
+        "Strategy optimization",
+        "Game theory applications",
+        "Process optimization",
+        "Adaptive algorithms"
+      ],
+      "microInteraction": "pulse"
+    }
+  ],
+  "capabilities": [
+    {
+      "title": "Real-time Processing",
+      "description": "Process millions of data points in milliseconds",
+      "icon": "bolt",
+      "metric": "10ms avg response"
+    },
+    {
+      "title": "Multi-Modal AI",
+      "description": "Combine text, voice, and image analysis",
+      "icon": "layer-group",
+      "metric": "3+ data types"
+    },
+    {
+      "title": "Self-Learning",
+      "description": "Continuously improves with more data",
+      "icon": "sync",
+      "metric": "24/7 learning"
+    },
+    {
+      "title": "Scalable Architecture",
+      "description": "Handles from startups to enterprise scale",
+      "icon": "expand",
+      "metric": "Unlimited scale"
+    }
+  ],
+  "useCases": [
+    {
+      "category": "Customer Service",
+      "examples": [
+        "AI-powered support agents",
+        "Sentiment analysis of feedback",
+        "Automated ticket routing",
+        "Predictive customer needs"
+      ]
+    },
+    {
+      "category": "Operations",
+      "examples": [
+        "Supply chain optimization",
+        "Quality control automation",
+        "Predictive maintenance",
+        "Resource allocation"
+      ]
+    },
+    {
+      "category": "Marketing",
+      "examples": [
+        "Personalized campaigns",
+        "Content generation",
+        "Market trend analysis",
+        "ROI prediction"
+      ]
+    },
+    {
+      "category": "Sales",
+      "examples": [
+        "Lead scoring AI",
+        "Price optimization",
+        "Sales forecasting",
+        "Competitor analysis"
+      ]
+    }
+  ],
+  "technicalSpecs": {
+    "models": [
+      "GPT-4 Integration",
+      "Custom Neural Networks",
+      "Computer Vision Models",
+      "Natural Language Models",
+      "Predictive Analytics Engines"
+    ],
+    "apis": [
+      "RESTful API",
+      "GraphQL Support",
+      "WebSocket Streaming",
+      "Batch Processing API"
+    ],
+    "integrations": [
+      "All Sintra Products",
+      "Third-party Platforms",
+      "Custom Enterprise Systems",
+      "IoT Device Networks"
+    ],
+    "security": [
+      "End-to-end Encryption",
+      "GDPR Compliance",
+      "SOC 2 Type II",
+      "Regular Security Audits"
+    ]
+  },
+  "microInteractions": {
+    "enabled": true,
+    "neuralNetworkSpeed": "medium",
+    "particleCount": 50,
+    "connectionDistance": 250,
+    "animationSpeed": 0.003,
+    "autoPlay": true
+  },
+  "demo": {
+    "videoUrl": "https://example.com/brain-ai-demo",
+    "interactiveDemo": true,
+    "features": [
+      "Live AI processing demo",
+      "Real-time data visualization",
+      "Interactive model testing",
+      "API playground"
+    ]
+  },
+  "cta": {
+    "primary": "Schedule Brain AI Demo",
+    "secondary": "View Documentation",
+    "tertiary": "API Access Request",
+    "contactEmail": "ai@sintra.ai"
+  }
+}
