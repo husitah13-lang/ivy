@@ -77,6 +77,7 @@ const AdminSidebar = () => {
     { name: 'Locations', path: '/admin/locations', icon: '📍' },
     { name: 'Privacy Statement', path: '/admin/privacy', icon: '🔒' },
     { name: 'Terms of Use', path: '/admin/terms', icon: '📜' },
+    { name: 'Cookie Policy', path: '/admin/cookie-policy', icon: '🍪' },
     { name: 'Accessibility', path: '/admin/accessibility', icon: '♿' },
   ];
 

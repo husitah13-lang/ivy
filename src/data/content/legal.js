@@ -27,3 +27,13 @@ export const accessibilityContent = {
     description: "Our commitment to accessibility."
   }
 };
+
+export const cookieContent = {
+  header: "SUPPORT",
+  title: "Cookies and similar technology",
+  body: `Below is information about how Accenture PLC and its affiliates ("we") use cookies and other similar technology on this website.\n\nThis policy is effective as of November 3, 2025. Please note that this privacy statement will be updated from time to time.\n\nWe can place cookies and other similar technology on your device, including mobile device, in accordance with your preferences set on our cookie consent manager. Depending on your settings in our cookie consent manager on your mobile device, the following information may be collected through cookies or similar technology: your unique device identifier, mobile device IP address, information about your device's operating system, mobile carrier and your location information (to the extent permissible under applicable law).\n\n<h2>What are cookies?</h2>\n\nCookies are text files containing small amounts of information which are downloaded to your computer or mobile device when you visit a site and allow a site to recognize your device. Cookies managed by Accenture only are called "first party cookies" whereas cookies from third parties are called "third party cookies" as explained below.`,
+  seo: {
+    title: "Cookie Policy | IVY Interactive",
+    description: "Information about how we use cookies."
+  }
+};

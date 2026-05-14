@@ -44,6 +44,20 @@ const accessibilityContentAr = {
   seo: { title: "بيان إمكانية الوصول | آيفي إنترأكتيف", description: "التزامنا بإمكانية الوصول." }
 };
 
+const cookieContent = {
+  header: "SUPPORT",
+  title: "Cookies and similar technology",
+  body: `Below is information about how Accenture PLC and its affiliates ("we") use cookies and other similar technology on this website.\n\nThis policy is effective as of November 3, 2025. Please note that this privacy statement will be updated from time to time.\n\nWe can place cookies and other similar technology on your device, including mobile device, in accordance with your preferences set on our cookie consent manager. Depending on your settings in our cookie consent manager on your mobile device, the following information may be collected through cookies or similar technology: your unique device identifier, mobile device IP address, information about your device's operating system, mobile carrier and your location information (to the extent permissible under applicable law).\n\n<h2>What are cookies?</h2>\n\nCookies are text files containing small amounts of information which are downloaded to your computer or mobile device when you visit a site and allow a site to recognize your device. Cookies managed by Accenture only are called "first party cookies" whereas cookies from third parties are called "third party cookies" as explained below.`,
+  seo: { title: "Cookie Policy | IVY Interactive", description: "Information about how we use cookies." }
+};
+
+const cookieContentAr = {
+  header: "الدعم",
+  title: "ملفات تعريف الارتباط والتقنيات المشابهة",
+  body: `فيما يلي معلومات حول كيفية استخدام Accenture PLC والشركات التابعة لها ("نحن") لملفات تعريف الارتباط والتقنيات المشابهة الأخرى على هذا الموقع.\n\nهذه السياسة سارية اعتبارًا من 3 نوفمبر 2025. يرجى ملاحظة أن بيان الخصوصية هذا سيتم تحديثه من وقت لآخر.\n\nيمكننا وضع ملفات تعريف الارتباط والتقنيات المشابهة الأخرى على جهازك، بما في ذلك الأجهزة المحمولة، وفقًا لتفضيلاتك المحددة في مدير الموافقة على ملفات تعريف الارتباط الخاص بنا. اعتمادًا على إعداداتك في مدير الموافقة على ملفات تعريف الارتباط على جهازك المحمول، قد يتم جمع المعلومات التالية من خلال ملفات تعريف الارتباط أو التكنولوجيا المشابهة: معرف الجهاز الفريد الخاص بك، عنوان IP للجهاز المحمول، معلومات حول نظام تشغيل جهازك، شركة الجوال ومعلومات موقعك (إلى الحد المسموح به بموجب القانون المعمول به).\n\n<h2>ما هي ملفات تعريف الارتباط؟</h2>\n\nملفات تعريف الارتباط هي ملفات نصية تحتوي على كميات صغيرة من المعلومات التي يتم تنزيلها على جهاز الكمبيوتر أو الجهاز المحمول الخاص بك عندما تزور موقعًا وتسمح للموقع بالتعرف على جهازك. تُسمى ملفات تعريف الارتباط التي تديرها أكسنتشر فقط "ملفات تعريف ارتباط الطرف الأول" في حين تُسمى ملفات تعريف الارتباط من أطراف ثالثة "ملفات تعريف ارتباط الطرف الثالث" كما هو موضح أدناه.`,
+  seo: { title: "سياسة ملفات تعريف الارتباط | آيفي إنترأكتيف", description: "معلومات حول كيفية استخدامنا لملفات تعريف الارتباط." }
+};
+
 async function syncCollection(name, data) {
     console.log(`Syncing collection: ${name}...`);
     await Content.findOneAndUpdate(
@@ -61,10 +75,12 @@ async function run() {
     await syncCollection('privacy', privacyContent);
     await syncCollection('terms', termsContent);
     await syncCollection('accessibility', accessibilityContent);
+    await syncCollection('cookie', cookieContent);
     
     await syncCollection('privacy.ar', privacyContentAr);
     await syncCollection('terms.ar', termsContentAr);
     await syncCollection('accessibility.ar', accessibilityContentAr);
+    await syncCollection('cookie.ar', cookieContentAr);
 
     console.log('Legal Sync Complete!');
     process.exit(0);

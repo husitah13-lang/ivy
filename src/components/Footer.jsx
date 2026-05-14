@@ -33,19 +33,15 @@ const Footer = ({ data }) => {
         
         <div className="footer-links-grid">
           <div className="footer-column">
-            <a href="#pref">{footer.links.preference}</a>
             <Link to="/careers">{footer.links.careers}</Link>
-            <a href="#about">{footer.links.about}</a>
             <Link to="/contact">{footer.links.contact}</Link>
             <Link to="/locations">{footer.links.locations}</Link>
-            <a href="#sitemap">{footer.links.sitemap}</a>
+            <Link to="/cookie-policy">{footer.links.cookie}</Link>
           </div>
           <div className="footer-column">
             <Link to="/privacy">{footer.links.privacy}</Link>
             <Link to="/terms">{footer.links.terms}</Link>
-            <a href="#cookie">{footer.links.cookie}</a>
             <Link to="/accessibility">{footer.links.accessibility}</Link>
-            <a href="#donotsell">{footer.links.donotsell}</a>
           </div>
         </div>
 

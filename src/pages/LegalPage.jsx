@@ -7,8 +7,8 @@ import { useVisualEditor } from '../context/VisualEditorContext';
 import { fetchAPI } from '../utils/api';
 import './LegalPage.css';
 
-import { privacyContent, termsContent, accessibilityContent } from '../data/content/legal';
-import { privacyContentAr, termsContentAr, accessibilityContentAr } from '../data/content/legal.ar';
+import { privacyContent, termsContent, accessibilityContent, cookieContent } from '../data/content/legal';
+import { privacyContentAr, termsContentAr, accessibilityContentAr, cookieContentAr } from '../data/content/legal.ar';
 
 const LegalPage = ({ type }) => {
   const { i18n } = useTranslation();
@@ -23,6 +23,7 @@ const LegalPage = ({ type }) => {
     const isAr = i18n.language === 'ar';
     if (pageType === 'privacy') return isAr ? privacyContentAr : privacyContent;
     if (pageType === 'terms') return isAr ? termsContentAr : termsContent;
+    if (pageType === 'cookie-policy' || pageType === 'cookie') return isAr ? cookieContentAr : cookieContent;
     if (pageType === 'accessibility') return isAr ? accessibilityContentAr : accessibilityContent;
     return isAr ? privacyContentAr : privacyContent; // default
   };
@@ -37,7 +38,10 @@ const LegalPage = ({ type }) => {
   useEffect(() => {
     const loadData = async () => {
       try {
-        const collectionName = pageType === 'privacy' ? 'privacy' : pageType === 'terms' ? 'terms' : 'accessibility';
+        const collectionName = pageType === 'privacy' ? 'privacy' 
+          : pageType === 'terms' ? 'terms' 
+          : (pageType === 'cookie-policy' || pageType === 'cookie') ? 'cookie' 
+          : 'accessibility';
         const collection = i18n.language === 'ar' ? `${collectionName}.ar` : collectionName;
         const fallback = getFallbackData();
         const fetched = await fetchAPI(`/content/${collection}`);

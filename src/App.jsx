@@ -122,6 +122,7 @@ function AppContent() {
               <Route path="/privacy" element={<LegalPage type="privacy" />} />
               <Route path="/terms" element={<LegalPage type="terms" />} />
               <Route path="/accessibility" element={<LegalPage type="accessibility" />} />
+              <Route path="/cookie-policy" element={<LegalPage type="cookie" />} />
 
               {/* Arabic Aliases to prevent broken links */}
               <Route path="/الخدمات" element={<ServicesMain />} />
@@ -146,6 +147,7 @@ function AppContent() {
               <Route path="/admin/privacy" element={<ProtectedRoute><LegalPage type="privacy" /></ProtectedRoute>} />
               <Route path="/admin/terms" element={<ProtectedRoute><LegalPage type="terms" /></ProtectedRoute>} />
               <Route path="/admin/accessibility" element={<ProtectedRoute><LegalPage type="accessibility" /></ProtectedRoute>} />
+              <Route path="/admin/cookie-policy" element={<ProtectedRoute><LegalPage type="cookie" /></ProtectedRoute>} />
             </Routes>
           </PageTransition>
         </main>
