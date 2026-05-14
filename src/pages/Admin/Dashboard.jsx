@@ -15,7 +15,7 @@ const AdminDashboard = () => {
       return;
     }
 
-    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5021';
     fetch(`${baseUrl}/api/homepage`, { cache: 'no-store' })
       .then(res => res.json())
       .then(json => {
@@ -36,7 +36,7 @@ const AdminDashboard = () => {
       const parsedData = JSON.parse(data);
 
       const token = localStorage.getItem('adminToken');
-      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5021';
       const res = await fetch(`${baseUrl}/api/homepage`, {
         method: 'POST', // Match server.js logic
         headers: {

@@ -9,7 +9,7 @@ const nodemailer = require('nodemailer');
 const Content = require('./models/Content');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5021;
 const SECRET_KEY = process.env.JWT_SECRET || 'super-secret-ivy-key';
 
 // Database Connection

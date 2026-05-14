@@ -70,7 +70,7 @@ const Contact = () => {
     setSubmitStatus(null);
     
     try {
-      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5021';
       const response = await fetch(`${baseUrl}/api/contact-submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

@@ -5,7 +5,7 @@ const cache = new Map();
  */
 export function getCachedData(path, urlParamsObject = {}) {
   const queryString = new URLSearchParams(urlParamsObject).toString();
-  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5021';
   const requestUrl = `${baseUrl}/api${path}${queryString ? `?${queryString}` : ''}`;
   const cacheKey = `ivy_cache_${requestUrl}`;
   
@@ -30,7 +30,7 @@ export function getCachedData(path, urlParamsObject = {}) {
 export async function fetchAPI(path, urlParamsObject = {}, options = {}) {
   const method = options.method || 'GET';
   const queryString = new URLSearchParams(urlParamsObject).toString();
-  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+  const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5021';
   const requestUrl = `${baseUrl}/api${path}${queryString ? `?${queryString}` : ''}`;
   const cacheKey = `ivy_cache_${requestUrl}`;
   
