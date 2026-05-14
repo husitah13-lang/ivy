@@ -273,7 +273,7 @@ app.post('/api/contact-submit', async (req, res) => {
 
     const mailOptions = {
       from: `"IVY Contact Form" <${process.env.SMTP_USER || 'no-reply@ivyinteractive.co'}>`,
-      to: destinationEmail || "zahra.tahir@ivyinteractive.co",
+      to: destinationEmail || process.env.CONTACT_RECIPIENT_EMAIL || "zahra.tahir@ivyinteractive.co",
       subject: `New Contact Inquiry: ${inquiryType} from ${firstName} ${lastName}`,
       html: `
         <h2>New Contact Form Submission</h2>
