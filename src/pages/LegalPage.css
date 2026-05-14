@@ -1,0 +1,55 @@
+.legal-page {
+  background-color: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  padding: 120px 5vw 80px;
+  max-width: 1000px; /* Legal pages usually don't want to span too wide for readability */
+  margin: 0 auto;
+  text-align: left;
+}
+
+.legal-header-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.legal-title {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  font-weight: 700;
+  margin: 0 0 40px 0;
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.legal-gradient-divider {
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(90deg, #42bbed, #ffb067, #74e39a);
+  border-radius: 3px;
+  margin-bottom: 60px;
+}
+
+.legal-body {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #e0e0e0;
+}
+
+.legal-body p {
+  margin-bottom: 30px;
+}
+
+.legal-body a {
+  color: #00aeef;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.legal-body a:hover {
+  opacity: 0.8;
+}
+

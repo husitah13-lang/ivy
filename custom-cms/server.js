@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const path = require('path');
 const jwt = require('jsonwebtoken');
 const multer = require('multer');
+const nodemailer = require('nodemailer');
 const Content = require('./models/Content');
 
 const app = express();
@@ -235,6 +236,73 @@ app.post('/api/translate', authenticateToken, async (req, res) => {
   };
 
   await tryTranslate();
+});
+
+// --- Contact Form Mailer ---
+app.post('/api/contact-submit', async (req, res) => {
+  const { inquiryType, firstName, lastName, email, phone, company, role, country, message, destinationEmail } = req.body;
+
+  // We fall back to ethereal email (a fake SMTP service) if real SMTP is not configured in .env
+  // For production, you should set SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
+  try {
+    let transporter;
+    
+    if (process.env.SMTP_HOST && process.env.SMTP_USER) {
+      transporter = nodemailer.createTransport({
+        host: process.env.SMTP_HOST,
+        port: process.env.SMTP_PORT || 587,
+        secure: process.env.SMTP_PORT == 465,
+        auth: {
+          user: process.env.SMTP_USER,
+          pass: process.env.SMTP_PASS
+        }
+      });
+    } else {
+      // Create a test account for local development if no SMTP is provided
+      const testAccount = await nodemailer.createTestAccount();
+      transporter = nodemailer.createTransport({
+        host: "smtp.ethereal.email",
+        port: 587,
+        secure: false,
+        auth: {
+          user: testAccount.user,
+          pass: testAccount.pass,
+        },
+      });
+      console.log('Using Ethereal Mail for testing.');
+    }
+
+    const mailOptions = {
+      from: \`"IVY Contact Form" <\${process.env.SMTP_USER || 'no-reply@ivyinteractive.co'}>\`,
+      to: destinationEmail || "zahra.tahir@ivyinteractive.co",
+      subject: \`New Contact Inquiry: \${inquiryType} from \${firstName} \${lastName}\`,
+      html: \`
+        <h2>New Contact Form Submission</h2>
+        <p><strong>Inquiry Type:</strong> \${inquiryType}</p>
+        <p><strong>Name:</strong> \${firstName} \${lastName}</p>
+        <p><strong>Email:</strong> \${email}</p>
+        <p><strong>Phone:</strong> \${phone}</p>
+        <p><strong>Company:</strong> \${company}</p>
+        <p><strong>Role:</strong> \${role}</p>
+        <p><strong>Country:</strong> \${country}</p>
+        <h3>Message:</h3>
+        <p>\${message}</p>
+      \`
+    };
+
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Message sent: %s", info.messageId);
+    
+    // Log URL if using Ethereal
+    if (!process.env.SMTP_HOST) {
+      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+    }
+
+    res.json({ success: true, message: 'Email sent successfully' });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ success: false, error: 'Failed to send email' });
+  }
 });
 
 app.listen(PORT, () => {

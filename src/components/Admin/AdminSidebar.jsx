@@ -73,6 +73,13 @@ const AdminSidebar = () => {
     { name: 'Contact', path: '/admin/contact', icon: '✉️' },
   ];
 
+  const footerPages = [
+    { name: 'Locations', path: '/admin/locations', icon: '📍' },
+    { name: 'Privacy Statement', path: '/admin/privacy', icon: '🔒' },
+    { name: 'Terms of Use', path: '/admin/terms', icon: '📜' },
+    { name: 'Accessibility', path: '/admin/accessibility', icon: '♿' },
+  ];
+
   // Hardcoded services based on existing files
   const servicesList = [
     { id: 'ai-solutions', title: 'AI Solutions' },
@@ -138,6 +145,21 @@ const AdminSidebar = () => {
         <div className="sidebar-group">
           <div className="sidebar-group-title">Main Pages</div>
           {mainPages.map(page => (
+            <NavLink 
+              key={page.path} 
+              to={page.path} 
+              className={({ isActive }) => `sidebar-item ${isActive ? 'active' : ''}`}
+              onClick={(e) => handleNavigation(page.path, e)}
+            >
+              <span className="item-icon">{page.icon}</span>
+              {page.name}
+            </NavLink>
+          ))}
+        </div>
+
+        <div className="sidebar-group">
+          <div className="sidebar-group-title">Footer & Legal</div>
+          {footerPages.map(page => (
             <NavLink 
               key={page.path} 
               to={page.path} 

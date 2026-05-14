@@ -11,6 +11,8 @@ import ServicesMain from './pages/ServicesMain'
 import AdminLogin from './pages/Admin/Login'
 import AdminLayout from './pages/Admin/AdminLayout'
 import ContentEditor from './pages/Admin/ContentEditor'
+import LocationsPage from './pages/LocationsPage'
+import LegalPage from './pages/LegalPage'
 import Footer from './components/Footer'
 import PageTransition from './components/PageTransition'
 import './App.css'
@@ -116,6 +118,10 @@ function AppContent() {
               <Route path="/careers" element={<Careers />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/services" element={<ServicesMain />} />
+              <Route path="/locations" element={<LocationsPage />} />
+              <Route path="/privacy" element={<LegalPage type="privacy" />} />
+              <Route path="/terms" element={<LegalPage type="terms" />} />
+              <Route path="/accessibility" element={<LegalPage type="accessibility" />} />
 
               {/* Arabic Aliases to prevent broken links */}
               <Route path="/الخدمات" element={<ServicesMain />} />
@@ -136,6 +142,10 @@ function AppContent() {
               <Route path="/admin/careers" element={<ProtectedRoute><Careers /></ProtectedRoute>} />
               <Route path="/admin/contact" element={<ProtectedRoute><Contact /></ProtectedRoute>} />
               <Route path="/admin/services" element={<ProtectedRoute><ServicesMain /></ProtectedRoute>} />
+              <Route path="/admin/locations" element={<ProtectedRoute><LocationsPage /></ProtectedRoute>} />
+              <Route path="/admin/privacy" element={<ProtectedRoute><LegalPage type="privacy" /></ProtectedRoute>} />
+              <Route path="/admin/terms" element={<ProtectedRoute><LegalPage type="terms" /></ProtectedRoute>} />
+              <Route path="/admin/accessibility" element={<ProtectedRoute><LegalPage type="accessibility" /></ProtectedRoute>} />
             </Routes>
           </PageTransition>
         </main>

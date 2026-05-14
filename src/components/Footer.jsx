@@ -2,6 +2,8 @@ import React from 'react';
 import './Footer.css';
 import { useTranslation } from 'react-i18next';
 
+import { Link } from 'react-router-dom';
+
 const Footer = ({ data }) => {
   const { t } = useTranslation();
   
@@ -32,17 +34,17 @@ const Footer = ({ data }) => {
         <div className="footer-links-grid">
           <div className="footer-column">
             <a href="#pref">{footer.links.preference}</a>
-            <a href="#careers">{footer.links.careers}</a>
+            <Link to="/careers">{footer.links.careers}</Link>
             <a href="#about">{footer.links.about}</a>
-            <a href="#contact">{footer.links.contact}</a>
-            <a href="#locations">{footer.links.locations}</a>
+            <Link to="/contact">{footer.links.contact}</Link>
+            <Link to="/locations">{footer.links.locations}</Link>
             <a href="#sitemap">{footer.links.sitemap}</a>
           </div>
           <div className="footer-column">
-            <a href="#privacy">{footer.links.privacy}</a>
-            <a href="#terms">{footer.links.terms}</a>
+            <Link to="/privacy">{footer.links.privacy}</Link>
+            <Link to="/terms">{footer.links.terms}</Link>
             <a href="#cookie">{footer.links.cookie}</a>
-            <a href="#accessibility">{footer.links.accessibility}</a>
+            <Link to="/accessibility">{footer.links.accessibility}</Link>
             <a href="#donotsell">{footer.links.donotsell}</a>
           </div>
         </div>

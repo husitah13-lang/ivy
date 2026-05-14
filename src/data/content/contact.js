@@ -1,45 +1,42 @@
 export const contactContent = {
-    "seo": {
-        "title": "Contact Us | IVY Interactive Global Offices",
-        "description": "Get in touch with IVY Interactive. We have a global presence in the UK, UAE, Pakistan, and Australia to support your digital transformation and software engineering needs.",
-        "keywords": "Contact IVY, Global Offices, Digital Transformation, Software Engineering, UK, UAE",
-        "schema": {
-            "@context": "https://schema.org",
-            "@type": "ContactPage",
-            "name": "Contact IVY Interactive",
-            "description": "Contact information for IVY Interactive's global offices.",
-            "mainEntity": {
-                "@type": "Organization",
-                "name": "IVY Interactive",
-                "telephone": "+44 (0) 208 1237 737",
-                "email": "contact@your-domain.com"
-            }
-        }
-    },
   hero: {
-    title: "Global Presence",
-    subtitle: "Connecting with our clients and communities across the globe to drive meaningful change."
+    title: "How can we help?"
   },
-  locations: [
-    {
-      country: "UK",
-      address: "Imperial Place\nMaxwell Road\nBorehamwood, WD6 1JN",
-      phone: "+44 (0) 208 1237 737"
+  destination_email: "zahra.tahir@ivyinteractive.co",
+  gridOptions: [
+    { title: "Clients", text: "Are you a new or current client interested in exploring potential business opportunities with IVY?", linkText: "Send us a message" },
+    { title: "Job seekers", text: "Ready for new career opportunities? Explore our current job openings and learn how you can prepare for your first day at IVY.", linkText: "IVY Careers" },
+    { title: "Ecosystem partners", text: "Learn more about IVY's ecosystem partner network, how we work with our partners and any upcoming events and initiatives.", linkText: "IVY Ecosystem Partners" },
+    { title: "Investors", text: "View prior earnings releases, earnings call replays, transcripts, shareholder resources and other updates about our performance.", linkText: "IVY Investor Relations" }
+  ],
+  form: {
+    title: "Need something else?",
+    aboutYouTitle: "About You",
+    fields: {
+      inquiryType: "Inquiry Type*",
+      firstName: "First name*",
+      lastName: "Last name*",
+      email: "Email address*",
+      phone: "Phone Number (Please include country code)",
+      company: "Company/Organization*",
+      role: "Your role/function",
+      country: "Country/Region*",
+      message: "How can we help you?*",
+      selectValuePlaceholder: "Select a value"
     },
-    {
-      country: "UAE",
-      address: "Mussafah Industrial\nM-3 Firdous Complex\nP.O. Box 46096",
-      phone: "+971 (2) 5551 610"
+    consentText: "I agree to the use or processing of my personal information by IVY for the purpose of fulfilling this request and in accordance with ",
+    privacyLinkText: "IVY's Privacy Statement",
+    submitButton: "Submit"
+  },
+  footerOptions: {
+    title: "More ways to get in touch",
+    callUs: {
+      title: "Call us",
+      text: "US and Canada: 1 (877) 889-9009\nInternational: 1 (216) 672-0266"
     },
-    {
-      country: "PAKISTAN",
-      address: "379/380, Main Potohar\nRoad, I-9/3, Islamabad",
-      phone: "+92 (0) 51 8899 778"
-    },
-    {
-      country: "AUSTRALIA",
-      address: "69B Tait street\nKelvin Grove\n4059, QLD",
-      phone: "+61 (0) 40 4057 468"
+    visitUs: {
+      title: "Visit us",
+      text: "We serve clients around the globe, with 700+ office locations in over 150 countries."
     }
-  ]
+  }
 };

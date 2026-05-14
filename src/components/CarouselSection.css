@@ -161,5 +161,14 @@
   
   .slide-content {
     padding-inline-end: 0;
+    margin-bottom: 20px;
+  }
+
+  .carousel-bottom-bar {
+    justify-content: center;
+    padding-block-start: 30px;
+    margin-top: 40px;
+    position: relative;
+    z-index: 10;
   }
 }

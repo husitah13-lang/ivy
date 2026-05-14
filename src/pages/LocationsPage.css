@@ -1,0 +1,127 @@
+.locations-page {
+  background-color: #000000;
+  color: #ffffff;
+  min-height: 100vh;
+  padding: 120px 5vw 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.locations-header {
+  margin-bottom: 60px;
+}
+
+.locations-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  line-height: 1.1;
+}
+
+.locations-subtitle {
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+  font-family: serif;
+  color: #e0e0e0;
+  margin: 0 0 40px 0;
+}
+
+.gradient-divider {
+  height: 6px;
+  width: 100%;
+  background: linear-gradient(90deg, #42bbed, #ffb067, #74e39a);
+  border-radius: 3px;
+  margin-bottom: 60px;
+}
+
+.locations-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.location-item {
+  border-bottom: 2px solid #333333;
+}
+
+.location-item:first-child {
+  border-top: 2px solid #333333;
+}
+
+.location-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 0;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.location-header:hover {
+  opacity: 0.8;
+}
+
+.location-region {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: 700;
+  margin: 0;
+}
+
+.location-icon {
+  font-size: 2rem;
+  font-weight: 300;
+  color: #ffffff;
+}
+
+.location-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  color: #cccccc;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.location-item.open .location-content {
+  max-height: 500px;
+  padding-bottom: 30px;
+}
+
+.admin-add-region-btn {
+  display: block;
+  width: 100%;
+  padding: 15px;
+  margin-top: 20px;
+  background-color: #1a1a1a;
+  color: #42bbed;
+  border: 1px dashed #42bbed;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.admin-add-region-btn:hover {
+  background-color: #42bbed;
+  color: #000;
+}
+
+.admin-delete-region-btn {
+  background: none;
+  border: none;
+  color: #ff4d4f;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-right: 15px;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-delete-region-btn:hover {
+  background-color: rgba(255, 77, 79, 0.1);
+  border-radius: 4px;
+}
+

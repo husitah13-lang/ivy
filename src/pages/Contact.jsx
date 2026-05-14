@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Contact.css';
-import worldMap from '../assets/contact_world_map_dots.png';
 import { useTranslation } from 'react-i18next';
 import { fetchAPI } from '../utils/api';
-import { useEffect, useState } from 'react';
 import { useVisualEditor } from '../context/VisualEditorContext';
 import { EditableText } from '../components/Admin/Editable';
+import { Link } from 'react-router-dom';
 
 const Contact = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { isCMS, draftData, initDraft } = useVisualEditor();
   const [cmsData, setCmsData] = useState(null);
+  
+  // Form State
+  const [formData, setFormData] = useState({
+    inquiryType: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    company: '',
+    role: '',
+    country: '',
+    message: '',
+    consent: false
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState(null);
 
   useEffect(() => {
     const loadData = async () => {
@@ -20,6 +35,12 @@ const Contact = () => {
         if (data) {
           setCmsData(data);
           if (isCMS) initDraft(data, collection);
+        } else {
+          // fallback import
+          const fallbackModule = i18n.language === 'ar' ? await import('../data/content/contact.ar.js') : await import('../data/content/contact.js');
+          const fallbackData = i18n.language === 'ar' ? fallbackModule.contactContentAr : fallbackModule.contactContent;
+          setCmsData(fallbackData);
+          if (isCMS) initDraft(fallbackData, collection);
         }
       } catch (err) {
         console.warn("CMS contact fetch failed", err);
@@ -28,52 +49,202 @@ const Contact = () => {
     loadData();
   }, [isCMS, i18n.language]);
 
-  const activeData = isCMS ? draftData : cmsData;
+  const activeData = (isCMS && draftData) ? draftData : cmsData;
 
-  const locations = activeData?.locations || [
-    { country: t('contact.locations.0.country'), address: "Imperial Place\nMaxwell Road\nBorehamwood, WD6 1JN", phone: "+44 (0) 208 1237 737" },
-    { country: t('contact.locations.1.country'), address: "Mussafah Industrial\nM-3 Firdous Complex\nP.O. Box 46096", phone: "+971 (2) 5551 610" },
-    { country: t('contact.locations.2.country'), address: "379/380, Main Potohar\nRoad, I-9/3, Islamabad", phone: "+92 (0) 51 8899 778" },
-    { country: t('contact.locations.3.country'), address: "69B Tait street\nKelvin Grove\n4059, QLD", phone: "+61 (0) 40 4057 468" }
-  ];
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
 
-  const heroTitle = activeData?.hero?.title || t('contact.hero.title');
-  const heroSubtitle = activeData?.hero?.subtitle || t('contact.hero.subtitle');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    if (!formData.consent) {
+      alert("Please agree to the privacy statement to continue.");
+      return;
+    }
+    
+    setIsSubmitting(true);
+    setSubmitStatus(null);
+    
+    try {
+      const response = await fetch('http://localhost:3001/api/contact-submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...formData,
+          destinationEmail: activeData?.destination_email || "zahra.tahir@ivyinteractive.co"
+        })
+      });
+      
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({
+          inquiryType: '', firstName: '', lastName: '', email: '',
+          phone: '', company: '', role: '', country: '', message: '', consent: false
+        });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (err) {
+      console.error(err);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  if (!activeData) return <div className="contact-page"></div>;
 
   return (
-    <div className="contact-page">
-      <section className="contact-hero">
+    <div className="contact-page" dir={i18n.language === 'ar' ? 'rtl' : 'ltr'}>
+      {/* Top Hero / Grid Section */}
+      <section className="contact-help-section">
         <div className="contact-container">
-          <EditableText path="hero.title" component="h1" className="contact-title">
-            {heroTitle}
+          <EditableText path="hero.title" component="h1" className="help-title">
+            {activeData.hero?.title}
           </EditableText>
-          <EditableText path="hero.subtitle" component="p" className="contact-subtitle">
-            {heroSubtitle}
-          </EditableText>
+          
+          <div className="help-grid">
+            {activeData.gridOptions?.map((item, index) => (
+              <div className="help-card" key={index}>
+                <div className="help-icon">
+                  <div className="icon-placeholder"></div>
+                </div>
+                <EditableText path={`gridOptions.${index}.title`} component="h3" className="help-card-title">
+                  {item.title}
+                </EditableText>
+                <EditableText path={`gridOptions.${index}.text`} component="p" className="help-card-text">
+                  {item.text}
+                </EditableText>
+                <div className="help-card-link">
+                  <EditableText path={`gridOptions.${index}.linkText`} component="span">
+                    {item.linkText}
+                  </EditableText>
+                  <span className="arrow">›</span>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
-      <section className="contact-map-section">
-        <div className="map-container">
-          <img src={worldMap} alt="World Map" className="contact-map-img" />
+      {/* Form Section */}
+      <section className="contact-form-section">
+        <div className="form-container">
+          <EditableText path="form.title" component="h2" className="form-title">
+            {activeData.form?.title}
+          </EditableText>
+          
+          <form onSubmit={handleSubmit} className="contact-form">
+            <div className="form-group">
+              <label><EditableText path="form.fields.inquiryType" component="span">{activeData.form?.fields?.inquiryType}</EditableText></label>
+              <select name="inquiryType" value={formData.inquiryType} onChange={handleChange} required>
+                <option value="" disabled>{activeData.form?.fields?.selectValuePlaceholder || "Select a value"}</option>
+                <option value="General">General Inquiry</option>
+                <option value="Sales">Sales</option>
+                <option value="Support">Support</option>
+              </select>
+            </div>
+
+            <EditableText path="form.aboutYouTitle" component="h3" className="about-you-title">
+              {activeData.form?.aboutYouTitle}
+            </EditableText>
+
+            <div className="form-group">
+              <label><EditableText path="form.fields.firstName" component="span">{activeData.form?.fields?.firstName}</EditableText></label>
+              <input type="text" name="firstName" value={formData.firstName} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label><EditableText path="form.fields.lastName" component="span">{activeData.form?.fields?.lastName}</EditableText></label>
+              <input type="text" name="lastName" value={formData.lastName} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label><EditableText path="form.fields.email" component="span">{activeData.form?.fields?.email}</EditableText></label>
+              <input type="email" name="email" value={formData.email} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label><EditableText path="form.fields.phone" component="span">{activeData.form?.fields?.phone}</EditableText></label>
+              <input type="tel" name="phone" value={formData.phone} onChange={handleChange} />
+            </div>
+
+            <div className="form-group">
+              <label><EditableText path="form.fields.company" component="span">{activeData.form?.fields?.company}</EditableText></label>
+              <input type="text" name="company" value={formData.company} onChange={handleChange} required />
+            </div>
+
+            <div className="form-group">
+              <label><EditableText path="form.fields.role" component="span">{activeData.form?.fields?.role}</EditableText></label>
+              <input type="text" name="role" value={formData.role} onChange={handleChange} />
+            </div>
+
+            <div className="form-group">
+              <label><EditableText path="form.fields.country" component="span">{activeData.form?.fields?.country}</EditableText></label>
+              <select name="country" value={formData.country} onChange={handleChange} required>
+                <option value="" disabled>{activeData.form?.fields?.selectValuePlaceholder || "Select a value"}</option>
+                <option value="US">United States</option>
+                <option value="UK">United Kingdom</option>
+                <option value="AE">United Arab Emirates</option>
+                <option value="PK">Pakistan</option>
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label><EditableText path="form.fields.message" component="span">{activeData.form?.fields?.message}</EditableText></label>
+              <textarea name="message" value={formData.message} onChange={handleChange} rows="5" maxLength="5000" required></textarea>
+              <div className="char-count">5000</div>
+            </div>
+
+            <div className="form-consent">
+              <label className="checkbox-container">
+                <input type="checkbox" name="consent" checked={formData.consent} onChange={handleChange} />
+                <span className="checkmark"></span>
+                <span className="consent-text">
+                  <EditableText path="form.consentText" component="span">{activeData.form?.consentText}</EditableText>
+                  <Link to="/privacy" className="privacy-link"><EditableText path="form.privacyLinkText" component="span">{activeData.form?.privacyLinkText}</EditableText></Link>
+                </span>
+              </label>
+            </div>
+
+            {submitStatus === 'success' && <div className="submit-success">Your message has been sent successfully!</div>}
+            {submitStatus === 'error' && <div className="submit-error">There was an error sending your message. Please try again.</div>}
+
+            <button type="submit" className="submit-btn" disabled={isSubmitting}>
+              <EditableText path="form.submitButton" component="span">{activeData.form?.submitButton}</EditableText>
+            </button>
+          </form>
         </div>
       </section>
 
-      <section className="contact-info-section">
-        <div className="contact-grid">
-          {locations.map((loc, index) => (
-            <div className="location-col" key={index}>
-              <EditableText path={`locations.${index}.country`} component="h3">
-                {loc.country}
-              </EditableText>
-              <EditableText path={`locations.${index}.address`} component="p" style={{ whiteSpace: 'pre-wrap' }}>
-                {loc.address}
-              </EditableText>
-              <EditableText path={`locations.${index}.phone`} component="p" className="contact-phone">
-                {loc.phone}
+      {/* Footer Contact Section */}
+      <section className="contact-footer-section">
+        <div className="form-container">
+          <EditableText path="footerOptions.title" component="h2" className="contact-footer-title">
+            {activeData.footerOptions?.title}
+          </EditableText>
+          
+          <div className="contact-footer-grid">
+            <div className="contact-footer-col">
+              <div className="purple-divider"></div>
+              <EditableText path="footerOptions.callUs.title" component="h3">{activeData.footerOptions?.callUs?.title}</EditableText>
+              <EditableText path="footerOptions.callUs.text" component="p" style={{ whiteSpace: 'pre-line' }}>
+                {activeData.footerOptions?.callUs?.text}
               </EditableText>
             </div>
-          ))}
+            
+            <div className="contact-footer-col">
+              <div className="purple-divider"></div>
+              <EditableText path="footerOptions.visitUs.title" component="h3">{activeData.footerOptions?.visitUs?.title}</EditableText>
+              <EditableText path="footerOptions.visitUs.text" component="p">
+                {activeData.footerOptions?.visitUs?.text}
+              </EditableText>
+            </div>
+          </div>
         </div>
       </section>
     </div>
