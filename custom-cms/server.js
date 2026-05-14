@@ -273,21 +273,21 @@ app.post('/api/contact-submit', async (req, res) => {
     }
 
     const mailOptions = {
-      from: \`"IVY Contact Form" <\${process.env.SMTP_USER || 'no-reply@ivyinteractive.co'}>\`,
+      from: `"IVY Contact Form" <${process.env.SMTP_USER || 'no-reply@ivyinteractive.co'}>`,
       to: destinationEmail || "zahra.tahir@ivyinteractive.co",
-      subject: \`New Contact Inquiry: \${inquiryType} from \${firstName} \${lastName}\`,
-      html: \`
+      subject: `New Contact Inquiry: ${inquiryType} from ${firstName} ${lastName}`,
+      html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Inquiry Type:</strong> \${inquiryType}</p>
-        <p><strong>Name:</strong> \${firstName} \${lastName}</p>
-        <p><strong>Email:</strong> \${email}</p>
-        <p><strong>Phone:</strong> \${phone}</p>
-        <p><strong>Company:</strong> \${company}</p>
-        <p><strong>Role:</strong> \${role}</p>
-        <p><strong>Country:</strong> \${country}</p>
+        <p><strong>Inquiry Type:</strong> ${inquiryType}</p>
+        <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Phone:</strong> ${phone}</p>
+        <p><strong>Company:</strong> ${company}</p>
+        <p><strong>Role:</strong> ${role}</p>
+        <p><strong>Country:</strong> ${country}</p>
         <h3>Message:</h3>
-        <p>\${message}</p>
-      \`
+        <p>${message}</p>
+      `
     };
 
     const info = await transporter.sendMail(mailOptions);
