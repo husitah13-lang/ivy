@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './CarouselSection.css';
 import { useTranslation } from 'react-i18next';
-import { EditableText } from './Admin/Editable';
+import { EditableText, EditableImage } from './Admin/Editable';
 
 const CarouselSection = ({ items, pathPrefix = 'client_carousel' }) => {
   const { t, i18n } = useTranslation();
@@ -23,7 +23,8 @@ const CarouselSection = ({ items, pathPrefix = 'client_carousel' }) => {
       ...configItem,
       originalIndex: index,
       title: dataItem.title || t(`carousel.items.${index}.title`),
-      body: dataItem.body || t(`carousel.items.${index}.description`)
+      body: dataItem.body || t(`carousel.items.${index}.description`),
+      image: dataItem.image || null
     };
   });
 
@@ -78,18 +79,31 @@ const CarouselSection = ({ items, pathPrefix = 'client_carousel' }) => {
         >
           {extendedData.map((item) => (
             <div className="carousel-slide" key={item.uniqueId}>
-              <div className="slide-media">
-                <div 
-                  className="slide-image-placeholder" 
-                  style={{ backgroundColor: item.imageColor }}
-                >
-                  <span className="placeholder-text">Image Area</span>
-                </div>
-                <button className="play-button" aria-label="Play video">
-                  <svg width="14" height="16" viewBox="0 0 14 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M14 8L0.500001 15.7942L0.500001 0.205771L14 8Z" fill="white"/>
-                  </svg>
-                </button>
+              <div className="slide-media" style={{ position: 'relative' }}>
+                {item.image ? (
+                  <EditableImage 
+                    path={`${pathPrefix}.${item.originalIndex}.image`} 
+                    src={item.image} 
+                    alt={item.title} 
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', top: 0, left: 0 }} 
+                  />
+                ) : (
+                  <>
+                    <div 
+                      className="slide-image-placeholder" 
+                      style={{ backgroundColor: item.imageColor, width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }}
+                    >
+                      <span className="placeholder-text">Image Area</span>
+                    </div>
+                    {/* Transparent overlay for CMS uploads when no image exists */}
+                    <EditableImage 
+                      path={`${pathPrefix}.${item.originalIndex}.image`} 
+                      src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                      alt="upload placeholder" 
+                      style={{ width: '100%', height: '100%', position: 'absolute', top: 0, left: 0 }} 
+                    />
+                  </>
+                )}
               </div>
               <div className="slide-content">
                 <EditableText path={`${pathPrefix}.${item.originalIndex}.title`} component="h2" className="slide-title">

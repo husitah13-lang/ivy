@@ -58,7 +58,10 @@ async function run() {
         { en: 'src/data/targets.js', ar: 'src/data/targets.ar.js', name: 'targets' },
         { en: 'src/data/saas-platforms.js', ar: 'src/data/saas-platforms.ar.js', name: 'saas-platforms' },
         { en: 'src/data/content/layout.js', ar: 'src/data/content/layout.ar.js', name: 'layout' },
-        { en: 'src/data/content/services_main.js', ar: 'src/data/content/services_main_ar.js', name: 'services' }
+        { en: 'src/data/content/services_main.js', ar: 'src/data/content/services_main_ar.js', name: 'services' },
+        { en: 'src/data/content/contact.js', ar: 'src/data/content/contact.ar.js', name: 'contact' },
+        { en: 'src/data/content/locations.js', ar: 'src/data/content/locations.ar.js', name: 'locations' },
+        { en: 'src/data/content/legal.js', ar: 'src/data/content/legal.ar.js', name: 'legal' }
     ];
 
     for (const pair of pairs) {
