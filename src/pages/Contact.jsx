@@ -76,7 +76,7 @@ const Contact = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           ...formData,
-          destinationEmail: activeData?.destination_email || "zahra.tahir@ivyinteractive.co"
+          destinationEmail: activeData?.destination_email || "mhussain200004@gmail.com"
         })
       });
       

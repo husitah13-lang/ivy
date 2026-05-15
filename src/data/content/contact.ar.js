@@ -2,7 +2,7 @@ export const contactContentAr = {
   hero: {
     title: "كيف يمكننا المساعدة؟"
   },
-  destination_email: "zahra.tahir@ivyinteractive.co",
+  destination_email: "mhussain200004@gmail.com",
   gridOptions: [
     { title: "العملاء", text: "هل أنت عميل جديد أو حالي مهتم باستكشاف فرص الأعمال المحتملة مع آيفي؟", linkText: "أرسل لنا رسالة" },
     { title: "الباحثون عن عمل", text: "هل أنت مستعد لفرص عمل جديدة؟ استكشف الوظائف الشاغرة الحالية لدينا وتعرف على كيفية الاستعداد ليومك الأول في آيفي.", linkText: "وظائف آيفي" },

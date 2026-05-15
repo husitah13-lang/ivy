@@ -2,7 +2,7 @@ export const contactContent = {
   hero: {
     title: "How can we help?"
   },
-  destination_email: "zahra.tahir@ivyinteractive.co",
+  destination_email: "mhussain200004@gmail.com",
   gridOptions: [
     { title: "Clients", text: "Are you a new or current client interested in exploring potential business opportunities with IVY?", linkText: "Send us a message" },
     { title: "Job seekers", text: "Ready for new career opportunities? Explore our current job openings and learn how you can prepare for your first day at IVY.", linkText: "IVY Careers" },
